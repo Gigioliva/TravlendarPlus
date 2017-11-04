@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.4)  29 OCT 2017 13:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.4)  4 NOV 2017 17:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -779,12 +779,12 @@ Overfull \hbox (13.06804pt too wide) in paragraph at lines 157--157
  []
 
 
-Overfull \hbox (4.534pt too wide) in paragraph at lines 155--166
+Overfull \hbox (4.534pt too wide) in paragraph at lines 155--169
 [][] 
  []
 
 [6]
-Overfull \hbox (7.28944pt too wide) in paragraph at lines 179--180
+Overfull \hbox (7.28944pt too wide) in paragraph at lines 182--183
 []\OT1/cmr/m/n/12 IEEE Std 1016tm-2009 Stan-dard for In-for-ma-tion Tecnology-S
 ystem Design-Software
  []
@@ -792,22 +792,22 @@ ystem Design-Software
 [7]
 chapter 2.
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--201
+Underfull \hbox (badness 10000) in paragraph at lines 203--204
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--203
+Underfull \hbox (badness 10000) in paragraph at lines 205--206
 
  []
 
 <phenomena.jpg, id=36, 526.96875pt x 215.80624pt>
 File: phenomena.jpg Graphic file (type jpg)
  <use phenomena.jpg>
-Package pdftex.def Info: phenomena.jpg used on input line 208.
+Package pdftex.def Info: phenomena.jpg used on input line 211.
 (pdftex.def)             Requested size: 358.50612pt x 146.82204pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 212--213
+Underfull \hbox (badness 10000) in paragraph at lines 215--216
 
  []
 
@@ -815,19 +815,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 212--213
 
 
  <./phenomena.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 234--235
+Underfull \hbox (badness 10000) in paragraph at lines 237--238
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 252--253
+Underfull \hbox (badness 10000) in paragraph at lines 255--256
 
  []
 
 [9] [10] [11]
 chapter 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 296--297
+Underfull \hbox (badness 10000) in paragraph at lines 299--300
 
  []
 
@@ -835,7 +835,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 296--297
 File: mockups/ExistingSchedule.png Graphic file (type png)
 
 <use mockups/ExistingSchedule.png>
-Package pdftex.def Info: mockups/ExistingSchedule.png used on input line 300.
+Package pdftex.def Info: mockups/ExistingSchedule.png used on input line 303.
 (pdftex.def)             Requested size: 313.69029pt x 622.45029pt.
  [12
 
@@ -848,7 +848,7 @@ Overfull \vbox (30.30032pt too high) has occurred while \output is active []
 <mockups/Guide.png, id=59, 381.425pt x 756.8275pt>
 File: mockups/Guide.png Graphic file (type png)
  <use mockups/Guide.png>
-Package pdftex.def Info: mockups/Guide.png used on input line 306.
+Package pdftex.def Info: mockups/Guide.png used on input line 309.
 (pdftex.def)             Requested size: 313.69029pt x 622.45029pt.
 
 Overfull \vbox (30.30032pt too high) has occurred while \output is active []
@@ -858,7 +858,7 @@ Overfull \vbox (30.30032pt too high) has occurred while \output is active []
 File: mockups/Login.png Graphic file (type png)
 
 <use mockups/Login.png>
-Package pdftex.def Info: mockups/Login.png used on input line 312.
+Package pdftex.def Info: mockups/Login.png used on input line 315.
 (pdftex.def)             Requested size: 313.69029pt x 622.45029pt.
 
 Overfull \vbox (15.80032pt too high) has occurred while \output is active []
@@ -869,7 +869,7 @@ Overfull \vbox (15.80032pt too high) has occurred while \output is active []
 File: mockups/PersonalArea.png Graphic file (type png)
 
 <use mockups/PersonalArea.png>
-Package pdftex.def Info: mockups/PersonalArea.png used on input line 318.
+Package pdftex.def Info: mockups/PersonalArea.png used on input line 321.
 (pdftex.def)             Requested size: 313.69029pt x 622.45029pt.
 
 Overfull \vbox (30.30032pt too high) has occurred while \output is active []
@@ -880,7 +880,7 @@ Overfull \vbox (30.30032pt too high) has occurred while \output is active []
 File: mockups/SharedSchedule.png Graphic file (type png)
 
 <use mockups/SharedSchedule.png>
-Package pdftex.def Info: mockups/SharedSchedule.png used on input line 324.
+Package pdftex.def Info: mockups/SharedSchedule.png used on input line 327.
 (pdftex.def)             Requested size: 313.69029pt x 622.45029pt.
 
 Overfull \vbox (30.30032pt too high) has occurred while \output is active []
@@ -890,7 +890,7 @@ Overfull \vbox (30.30032pt too high) has occurred while \output is active []
 <mockups/Tickets.png, id=79, 381.425pt x 756.8275pt>
 File: mockups/Tickets.png Graphic file (type png)
  <use mockups/Tickets.png>
-Package pdftex.def Info: mockups/Tickets.png used on input line 330.
+Package pdftex.def Info: mockups/Tickets.png used on input line 333.
 (pdftex.def)             Requested size: 313.69029pt x 622.45029pt.
 
 Overfull \vbox (15.80032pt too high) has occurred while \output is active []
@@ -901,7 +901,7 @@ Overfull \vbox (15.80032pt too high) has occurred while \output is active []
 File: mockups/TicketsBuy.png Graphic file (type png)
 
 <use mockups/TicketsBuy.png>
-Package pdftex.def Info: mockups/TicketsBuy.png used on input line 336.
+Package pdftex.def Info: mockups/TicketsBuy.png used on input line 339.
 (pdftex.def)             Requested size: 313.69029pt x 622.45029pt.
 
 Overfull \vbox (30.30032pt too high) has occurred while \output is active []
@@ -912,25 +912,25 @@ Overfull \vbox (30.30032pt too high) has occurred while \output is active []
 File: usecases/Scenario1.png Graphic file (type png)
 
 <use usecases/Scenario1.png>
-Package pdftex.def Info: usecases/Scenario1.png used on input line 438.
+Package pdftex.def Info: usecases/Scenario1.png used on input line 441.
 (pdftex.def)             Requested size: 448.13095pt x 380.85156pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 435--440
+Underfull \hbox (badness 10000) in paragraph at lines 438--443
 
  []
 
 
-Overfull \hbox (3.52776pt too wide) in paragraph at lines 445--445
+Overfull \hbox (3.52776pt too wide) in paragraph at lines 448--448
  []\OT1/cmr/bx/n/12 Name 
  []
 
 
-Overfull \hbox (2.70831pt too wide) in paragraph at lines 447--447
+Overfull \hbox (2.70831pt too wide) in paragraph at lines 450--450
  []\OT1/cmr/bx/n/12 Actor 
  []
 
 
-Overfull \hbox (24.8251pt too wide) in paragraph at lines 443--473
+Overfull \hbox (24.8251pt too wide) in paragraph at lines 446--476
 [][] 
  []
 
@@ -938,14 +938,14 @@ Overfull \hbox (24.8251pt too wide) in paragraph at lines 443--473
 File: flows/Scenario1.png Graphic file (type png)
 
 <use flows/Scenario1.png>
-Package pdftex.def Info: flows/Scenario1.png used on input line 476.
+Package pdftex.def Info: flows/Scenario1.png used on input line 479.
 (pdftex.def)             Requested size: 179.24963pt x 591.39825pt.
  [23 <./usecases/Scenario1.png>]
 Overfull \vbox (63.73355pt too high) has occurred while \output is active []
 
 
 [24] [25 <./flows/Scenario1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 483--485
+Underfull \hbox (badness 10000) in paragraph at lines 486--488
 
  []
 
@@ -953,27 +953,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 483--485
 File: usecases/Scenario2.png Graphic file (type png)
 
 <use usecases/Scenario2.png>
-Package pdftex.def Info: usecases/Scenario2.png used on input line 487.
+Package pdftex.def Info: usecases/Scenario2.png used on input line 490.
 (pdftex.def)             Requested size: 448.13095pt x 329.02916pt.
 
-Overfull \hbox (3.52776pt too wide) in paragraph at lines 493--493
+Overfull \hbox (3.52776pt too wide) in paragraph at lines 496--496
  []\OT1/cmr/bx/n/12 Name 
  []
 
 
-Overfull \hbox (2.70831pt too wide) in paragraph at lines 496--496
+Overfull \hbox (2.70831pt too wide) in paragraph at lines 499--499
  []\OT1/cmr/bx/n/12 Actor 
  []
 
 
-Overfull \hbox (24.8251pt too wide) in paragraph at lines 491--523
+Overfull \hbox (24.8251pt too wide) in paragraph at lines 494--526
 [][] 
  []
 
 <flows/Scenario2.png, id=114, 554.07pt x 1164.35pt>
 File: flows/Scenario2.png Graphic file (type png)
  <use flows/Scenario2.png>
-Package pdftex.def Info: flows/Scenario2.png used on input line 526.
+Package pdftex.def Info: flows/Scenario2.png used on input line 529.
 (pdftex.def)             Requested size: 291.28238pt x 612.11017pt.
 
 [26 <./usecases/Scenario2.png>]
@@ -985,7 +985,7 @@ Overfull \vbox (5.4602pt too high) has occurred while \output is active []
 
 
 [28 <./flows/Scenario2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 532--534
+Underfull \hbox (badness 10000) in paragraph at lines 535--537
 
  []
 
@@ -993,15 +993,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 532--534
 File: usecases/Scenario3.png Graphic file (type png)
 
 <use usecases/Scenario3.png>
-Package pdftex.def Info: usecases/Scenario3.png used on input line 537.
+Package pdftex.def Info: usecases/Scenario3.png used on input line 540.
 (pdftex.def)             Requested size: 448.13095pt x 221.02061pt.
 
-Overfull \hbox (3.52776pt too wide) in paragraph at lines 543--543
+Overfull \hbox (3.52776pt too wide) in paragraph at lines 546--546
  []\OT1/cmr/bx/n/12 Name 
  []
 
 
-Overfull \hbox (2.70831pt too wide) in paragraph at lines 546--546
+Overfull \hbox (2.70831pt too wide) in paragraph at lines 549--549
  []\OT1/cmr/bx/n/12 Actor 
  []
 
@@ -1009,15 +1009,15 @@ Overfull \hbox (2.70831pt too wide) in paragraph at lines 546--546
 File: flows/Scenario3.png Graphic file (type png)
 
 <use flows/Scenario3.png>
-Package pdftex.def Info: flows/Scenario3.png used on input line 569.
+Package pdftex.def Info: flows/Scenario3.png used on input line 572.
 (pdftex.def)             Requested size: 134.44064pt x 539.98578pt.
 
-Overfull \hbox (24.8251pt too wide) in paragraph at lines 541--571
+Overfull \hbox (24.8251pt too wide) in paragraph at lines 544--574
 [][] 
  []
 
 [29 <./usecases/Scenario3.png>] [30] [31 <./flows/Scenario3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 576--578
+Underfull \hbox (badness 10000) in paragraph at lines 579--581
 
  []
 
@@ -1025,20 +1025,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 576--578
 File: usecases/Scenario4.png Graphic file (type png)
 
 <use usecases/Scenario4.png>
-Package pdftex.def Info: usecases/Scenario4.png used on input line 580.
+Package pdftex.def Info: usecases/Scenario4.png used on input line 583.
 (pdftex.def)             Requested size: 448.13095pt x 277.96846pt.
 
-Overfull \hbox (3.52776pt too wide) in paragraph at lines 586--586
+Overfull \hbox (3.52776pt too wide) in paragraph at lines 589--589
  []\OT1/cmr/bx/n/12 Name 
  []
 
 
-Overfull \hbox (2.70831pt too wide) in paragraph at lines 590--590
+Overfull \hbox (2.70831pt too wide) in paragraph at lines 593--593
  []\OT1/cmr/bx/n/12 Actor 
  []
 
 
-Overfull \hbox (24.8251pt too wide) in paragraph at lines 584--615
+Overfull \hbox (24.8251pt too wide) in paragraph at lines 587--618
 [][] 
  []
 
@@ -1046,14 +1046,14 @@ Overfull \hbox (24.8251pt too wide) in paragraph at lines 584--615
 File: flows/Scenario4.png Graphic file (type png)
 
 <use flows/Scenario4.png>
-Package pdftex.def Info: flows/Scenario4.png used on input line 618.
+Package pdftex.def Info: flows/Scenario4.png used on input line 621.
 (pdftex.def)             Requested size: 291.28238pt x 607.21786pt.
  [32 <./usecases/Scenario4.png>] [33]
 Overfull \vbox (0.5679pt too high) has occurred while \output is active []
 
 
 [34 <./flows/Scenario4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 624--626
+Underfull \hbox (badness 10000) in paragraph at lines 627--629
 
  []
 
@@ -1061,20 +1061,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 624--626
 File: usecases/Scenario5.png Graphic file (type png)
 
 <use usecases/Scenario5.png>
-Package pdftex.def Info: usecases/Scenario5.png used on input line 628.
+Package pdftex.def Info: usecases/Scenario5.png used on input line 631.
 (pdftex.def)             Requested size: 448.13095pt x 266.69331pt.
 
-Overfull \hbox (3.52776pt too wide) in paragraph at lines 634--634
+Overfull \hbox (3.52776pt too wide) in paragraph at lines 637--637
  []\OT1/cmr/bx/n/12 Name 
  []
 
 
-Overfull \hbox (2.70831pt too wide) in paragraph at lines 637--637
+Overfull \hbox (2.70831pt too wide) in paragraph at lines 640--640
  []\OT1/cmr/bx/n/12 Actor 
  []
 
 
-Overfull \hbox (24.8251pt too wide) in paragraph at lines 632--669
+Overfull \hbox (24.8251pt too wide) in paragraph at lines 635--672
 [][] 
  []
 
@@ -1082,14 +1082,14 @@ Overfull \hbox (24.8251pt too wide) in paragraph at lines 632--669
 File: flows/Scenario5.png Graphic file (type png)
 
 <use flows/Scenario5.png>
-Package pdftex.def Info: flows/Scenario5.png used on input line 672.
+Package pdftex.def Info: flows/Scenario5.png used on input line 675.
 (pdftex.def)             Requested size: 224.06548pt x 592.52383pt.
  [35 <./usecases/Scenario5.png>]
 Overfull \vbox (25.73355pt too high) has occurred while \output is active []
 
 
 [36]
-Underfull \hbox (badness 10000) in paragraph at lines 678--680
+Underfull \hbox (badness 10000) in paragraph at lines 681--683
 
  []
 
@@ -1098,20 +1098,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 678--680
 File: usecases/Scenario6.png Graphic file (type png)
 
 <use usecases/Scenario6.png>
-Package pdftex.def Info: usecases/Scenario6.png used on input line 682.
+Package pdftex.def Info: usecases/Scenario6.png used on input line 685.
 (pdftex.def)             Requested size: 448.13095pt x 325.20372pt.
 
-Overfull \hbox (3.52776pt too wide) in paragraph at lines 688--688
+Overfull \hbox (3.52776pt too wide) in paragraph at lines 691--691
  []\OT1/cmr/bx/n/12 Name 
  []
 
 
-Overfull \hbox (2.70831pt too wide) in paragraph at lines 691--691
+Overfull \hbox (2.70831pt too wide) in paragraph at lines 694--694
  []\OT1/cmr/bx/n/12 Actor 
  []
 
 
-Overfull \hbox (24.8251pt too wide) in paragraph at lines 686--717
+Overfull \hbox (24.8251pt too wide) in paragraph at lines 689--720
 [][] 
  []
 
@@ -1119,10 +1119,10 @@ Overfull \hbox (24.8251pt too wide) in paragraph at lines 686--717
 File: flows/Scenario6.png Graphic file (type png)
 
 <use flows/Scenario6.png>
-Package pdftex.def Info: flows/Scenario6.png used on input line 720.
+Package pdftex.def Info: flows/Scenario6.png used on input line 723.
 (pdftex.def)             Requested size: 224.06548pt x 577.66058pt.
  [38 <./usecases/Scenario6.png>] [39] [40 <./flows/Scenario6.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 727--731
+Underfull \hbox (badness 10000) in paragraph at lines 730--734
 
  []
 
@@ -1130,20 +1130,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 727--731
 File: usecases/Scenario7.png Graphic file (type png)
 
 <use usecases/Scenario7.png>
-Package pdftex.def Info: usecases/Scenario7.png used on input line 733.
+Package pdftex.def Info: usecases/Scenario7.png used on input line 736.
 (pdftex.def)             Requested size: 448.13095pt x 415.89755pt.
 
-Overfull \hbox (3.52776pt too wide) in paragraph at lines 739--739
+Overfull \hbox (3.52776pt too wide) in paragraph at lines 742--742
  []\OT1/cmr/bx/n/12 Name 
  []
 
 
-Overfull \hbox (2.70831pt too wide) in paragraph at lines 742--742
+Overfull \hbox (2.70831pt too wide) in paragraph at lines 745--745
  []\OT1/cmr/bx/n/12 Actor 
  []
 
 
-Overfull \hbox (24.8251pt too wide) in paragraph at lines 737--766
+Overfull \hbox (24.8251pt too wide) in paragraph at lines 740--769
 [][] 
  []
 
@@ -1151,43 +1151,43 @@ Overfull \hbox (24.8251pt too wide) in paragraph at lines 737--766
 File: flows/Scenario7.png Graphic file (type png)
 
 <use flows/Scenario7.png>
-Package pdftex.def Info: flows/Scenario7.png used on input line 769.
+Package pdftex.def Info: flows/Scenario7.png used on input line 772.
 (pdftex.def)             Requested size: 156.84856pt x 606.59842pt.
  [41 <./usecases/Scenario7.png>] [42] [43 <./flows/Scenario7.png>] <usecases/Sc
 enario8.png, id=192, 899.36pt x 419.5675pt>
 File: usecases/Scenario8.png Graphic file (type png)
 
 <use usecases/Scenario8.png>
-Package pdftex.def Info: usecases/Scenario8.png used on input line 779.
+Package pdftex.def Info: usecases/Scenario8.png used on input line 782.
 (pdftex.def)             Requested size: 313.69029pt x 146.33865pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 776--781
+Underfull \hbox (badness 10000) in paragraph at lines 779--784
 
  []
 
 
-Overfull \hbox (3.52776pt too wide) in paragraph at lines 786--786
+Overfull \hbox (3.52776pt too wide) in paragraph at lines 789--789
  []\OT1/cmr/bx/n/12 Name 
  []
 
 
-Overfull \hbox (2.70831pt too wide) in paragraph at lines 789--789
+Overfull \hbox (2.70831pt too wide) in paragraph at lines 792--792
  []\OT1/cmr/bx/n/12 Actor 
  []
 
 
-Overfull \hbox (24.8251pt too wide) in paragraph at lines 784--811
+Overfull \hbox (24.8251pt too wide) in paragraph at lines 787--814
 [][] 
  []
 
 <flows/Scenario8.png, id=193, 264.99pt x 700.6175pt>
 File: flows/Scenario8.png Graphic file (type png)
  <use flows/Scenario8.png>
-Package pdftex.def Info: flows/Scenario8.png used on input line 814.
+Package pdftex.def Info: flows/Scenario8.png used on input line 817.
 (pdftex.def)             Requested size: 224.06548pt x 592.41673pt.
 
 [44 <./usecases/Scenario8.png>] [45] [46 <./flows/Scenario8.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 822--825
+Underfull \hbox (badness 10000) in paragraph at lines 825--828
 
  []
 
@@ -1195,20 +1195,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 822--825
 File: usecases/Scenario9.png Graphic file (type png)
 
 <use usecases/Scenario9.png>
-Package pdftex.def Info: usecases/Scenario9.png used on input line 827.
+Package pdftex.def Info: usecases/Scenario9.png used on input line 830.
 (pdftex.def)             Requested size: 448.13095pt x 298.59106pt.
 
-Overfull \hbox (3.52776pt too wide) in paragraph at lines 834--834
+Overfull \hbox (3.52776pt too wide) in paragraph at lines 837--837
  []\OT1/cmr/bx/n/12 Name 
  []
 
 
-Overfull \hbox (2.70831pt too wide) in paragraph at lines 837--837
+Overfull \hbox (2.70831pt too wide) in paragraph at lines 840--840
  []\OT1/cmr/bx/n/12 Actor 
  []
 
 
-Overfull \hbox (24.8251pt too wide) in paragraph at lines 832--857
+Overfull \hbox (24.8251pt too wide) in paragraph at lines 835--860
 [][] 
  []
 
@@ -1217,20 +1217,26 @@ Overfull \hbox (24.8251pt too wide) in paragraph at lines 832--857
 File: flows/Scenario9.png Graphic file (type png)
 
 <use flows/Scenario9.png>
-Package pdftex.def Info: flows/Scenario9.png used on input line 863.
+Package pdftex.def Info: flows/Scenario9.png used on input line 866.
 (pdftex.def)             Requested size: 134.44064pt x 623.31693pt.
 
 Overfull \vbox (16.66696pt too high) has occurred while \output is active []
 
 
 [49 <./flows/Scenario9.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 883--884
+Underfull \hbox (badness 10000) in paragraph at lines 886--887
 
  []
 
 [50] [51]
 chapter 4.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 898.
+<uml.jpg, id=226, 939.51pt x 878.28125pt>
+File: uml.jpg Graphic file (type jpg)
+ <use uml.jpg>
+Package pdftex.def Info: uml.jpg used on input line 903.
+(pdftex.def)             Requested size: 448.13095pt x 418.91672pt.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 908.
+
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -1249,117 +1255,118 @@ LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10.95> not available
  [52
 
 
-] [53] [54]
-[55] [56] [57] [58]) <result.jpg, id=253, 412.54124pt x 295.1025pt>
+ <./uml.jpg>]
+[53] [54] [55] [56] [57] [58] [59])
+<result.jpg, id=257, 412.54124pt x 295.1025pt>
 File: result.jpg Graphic file (type jpg)
-
-<use result.jpg>
-Package pdftex.def Info: result.jpg used on input line 901.
+ <use result.jpg>
+Package pdftex.def Info: result.jpg used on input line 911.
 (pdftex.def)             Requested size: 412.54024pt x 295.10176pt.
- <AlloyPDFRender.pdf, id=254, 2559.5625pt x 3312.375pt>
+
+<AlloyPDFRender.pdf, id=258, 2559.5625pt x 3312.375pt>
 File: AlloyPDFRender.pdf Graphic file (type pdf)
 
 <use AlloyPDFRender.pdf>
-Package pdftex.def Info: AlloyPDFRender.pdf used on input line 903.
+Package pdftex.def Info: AlloyPDFRender.pdf used on input line 913.
 (pdftex.def)             Requested size: 2559.55629pt x 3312.36697pt.
 File: AlloyPDFRender.pdf Graphic file (type pdf)
  <use AlloyPDFRender.pdf>
-Package pdftex.def Info: AlloyPDFRender.pdf used on input line 903.
+Package pdftex.def Info: AlloyPDFRender.pdf used on input line 913.
 (pdftex.def)             Requested size: 2559.55629pt x 3312.36697pt.
 
-<AlloyPDFRender.pdf, id=257, page=1, 2559.5625pt x 3312.375pt>
+<AlloyPDFRender.pdf, id=261, page=1, 2559.5625pt x 3312.375pt>
 File: AlloyPDFRender.pdf Graphic file (type pdf)
 
 <use AlloyPDFRender.pdf, page 1>
-Package pdftex.def Info: AlloyPDFRender.pdf, page1 used on input line 903.
+Package pdftex.def Info: AlloyPDFRender.pdf, page1 used on input line 913.
 (pdftex.def)             Requested size: 2559.55629pt x 3312.36697pt.
 File: AlloyPDFRender.pdf Graphic file (type pdf)
  <use AlloyPDFRender.pdf, page 1>
-Package pdftex.def Info: AlloyPDFRender.pdf, page1 used on input line 903.
+Package pdftex.def Info: AlloyPDFRender.pdf, page1 used on input line 913.
 (pdftex.def)             Requested size: 597.63077pt x 773.40453pt.
- [59] [60 <./result.jpg>]
+ [60 <./result.jpg>]
 File: AlloyPDFRender.pdf Graphic file (type pdf)
  <use AlloyPDFRender.pdf, page 1>
-Package pdftex.def Info: AlloyPDFRender.pdf, page1 used on input line 903.
+Package pdftex.def Info: AlloyPDFRender.pdf, page1 used on input line 913.
 (pdftex.def)             Requested size: 597.63077pt x 773.40453pt.
 File: AlloyPDFRender.pdf Graphic file (type pdf)
  <use AlloyPDFRender.pdf, page 1>
-Package pdftex.def Info: AlloyPDFRender.pdf, page1 used on input line 903.
+Package pdftex.def Info: AlloyPDFRender.pdf, page1 used on input line 913.
 (pdftex.def)             Requested size: 597.63077pt x 773.40453pt.
 File: AlloyPDFRender.pdf Graphic file (type pdf)
 
 <use AlloyPDFRender.pdf, page 1>
-Package pdftex.def Info: AlloyPDFRender.pdf, page1 used on input line 903.
+Package pdftex.def Info: AlloyPDFRender.pdf, page1 used on input line 913.
 (pdftex.def)             Requested size: 597.63077pt x 773.40453pt.
  [61 <./AlloyPDFRender.pdf>]
-<PdfAlloy2.pdf, id=269, 2559.5625pt x 3312.375pt>
+<PdfAlloy2.pdf, id=270, 2559.5625pt x 3312.375pt>
 File: PdfAlloy2.pdf Graphic file (type pdf)
  <use PdfAlloy2.pdf>
-Package pdftex.def Info: PdfAlloy2.pdf used on input line 904.
+Package pdftex.def Info: PdfAlloy2.pdf used on input line 914.
 (pdftex.def)             Requested size: 2559.55629pt x 3312.36697pt.
 File: PdfAlloy2.pdf Graphic file (type pdf)
 
 <use PdfAlloy2.pdf>
-Package pdftex.def Info: PdfAlloy2.pdf used on input line 904.
+Package pdftex.def Info: PdfAlloy2.pdf used on input line 914.
 (pdftex.def)             Requested size: 2559.55629pt x 3312.36697pt.
- <PdfAlloy2.pdf, id=272, page=1, 2559.5625pt x 3312.375pt>
+ <PdfAlloy2.pdf, id=273, page=1, 2559.5625pt x 3312.375pt>
 File: PdfAlloy2.pdf Graphic file (type pdf)
 
 <use PdfAlloy2.pdf, page 1>
-Package pdftex.def Info: PdfAlloy2.pdf, page1 used on input line 904.
+Package pdftex.def Info: PdfAlloy2.pdf, page1 used on input line 914.
 (pdftex.def)             Requested size: 2559.55629pt x 3312.36697pt.
 File: PdfAlloy2.pdf Graphic file (type pdf)
  <use PdfAlloy2.pdf, page 1>
-Package pdftex.def Info: PdfAlloy2.pdf, page1 used on input line 904.
+Package pdftex.def Info: PdfAlloy2.pdf, page1 used on input line 914.
 (pdftex.def)             Requested size: 597.63077pt x 773.40453pt.
 File: PdfAlloy2.pdf Graphic file (type pdf)
 
 <use PdfAlloy2.pdf, page 1>
-Package pdftex.def Info: PdfAlloy2.pdf, page1 used on input line 904.
+Package pdftex.def Info: PdfAlloy2.pdf, page1 used on input line 914.
 (pdftex.def)             Requested size: 597.63077pt x 773.40453pt.
 File: PdfAlloy2.pdf Graphic file (type pdf)
  <use PdfAlloy2.pdf, page 1>
-Package pdftex.def Info: PdfAlloy2.pdf, page1 used on input line 904.
+Package pdftex.def Info: PdfAlloy2.pdf, page1 used on input line 914.
 (pdftex.def)             Requested size: 597.63077pt x 773.40453pt.
 File: PdfAlloy2.pdf Graphic file (type pdf)
 
 <use PdfAlloy2.pdf, page 1>
-Package pdftex.def Info: PdfAlloy2.pdf, page1 used on input line 904.
+Package pdftex.def Info: PdfAlloy2.pdf, page1 used on input line 914.
 (pdftex.def)             Requested size: 597.63077pt x 773.40453pt.
  [62 <./PdfAlloy2.pdf>]
 chapter 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 910--911
+Underfull \hbox (badness 10000) in paragraph at lines 920--921
 
  []
 
 
-Overfull \hbox (3.52776pt too wide) in paragraph at lines 914--914
+Overfull \hbox (3.52776pt too wide) in paragraph at lines 924--924
  []\OT1/cmr/bx/n/12 Name 
  []
 
 
-Overfull \hbox (4.14961pt too wide) in paragraph at lines 917--917
+Overfull \hbox (4.14961pt too wide) in paragraph at lines 927--927
  []\OT1/cmr/m/n/12 Lukasz 
  []
 
 
-Overfull \hbox (10.51204pt too wide) in paragraph at lines 917--917
+Overfull \hbox (10.51204pt too wide) in paragraph at lines 927--927
  \OT1/cmr/m/n/12 Moskwa 
  []
 
 
-Overfull \hbox (1.30797pt too wide) in paragraph at lines 919--919
+Overfull \hbox (1.30797pt too wide) in paragraph at lines 929--929
  []\OT1/cmr/m/n/12 Marco 
  []
 
 
-Overfull \hbox (16.08005pt too wide) in paragraph at lines 921--921
+Overfull \hbox (16.08005pt too wide) in paragraph at lines 931--931
  []\OT1/cmr/m/n/12 Gianluigi 
  []
 
 
-Overfull \hbox (36.94984pt too wide) in paragraph at lines 912--927
+Overfull \hbox (36.94984pt too wide) in paragraph at lines 922--937
 [][] 
  []
 
@@ -1369,7 +1376,7 @@ Overfull \hbox (36.94984pt too wide) in paragraph at lines 912--927
 ]
 chapter 6.
 
-Overfull \hbox (7.28944pt too wide) in paragraph at lines 939--940
+Overfull \hbox (7.28944pt too wide) in paragraph at lines 949--950
 []\OT1/cmr/m/n/12 IEEE Std 1016tm-2009 Stan-dard for In-for-ma-tion Tecnology-S
 ystem Design-Software
  []
@@ -1379,10 +1386,10 @@ ystem Design-Software
 
 ] (./rasd.aux) ) 
 Here is how much of TeX's memory you used:
- 7253 strings out of 494953
- 107599 string characters out of 6180977
- 410444 words of memory out of 5000000
- 10396 multiletter control sequences out of 15000+600000
+ 7258 strings out of 494953
+ 107653 string characters out of 6180977
+ 418932 words of memory out of 5000000
+ 10400 multiletter control sequences out of 15000+600000
  13255 words of font info for 47 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  47i,18n,66p,740b,1759s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1400,10 +1407,10 @@ cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
 i12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on rasd.pdf (64 pages, 1548033 bytes).
+Output written on rasd.pdf (64 pages, 1627821 bytes).
 PDF statistics:
- 331 PDF objects out of 1000 (max. 8388607)
+ 332 PDF objects out of 1000 (max. 8388607)
  189 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 181 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 186 words of extra memory for PDF output out of 10000 (max. 10000000)
 
