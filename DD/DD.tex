@@ -1,0 +1,239 @@
+\documentclass[numbers=noenddot, 12pt, a4paper, oneside]{scrbook}
+\usepackage{blindtext}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\def\Plus{\texttt{+}}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=false,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+
+\begin{document}
+ 
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE Politecnico di Milano \par}
+	\vspace{1cm}
+	\includegraphics[width=0.35\textwidth]{polimi-logo}\par
+	\vspace{1cm}
+		
+	{\scshape\Large Software Engineering 2 Course\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Travlendar \Plus \par}
+	\vspace{6cm}
+	{\Large\itshape di\par}
+	{\Large\itshape Gianluigi Oliva, Marco Mussi e Lukasz Moskwa\par}
+	\vfill
+
+	
+	\vfill
+	
+	% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+
+\newpage 
+\tableofcontents
+\newpage 
+
+\section*{Abstract}
+
+
+\chapter{Introduction}
+
+
+
+\section{Purpose}
+
+The purpose of this document is to provide technical details about the information contained in
+RASD of Travelandar+ Application and lead the developers that viewing this document can develop the application in the correct way.\\
+
+The output of this document is an architectural description that shows all the critical feature of the
+problem taken into account.
+In particular in this document will be treated:
+\begin{itemize}
+	\item The high architectural level;
+	\item The design patterns;
+	\item The main component and the interface that the application provides;
+	\item The runtime behavior;
+	\item The data structure used for the developing;
+\end{itemize}
+
+The relation among the different models is represented by using UML diagram and other useful
+kind of diagram that show the structure of the system (Entity – Relation diagram).
+
+
+
+\section{Scope}
+
+The scope of this application (Travlendar \Plus) is provide a tool for the target users to schedule in an effective way their time optimizing the travels.\\
+
+Travlendar+ allows to create a calendar which fits the meetings and other kind of commitments.
+The key feature of this application is to determine if the meeting location is reachable in the scheduled time and then provide a fast way to get to the destionation, otherwise it notify the user that it is not possibile by any mean to fullfill the request. Furthermore the application also arranges the schedule in a flexible way, taking into account weather condition and user's preferences as well, for some kind of events (like the lunch) and offers the possibility to slightly change its time.\\
+
+With Travlendar+ is possible as well to buy public transport's tickets on the fly for the journey. If the user requires often the same path, he is suggested by the application to buy the best offered subscription.\\
+
+The architecture must be designed with the intent of being maintainable and extensible. For this purpose, we will implement some known design patterns which will facilitate the development of the system.
+
+
+
+\section{Definitions, Acronyms, Abbreviations}
+
+\subsection*{Definitions}
+\begin{itemize}
+	\item \textbf{Platform}: system/application as a whole.
+	\item \textbf{User}: An end user who is currently registered to the Travlendar+ application and has credentials to access.
+	\item \textbf{Guest}: Person not registered yet and with limited access to features.
+	\item \textbf{Event}: A scheduled meeting or other kind of appointment a user has to attend.
+	\item \textbf{Journey}: The path chosen by the application as the one with all the fullfilled requirements.
+	\item \textbf{Bad Weather}: A weather that prevents the user from choosing some path options. The listed bad weathers are snow, rain, storm and others.
+	\item \textbf{Framework}: Reusable set of libraries or classes for a software system.
+	\item \textbf{Cross-Platform}: software able to run on different platforms with same code.
+	\item \textbf{Port}: in the internet protocol suite, it is an endpoint of communication in operating system
+	\item \textbf{Web-Socket}:is a computer communications protocol, providing full-duplex communication channels over a single TCP connection
+	\item \textbf{REST}: is a way of providing interoperability between computer systems on the Internet.
+	\item \textbf{RESTful}: a system using REST
+	\item \textbf{Client Server Architecture}:  is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients.
+	\item \textbf{Client Tier}: is the tier/layer involving the client.
+	\item \textbf{Fat Client}: is a client computer in client–server architecture or networks that typically provides rich functionality independent of the central server.
+	\item \textbf{Layer}:In a logical multilayered architecture for an information system with an object-oriented design, the main layers are Presentation layer, Application layer and Data access layer.
+\end{itemize}
+
+\subsection*{Acronyms}
+
+\begin{itemize}
+	\item \textbf{RASD}: Requirements Analysis and Specification Document
+	\item \textbf{DB}: Database
+	\item \textbf{DBMS}: Database Management System
+	\item \textbf{OS}: Operating System 
+	\item \textbf{HTML}: HyperText Markup Language
+	\item \textbf{CSS}: Cascading Style Sheets
+	\item \textbf{JS}: JavaScript
+	\item \textbf{JSON}: JavaScript Object Notation
+	\item \textbf{API}: Application Programming Interface
+	\item \textbf{IDE}: Integrated Development Environment
+	\item \textbf{RAM}: Random Access Memory
+	\item \textbf{HTTP}: HyperText Transfer Protocol
+	\item \textbf{HTTPS}: HyperText Transfer Protocol Secure
+	\item \textbf{TCP}: Transmission Control Protocol
+	\item \textbf{ACID}: Atomicity Consistency Isolation and Durability
+	\item \textbf{DD}: Design Document
+	\item \textbf{MVC}: Model View Component
+	\item \textbf{UX}: User Experience
+	\item \textbf{URL}: Uniform Resource Locator
+	\item \textbf{OLTP}: On Line Transaction Processing
+	
+\end{itemize}
+
+\subsection*{Abbreviations}
+\begin{itemize}
+	\item \textbf{Gn}: n-th goal
+	\item \textbf{Rn}: n-th functional requirement
+	\item \textbf{Dn}: n-th domain
+	\item \textbf{Mn}: n-th mockup
+	\item \textbf{WebApp}: WebApplication 
+\end{itemize}
+
+
+
+\section{Revision History}
+
+Version, date and summary\\
+
+\begin{tabular}{|p{0.2\textwidth}|p{0.3\textwidth}|p{0.4\textwidth}|}
+	\hline
+	\parbox[c][6ex]{6ex}{\centering \textbf{Version}} & \textbf{Date} & \textbf{Summary}\\
+	\hline
+	\parbox[c][6ex]{6ex}{\centering 1.0.0} & \today & First release of this document\\
+	%	\parbox[c][6ex]{6ex}{\centering \textbf{Goal}} & 2 \\
+	\hline
+	
+	
+	
+\end{tabular}
+
+
+
+\section{Reference Documents}
+
+
+We used the following documents:
+\begin{enumerate}
+	\item The orginal Travlendar application: \\
+	\textbf{http://score-contest.org/2018/projects/travlendar.php}
+	\item The revised document of the assignment:\\
+	\textbf{https://goo.gl/9m1ojy}
+	
+	\item IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements Specifications. 
+	
+	\item IEEE Std 1016tm-2009 Standard for Information Tecnology-System Design-Software Design Descriptions.
+\end{enumerate}
+
+\section{Document Structure}
+
+
+\begin{itemize}
+	\item \textbf{Introduction}: This section provides a general introduction and overview of the Design Document
+	\item \textbf{Architectural Design}: Overall description of the main system component and relationship between them. This part is divided in various subsection in which are show the main component view, deployment view, runtime view, component interface and design patterns.
+	\item \textbf{Algorithm Design}: Overall description of the high level details about the most critical part of the algorithms that must be implemented for the system.
+	\item \textbf{User Interface Design}: Overview of the way the user can interact with the system and the response of the application to the user input.
+	\item \textbf{Requirements Traceability}: Overview of how the design part descripted in this document
+	satisfy the functional requirement and the constraints explain the RASD.
+	\item \textbf{Implementation, Integration and Test Plan}: Identification of the order we will use to realize the subcomponents of the system and how we will integrate and test them together.
+	\item \textbf{Effort Spent}: Time and resource effort during the development of the application.
+	\item \textbf{References}: References and software used during the process of creation of the system.
+\end{itemize}
+
+
+
+\chapter{Architectural Design}
+
+\section{Overview: Highlevel components	and their interaction}
+
+\subsection*{High level component}
+
+\section{Component View}
+
+\section{Deployment View}
+
+\section{Runtime View}
+
+\section{Other design decisions}
+
+\chapter{Algorithm Design}
+
+\chapter{User Interface Design}
+
+\chapter{Requirements Traceability}
+
+\chapter{Implementation,Integration and Test Plan}
+
+
+\chapter{Effort Spent}
+
+
+\chapter{References}
+
+\end{document}
