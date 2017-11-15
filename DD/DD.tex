@@ -208,15 +208,160 @@ We used the following documents:
 
 
 
+
 \chapter{Architectural Design}
 
 \section{Overview: Highlevel components	and their interaction}
 
+The Travlander+ system has a three tier architecture:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/HighLevelArchitecture}
+	\caption{Graphical description of the High Level Architecture and relationship of the tiers}
+\end{figure}
+
+The client has only the presentation layer realized with a dynamic GUI, created due to informations retrieved by the server. The communication between client and server happens due to REST calls and JSON response.\\
+
+The second tier contains the application logic layer and the methods for the communication with the Database Server.\\
+
+The third layer stores all the usefull data to the user which allows the system to perform operations and manage separatly different users.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.2\textwidth]{images/ArchitectureLayer}
+	\caption{Graphical representation of the position of the firewalls in our network}
+\end{figure}
+
+Between all the layers there are firewalls in order to increase the safety of communication and increase the reliability of the overall system.
+
 \subsection*{High level component}
+
+The high level components architecture is composed of four different elements
+types. The main element is a singleton, the web server.
+Clients communicate only with the web application server and this kind of communication can be performed throught a PC, a mobile device and all devices which allow the execution of JavaScript.\\
+
+When the client has to perform a request, it sends a well formatted JSON string to the web application that will computate it, interacting as well with third part services and with the database if needed to save or to request usefull information, and provide a response.\\
+
+The client and the server communicate using both synchronous messages and asynchronous ones based on the purpose. For example, if the user wants to save some informations, a synchronous communication will be done. Otherwise if, for example, a client requires the informations of a map (that is retrieved with the Google's API) an asynchronous communication will be done.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{images/HighLevelComponent}
+	\caption{Graphical representation of the High Level components}
+\end{figure}
 
 \section{Component View}
 
+In this section we will explain in detail all the major sub-part of the system and the way they interact each other.
+
+\subsection*{DBMS Server}
+
+Into the database server we want to use a relational DBMS component, like MySQL, to manage the interaction with the database. In that way we can guarantee the ACID properties of the transactions executed.\\
+
+As seen in the previous schema (Fig 2.2) the DBMS server can communicate only with the Application server through a firewall. Sensible data such as passwords and personal information must be encrypted properly before being stored. Users must be granted access only upon provision of correct and valid credentials.\\
+
+The DBMS will use a high level schema like the one represented in the following Entity-Relationship diagram.\\
+
+The main components of the DBMS server are:
+\begin{itemize}
+	\item \textbf{DBMS}:\\\newline
+	This component deals with the operations of read and write of the data stored into the Database. It's implemented as OLTP, which is used to refer to processing in which the system responds immediately to user requests.\\
+	
+	\item \textbf{DBRequestHandler}:\\\newline
+	This module converts requests from the Application Server into SQL queries which are executed by the DBMS.\\
+	
+\end{itemize}
+
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{images/ER}
+	\caption{E-R Diagram of the DBMS}
+\end{figure}
+
+
+\subsection*{Application and Web Server}
+
+For our purpose we decided to merge together the Application and Web server. This choice is based on the three-tier architecture model. The Application server is the middle-tier which implements the business logic of the WebApp. It also uses a Script Engine mechanism to provide dynamic real-time contents to the users.\\
+
+In this layer we can also find a Web Server which is the component that handles the requests from the clients. These requests are based both on HTTP standard protocol and on the Web-Socket protocol. Once the page request is completed, a connection is estabilished with the Web-Socket protocol in order to have a full-duplex communication and refresh the web page content without reloading the whole page.\\
+
+The system must also provide a way to communicate with external systems with the purpose of collecting important data and informations which will allow the correct execution of operations.\\
+
+The main components are:
+\begin{itemize}
+	\item \textbf{UserManager}:\\\newline
+	This module will manage all the sensitive informations about the users. It will also allow the users to see and modify them when requested. It mananages as well the Login and Registration procedures.\\
+	
+	\item \textbf{ScheduleManager}:\\\newline
+	This module contains the business and application logic that performs the computation of the best travel path and also verifies the schedule can fit in the user's timetable. In order to provide the best journey path, this module takes into account the weather forecast as well through the ExternalRequestManager.\\
+	
+	\item \textbf{ExternalRequestManager}:\\\newline
+	This module handles all the communications with third part services and retrives from them important informations which will be passed to other system's modules. \\
+	
+	\item \textbf{PaymentHandler}:\\\newline
+	This module deals with all the procedures necessary to perform a payment. This occurs every time a user wants to purchase a ticket or a subscription for a specific journey in his schedule. In some cases, with third part services like car sharing or bike sharing, this module redirects those informations directly to the required service page.\\
+	
+	\item \textbf{SecurityAuthenticator}:\\\newline
+	This module manages all the security policies in order to prevent fraudulent accesses and guarantee the privacy of the users. It also provide a secure way to connect to the web application using a token-based mechanism in a Web-Socket context. \\
+	
+	\item \textbf{NotificationManager}:\\\newline
+	The Notification Manager purpose is to handle all the notifications to the user and communicate them even when the application is closed or in background. It also report the informations on different priority levels.\\
+	
+	\item \textbf{RequestController}:\\\newline
+	This module has the task of managing all the user's requests and handle them to the proper system modules in order to fullfill their queries.\\
+	
+	\item \textbf{DataHandler}:\\\newline
+	This module allows the exchange of data and informations between the Application/WebServer and the Database Server. While the communication between the Client and the Web Application is made through a HTTPS standard protocol to ensure the connection safety, the communication between the Application Server and the Database is realized with HTTP. In fact, the firewall is configured to deny all the possible connections coming from sources different than the WebApp.\\
+	
+\end{itemize}
+
+\subsection*{Client}
+
+The client in our model architecture is a Thin Client, as the whole business logic and calculations are made on the Application Server side. Therefore the client realizes only the Presentation Layer.\\
+
+The Client side is meant for the mobile and desktop users and, in order to access to all the system features, it has to have implemented necessary methods to retrieve informations from its GPS hardware component.\\
+
+The client's main components are:
+
+\begin{itemize}	
+	
+	\item \textbf{PositionController}:\\\newline
+	This module takes into account the position of the used device when the ApplicationController needs it. The user is asked either to insert manually his position or grant to the device the permission of using GPS position data.\\
+	
+	\item \textbf{UIManager}:\\\newline
+	This module is used to manage all the contents displayed to the user in a certain page he visits. It takes datas from the ApplicationController and show them. It is also responsible for the handling of user's input and form fullfilling.\\
+	
+	\item \textbf{NotificationMonitor}:\\\newline
+	This software component has the purpose of listen the Application server notifications and display them immediatly or, if expected, store them for a while and then display them when scheduled.\\
+	
+	\item \textbf{ApplicationController}:\\\newline
+	This module acts as core of our client implementation. It contains the client's logic and allows an efficent communication between modules listed above.\\
+	
+	This software component deals with all the user's request and forward them through a specific protocol in a public network to the Application Server.
+	It also handles the retrived data received as responses from the Server side, and send them to the ApplicationController to be shown.\\
+	
+\end{itemize}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{images/ComponentView}
+	\caption{Component View of the System}
+\end{figure}
+
+
 \section{Deployment View}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.80\textwidth]{images/DeploymentView}
+	\caption{Deployment View of the system}
+\end{figure}
+
 
 \section{Runtime View}
 
