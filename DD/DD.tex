@@ -365,7 +365,194 @@ The client's main components are:
 
 \section{Runtime View}
 
+This section represents the dynamic behaviour of the system in the most
+relevant and already seen cases. The purpose of each of the following sequence diagrams is to explain as much as possibile in the detail, the workflow inside the Application Server and its communication with the Client and the Database Server.
+
+\subsection*{Registration to Travlendar+ application}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth,angle=-0]{images/Goal1}
+	\caption{Sequence Diagram of the guest's registration to the application}
+\end{figure}
+
+As we can see in this Diagram, the guest can send a Serialized Form from the Application Controller module to the Request Controller, which will entrust the Data Handler of making a request to the Database Sever in order to know if a user with same datas already exists.\\
+
+If not, the guest is added to the Database server and is sent an e-mail for account verification. Otherwise, the guest is notified that someone with the same datas already exists.
+
+\subsection*{Schedule Creation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth,angle=-0]{images/Goal2}
+	\caption{Sequence Diagram of the schedule creation}
+\end{figure}
+
+In this diagram is possible to see how the components interact between them in order to create a new schedule. Once the request reaches the Application server, several control are made and the External Request Manager grants informations about the Weather and path to be chosen.
+
+
+\subsection*{Manage User's information}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth,angle=-0]{images/Goal3}
+	\caption{Sequence Diagram of the managing of users' information}
+\end{figure}
+
+In this diagram it is possible to see how the Data Handler module deals with a request of the user to modify his data and preferences. All the changes are stored in the DB Server.
+
+
+\subsection*{Retrieve Weather Forecast informations}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth,angle=-0]{images/Goal4}
+	\caption{Sequence Diagram of the retrieving of Weather Forecast informations}
+\end{figure}
+
+Both the guests and users can actually retrieve informations about the Weather Forecast. This is done by the External Request Manager that collect datas from the Openweather external API. Then these informations are sent to the Notification Manager module.
+
+\subsection*{Buy tickets and subscription for public transport}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth,angle=-0]{images/Goal5}
+	\caption{Sequence Diagram of the purchase of tickets and subscription for public transport}
+\end{figure}
+
+Here we can observe the procedure that deals with the purchase of tickets by the user. If the transaction done due to the Payment Handler goes well, the informations about the bought ticket are saved to the Database Server using the submitQuery method.
+
+\subsection*{Share user's schedule}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth,angle=-0]{images/Goal6}
+	\caption{Sequence Diagram of sharing user's schedule}
+\end{figure}
+
+Whenever a user wants to share his own schedule of a given day of his choice, the username of the second user is saved to the Database Server. Then the first user is notified by the Notification Manager.
+
+\subsection*{Update user's schedule}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth,angle=-0]{images/Goal7}
+	\caption{Sequence Diagram of updating user's schedule}
+\end{figure}
+
+As the preferences of every user are stored in the Database Server, whenever they want to change them the Data Handler's method submitQuery is called. Then the modifications are saved and updated immediatly in the DB server. 
+
+\subsection*{Manage user's preference about time for break}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth,angle=-0]{images/Goal8}
+	\caption{Sequence Diagram of managing user's preference about time for break}
+\end{figure}
+
+If a user decides to modify his break preferences, they are modified for all the upcoming schedules he decides to create. Already created schedules are not modified. 
+
+
+\subsection*{User wants to see a schedule for specified day}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth,angle=-0]{images/Goal9}
+	\caption{Sequence Diagram of a user wants to see a schedule for specified day}
+\end{figure}
+
+If a user decides to see a schedule of his, he has just to insert the data of the day and thus it will be passed to the Application Controller. Then, after a query is successfully executed passing from the Request Controller and Data Handler, the result is shown to the user by the UI Manager.
+
+\subsection*{Other considerations}
+
+In all the diagrams above the procedure which check the correctness of the token and the one that explain the submitQuery method to the Database server where deliberately omitted. The reason is mainly redundancy and thus they are explained in the following diagrams.\\
+
+\subsection*{Check token procedure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth,angle=-0]{images/checkToken}
+	\caption{The procedure of checking the token}
+\end{figure}
+
+This particular procedure is called every time the user makes a request to the server. The validity of the token is then increased to permit the user an easy flow in browsing contents.
+
+\subsection*{Query DBMS procedure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth,angle=-0]{images/QueryDBMS}
+	\caption{The procedure of sending a query to the DBMS}
+\end{figure}
+
+\subsection*{Login procedure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth,angle=-0]{images/Login}
+	\caption{The procedure of logging in}
+\end{figure}
+
+\section{Component Interfaces}
+
+This sections includes further details on the interfaces between different components of the system.
+
+\subsection*{Component Interface of the client}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/ClientInterface}
+	\caption{Component Interface of the client}
+\end{figure}
+
+\subsection*{Component Interface of the Application \& Web Server}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/ApplicationInterface}
+	\caption{Component Interface of the Application \& Web Server}
+\end{figure}
+
+\subsection*{Component Interface of the Database Server}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/DatabaseInterface}
+	\caption{Component Interface of the Database Server}
+\end{figure}
+
+
+
+\section{Selected Architectural styles and patterns}
+
+We decided to use a three-tier architecture. The client will be represented by the application installed on the device of the user or his web browser, which only contains the presentation layer. Therefore it is a so called Thin-Client.\\
+
+On the other hand, the server is represented by a mainframe which computate all the business logic and computation to fullfill the users' requests. The reason behind this choice are the willing of keeping thin the client to improve the user experience and the reserved channel on which communicate the Application server and the Database server. As there is only this single channel, we can guarantee the confidentiality and privacy of the users. \\
+
+Here are listed the main pattern we chose to implement:
+\begin{itemize}
+	\item \textbf{Model View Controller}:\\\newline
+	The model role is covered by the Data center which mantains the data related to the users. The controller instead is covered by the Application \& Web Server which manage the events handling with both Model and View. Finally, the View is covered by the Client Application which displays data and informations in a way that is possibile to interact with them due to a User Interface.\\
+	
+	\item \textbf{Proxy}:\\\newline
+	On the Application side we keep a copy of the tokens which allow the user to correctly login. In this way it is not necessary to request every time the database server in order to know if a user is currently logged in or not. Therefore we can actually even double check if a user is really connected with a random control over time.\\
+	
+	\item \textbf{Singleton}:\\\newline
+	The Application Server's module RequestController is a Singleton, as it is istatiated only once and handle all the possibile request by different users.\\
+	
+\end{itemize}
+
+
 \section{Other design decisions}
+
+We decided to display on the client side a map which displays the journey the user is willing to do. In order to achive this, we decided to use the Google Maps API.\\
+
+For the Weather Forecast instead we decided to requests informations to the OpenWeather API. In this way we can also display data about the forecast whenever the users' request them.\\
+
+To keep stored the session of any current user, we decide to implement the login procedure based on a token-exhange and verification. Therefore is possibile to keep alive a session up to an estabilished time (for example 5 min) and refresh it whenever a correct HTTP GET is performed.\\
+
+To ease the developement of a cross platform application, we decided to use Phonegap (https://phonegap.com/), which allows the creation of different kind of native applications starting from a WebApp. In that way it is possible to use it from iOS, Android and Windows Phone and from Desktop browsers
 
 \chapter{Algorithm Design}
 
