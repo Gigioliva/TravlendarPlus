@@ -556,6 +556,128 @@ To ease the developement of a cross platform application, we decided to use Phon
 
 \chapter{Algorithm Design}
 
+In this section we will explain the algorithms that concern the critical part of the implementation on the system.
+
+\subsection*{Creation of a Journey/Event}
+
+The algorithm used for the creation of a journey has to take into account every aspect of a user profile. It has to follow these steps:\\
+\begin{enumerate}
+	\item Consider the schedule of a chosen by user day
+	\item Take informations about the Weather Forecast
+	\item Take the user's preferences about the means of transport
+	\item Retrieve the information about the best path to take from Google Maps API 
+	\item Verify that the combination of created Event and Journey in the Schedule does not overlap with another currently existing Event or Journey
+	\item Verify that there is always possibile to have an Event of type Break in the current Schedule
+	\item If the previous control is satisfied we can save the update Schedule into the Database Server
+	\item Else, the Application server notifies the user that something went wrong
+\end{enumerate}
+
+
+\subsection*{Token Creation}
+
+This is an example of a piece of code which can be used to apply the algorithm.
+
+
+
+\begin{lstlisting}
+/**
+* Generate a random string.
+*/
+public String nextString() {
+for (int idx = 0; idx < buf.length; ++idx)
+buf[idx] = symbols[random.nextInt(symbols.length)];
+return new String(buf);
+}
+
+public static final String special = "!%&/=#@";
+
+public static final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+public static final String lower = upper.toLowerCase(Locale.ROOT);
+
+public static final String digits = "0123456789";
+
+public static final String alphanum = upper + lower + digits;
+
+private final Random random;
+
+private final char[] symbols;
+
+private final char[] buf;
+
+public RandomString(int length, Random random, String symbols) {
+if (length < 1) throw new IllegalArgumentException();
+if (symbols.length() < 2) throw new IllegalArgumentException();
+this.random = Objects.requireNonNull(random);
+this.symbols = symbols.toCharArray();
+this.buf = new char[length];
+}
+
+/**
+* Create an alphanumeric string generator.
+*/
+public RandomString(int length, Random random) {
+this(length, random, alphanum);
+}
+
+/**
+* Create an alphanumeric strings from a secure generator.
+*/
+public RandomString(int length) {
+this(length, new SecureRandom());
+}
+
+/**
+* Create session identifiers.
+*/
+public RandomString() {
+this(21);
+}
+\end{lstlisting}
+
+
+\subsection*{User Registration}
+
+This is an example of a piece of code which can be used to apply the algorithm.
+
+\begin{lstlisting}
+public void register(HashMap<String, String> newUser) {
+try {
+PreparedStatement prepared = connection
+.prepareStatement("insert into User (Surname, Name, Age, Email) values (?,?,?,?)");
+prepared.setString(1, newUser.get("Surname"));
+prepared.setString(2, newUser.get("Name"));
+prepared.setString(3, newUser.get("Age"));
+prepared.setString(4, newUser.get("Email"));
+prepared.executeUpdate();
+} catch (SQLException e) {
+e.printStackTrace();
+} finally {
+try {
+if (connection != null)
+connection.close();
+} catch (SQLException e) {
+e.printStackTrace();
+}
+}
+}
+\end{lstlisting}
+
+
+\subsection*{Payment}
+
+In order to perform the purchase requested by the user, the system has to follow these steps:
+
+\begin{enumerate}
+	\item Consider the mean of transport found in the event
+	\item Allow the user to choose the ticket or subscription referred to the mean of transport of his choice
+	\item Consider the credit card data of the user
+	\item Send the purchase information to third part services like PayPal
+	\item If the purchase ends well, save the receipt of the ticket and add it to the stored ticket of the user in the Database Server
+	\item Else, the system notifies the user that something went wrong with the transaction
+\end{enumerate}
+
+
 \chapter{User Interface Design}
 
 \chapter{Requirements Traceability}
