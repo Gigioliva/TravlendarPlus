@@ -694,6 +694,54 @@ The diagram provided below follow the User Interface requirements stated in the 
 
 \chapter{Requirements Traceability}
 
+In this section we create a bridge between the functional and not functional requirements defined before in the RASD with the sections in the DD.\\
+
+\begin{tabular}{|c|p{0.7\textwidth}|}
+	\hline
+	\parbox[c][4ex]{20ex}{\textbf{DD Component}} & \textbf{Functional Requirements}\\
+	\hline
+	\parbox[c][14ex]{20ex} {Request Controller} & Register, Create Schedule, Data Management, Weather Forecast, Buy Ticket, Share Schedule, Update Schedule, Manage Break, Journey Infos\\[2ex]
+	\hline
+	\parbox[c][14ex]{14ex} {Data Handler}&Register, Create Schedule, Data Management, Buy Ticket, Share Schedule, Update Schedule, Manage Break, Journey Infos\\[2ex]
+	\hline
+	\parbox[c][14ex]{18ex} {Schedule Manager}&Create Schedule, Buy Ticket, Update Schedulet\\
+	\hline
+	\parbox[c][14ex]{18ex} {Payment Handler}&Buy Ticket\\
+	\hline
+	\parbox[c][14ex]{18ex} {External Request Manager}&Create Schedule, Weather Forecast, Update Schedule\\
+	\hline
+	\parbox[c][14ex]{18ex} {User Manager}& Login\\
+	\hline
+\end{tabular}
+\newpage
+\begin{tabular}{|c|p{0.7\textwidth}|}
+	\hline
+	\parbox[c][4ex]{20ex}{\textbf{DD Component}} & \textbf{Functional Requirements}\\
+	\hline
+	\parbox[c][14ex]{16ex} {Notification Manager} &Register, Create Schedule, Data Management, Weather Forecast, Buy Ticket, Share Schedule, Update Schedule, Manage Break\\[2ex]
+	\hline
+	\parbox[c][14ex]{16ex} {Application Controller}&Register, Create Schedule, Data Management, Weather Forecast, Buy Ticket, Share Schedule, Update Schedule, Manage Break, Journey Infos\\[2ex]
+	\hline
+	\parbox[c][14ex]{16ex} {UI Manager}&Register, Create Schedule, Data Management, Weather Forecast, Buy Ticket, Share Schedule, Update Schedule, Manage Break, Journey Infos\\[2ex]
+	\hline
+	\parbox[c][14ex]{16ex} {Notification Monitor}&Register, Create Schedule, Data Management, Buy Ticket, Share Schedule, Update Schedule, Manage Break\\
+	\hline
+\end{tabular}
+\newpage
+\begin{tabular}{|c|p{0.7\textwidth}|}
+	\hline
+	\parbox[c][6ex]{20ex}{\textbf{RASD Requirements}} & \textbf{DD Section}\\
+	\hline
+	\parbox[c][14ex]{16ex} {Security} & Highlevel components and their Interaction\\[2ex]
+	\hline
+	\parbox[c][14ex]{16ex} {Parallel Operation}& Client Server Architecture\\[2ex]
+	\hline
+	\parbox[c][14ex]{16ex} {Maintainability}& Selected Architectural styles and patterns\\[2ex]
+	\hline
+	\parbox[c][14ex]{16ex} {Portability}& Other design decisions\\
+	\hline
+\end{tabular}
+
 \chapter{Implementation,Integration and Test Plan}
 
 
