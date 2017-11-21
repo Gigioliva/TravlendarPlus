@@ -208,7 +208,6 @@ We used the following documents:
 
 
 
-
 \chapter{Architectural Design}
 
 \section{Overview: Highlevel components	and their interaction}
@@ -361,7 +360,6 @@ The client's main components are:
 	\includegraphics[width=0.80\textwidth]{images/DeploymentView}
 	\caption{Deployment View of the system}
 \end{figure}
-
 
 \section{Runtime View}
 
@@ -540,7 +538,7 @@ Here are listed the main pattern we chose to implement:
 	
 	\item \textbf{Singleton}:\\\newline
 	The Application Server's module RequestController is a Singleton, as it is istatiated only once and handle all the possibile request by different users.\\
-	
+		
 \end{itemize}
 
 
@@ -553,6 +551,7 @@ For the Weather Forecast instead we decided to requests informations to the Open
 To keep stored the session of any current user, we decide to implement the login procedure based on a token-exhange and verification. Therefore is possibile to keep alive a session up to an estabilished time (for example 5 min) and refresh it whenever a correct HTTP GET is performed.\\
 
 To ease the developement of a cross platform application, we decided to use Phonegap (https://phonegap.com/), which allows the creation of different kind of native applications starting from a WebApp. In that way it is possible to use it from iOS, Android and Windows Phone and from Desktop browsers
+
 
 \chapter{Algorithm Design}
 
@@ -580,59 +579,59 @@ This is an example of a piece of code which can be used to apply the algorithm.
 
 
 \begin{lstlisting}
-/**
-* Generate a random string.
-*/
-public String nextString() {
-for (int idx = 0; idx < buf.length; ++idx)
-buf[idx] = symbols[random.nextInt(symbols.length)];
-return new String(buf);
-}
-
-public static final String special = "!%&/=#@";
-
-public static final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-public static final String lower = upper.toLowerCase(Locale.ROOT);
-
-public static final String digits = "0123456789";
-
-public static final String alphanum = upper + lower + digits;
-
-private final Random random;
-
-private final char[] symbols;
-
-private final char[] buf;
-
-public RandomString(int length, Random random, String symbols) {
-if (length < 1) throw new IllegalArgumentException();
-if (symbols.length() < 2) throw new IllegalArgumentException();
-this.random = Objects.requireNonNull(random);
-this.symbols = symbols.toCharArray();
-this.buf = new char[length];
-}
-
-/**
-* Create an alphanumeric string generator.
-*/
-public RandomString(int length, Random random) {
-this(length, random, alphanum);
-}
-
-/**
-* Create an alphanumeric strings from a secure generator.
-*/
-public RandomString(int length) {
-this(length, new SecureRandom());
-}
-
-/**
-* Create session identifiers.
-*/
-public RandomString() {
-this(21);
-}
+	/**
+	* Generate a random string.
+	*/
+	public String nextString() {
+		for (int idx = 0; idx < buf.length; ++idx)
+			buf[idx] = symbols[random.nextInt(symbols.length)];
+			return new String(buf);
+	}
+	
+	public static final String special = "!%&/=#@";
+	
+	public static final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	
+	public static final String lower = upper.toLowerCase(Locale.ROOT);
+	
+	public static final String digits = "0123456789";
+	
+	public static final String alphanum = upper + lower + digits;
+	
+	private final Random random;
+	
+	private final char[] symbols;
+	
+	private final char[] buf;
+	
+	public RandomString(int length, Random random, String symbols) {
+		if (length < 1) throw new IllegalArgumentException();
+			if (symbols.length() < 2) throw new IllegalArgumentException();
+			this.random = Objects.requireNonNull(random);
+			this.symbols = symbols.toCharArray();
+			this.buf = new char[length];
+	}
+	
+	/**
+	* Create an alphanumeric string generator.
+	*/
+	public RandomString(int length, Random random) {
+		this(length, random, alphanum);
+	}
+	
+	/**
+	* Create an alphanumeric strings from a secure generator.
+	*/
+	public RandomString(int length) {
+		this(length, new SecureRandom());
+	}
+	
+	/**
+	* Create session identifiers.
+	*/
+	public RandomString() {
+		this(21);
+	}
 \end{lstlisting}
 
 
@@ -641,26 +640,26 @@ this(21);
 This is an example of a piece of code which can be used to apply the algorithm.
 
 \begin{lstlisting}
-public void register(HashMap<String, String> newUser) {
-try {
-PreparedStatement prepared = connection
-.prepareStatement("insert into User (Surname, Name, Age, Email) values (?,?,?,?)");
-prepared.setString(1, newUser.get("Surname"));
-prepared.setString(2, newUser.get("Name"));
-prepared.setString(3, newUser.get("Age"));
-prepared.setString(4, newUser.get("Email"));
-prepared.executeUpdate();
-} catch (SQLException e) {
-e.printStackTrace();
-} finally {
-try {
-if (connection != null)
-connection.close();
-} catch (SQLException e) {
-e.printStackTrace();
-}
-}
-}
+	public void register(HashMap<String, String> newUser) {
+		try {
+			PreparedStatement prepared = connection
+			.prepareStatement("insert into User (Surname, Name, Age, Email) values (?,?,?,?)");
+			prepared.setString(1, newUser.get("Surname"));
+			prepared.setString(2, newUser.get("Name"));
+			prepared.setString(3, newUser.get("Age"));
+			prepared.setString(4, newUser.get("Email"));
+			prepared.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+		try {
+			if (connection != null)
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 \end{lstlisting}
 
 
@@ -744,10 +743,97 @@ In this section we create a bridge between the functional and not functional req
 
 \chapter{Implementation,Integration and Test Plan}
 
+Once we defined the whole software and hardware architecture, the next step is the Implementation and Testing. During the testing phase we have to cover a certain amount of code:
+\begin{itemize}
+	\item \textbf{100\%} of the DBMS Server's components
+	\item \textbf{80\%} for the Web \& Application Server's component
+	\item \textbf{50\%} for the Client's component
+\end{itemize}
+We want to approach the Integration phase with a \textbf{bottom-up} paradigm, which starts with the developement of minor modules. Then we extend the modules integrating them each other.\\
+
+Meanwhile we realize the presentation layer and data layer as they are separated each other, so can be developed in parallel. Therefore we implement on the server side:
+\begin{enumerate}
+	\item Data Handler
+	\item User Manager and Security Authenticator
+	\item Payment Handler and External Request Manager
+	\item Schedule Manager
+	\item Request Controller and Notification Manager
+\end{enumerate}
+
+Done that, we must create the Application Controller for the Client. Once completed, it is finally possible to integrate the single components together like shown in the following schemas:
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth,angle=-0]{images/impleServer1}
+	\caption{Integration of the Request Controller with the User Handler}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth,angle=-0]{images/impleServer2}
+	\caption{Integration of the Request Controller with the Data Handler}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth,angle=-0]{images/impleServer3}
+	\caption{Integration of the Schedule Manager with Third Part Services}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth,angle=-0]{images/impleServer4}
+	\caption{Integration of the Schedule Manager with the Request Controller}
+\end{figure}
+
+Once we integrate all these components, we can let them communicate in order to make the application work. Then, as in the scheme down here, we implement all the Client's modules.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth,angle=-0]{images/implClient}
+	\caption{Integration of the various components of the client}
+\end{figure}
+
+
+When all those implementations are done, it is effectively possibile to try and test the system as a whole. 
+
+
 
 \chapter{Effort Spent}
 
+While working on the project, we always met to discuss main topics to provide more consistence to the project:\\
+
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+	\hline
+	\parbox[c][6ex]{6ex}{\centering \textbf{Name}} & \textbf{Effort}
+	\\
+	\hline
+	\parbox[c][8ex]{6ex}{\centering Lukasz Moskwa} & Group 30h and 5h alone\\
+	\hline
+	\parbox[c][8ex]{6ex}{\centering Marco Mussi} & Group 30h and 5h alone\\
+	\hline
+	\parbox[c][8ex]{6ex}{\centering Gianluigi Oliva} & Group 30h and 5h alone \\
+	\hline
+	
+	
+	
+\end{tabular}
 
 \chapter{References}
+
+\begin{itemize}
+	\item The orginal Travlendar application: \\
+	\textbf{http://score-contest.org/2018/projects/travlendar.php}
+	\item The revised document of the assignment:\\
+	\textbf{https://goo.gl/9m1ojy}
+	\item IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements Specifications. 
+	\item IEEE Std 1016tm-2009 Standard for Information Tecnology-System Design-Software Design Descriptions.
+	\item Phonegap: \\
+	https://phonegap.com/
+\end{itemize}
+
+
 
 \end{document}

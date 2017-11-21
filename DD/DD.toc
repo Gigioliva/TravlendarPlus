@@ -7,7 +7,7 @@
 \contentsline {section}{\numberline {1.6}Document Structure}{7}
 \contentsline {chapter}{\numberline {2}Architectural Design}{9}
 \contentsline {section}{\numberline {2.1}Overview: Highlevel components and their interaction}{9}
-\contentsline {section}{\numberline {2.2}Component View}{12}
+\contentsline {section}{\numberline {2.2}Component View}{11}
 \contentsline {section}{\numberline {2.3}Deployment View}{18}
 \contentsline {section}{\numberline {2.4}Runtime View}{19}
 \contentsline {section}{\numberline {2.5}Component Interfaces}{30}
@@ -17,5 +17,5 @@
 \contentsline {chapter}{\numberline {4}User Interface Design}{38}
 \contentsline {chapter}{\numberline {5}Requirements Traceability}{40}
 \contentsline {chapter}{\numberline {6}Implementation,Integration and Test Plan}{43}
-\contentsline {chapter}{\numberline {7}Effort Spent}{44}
-\contentsline {chapter}{\numberline {8}References}{45}
+\contentsline {chapter}{\numberline {7}Effort Spent}{46}
+\contentsline {chapter}{\numberline {8}References}{47}
