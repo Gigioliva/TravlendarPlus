@@ -31,14 +31,14 @@
 
 
 \begin{document}
- 
+
 \begin{titlepage}
 	\centering
 	{\scshape\LARGE Politecnico di Milano \par}
 	\vspace{1cm}
 	\includegraphics[width=0.35\textwidth]{polimi-logo}\par
 	\vspace{1cm}
-		
+
 	{\scshape\Large Software Engineering 2 Course\par}
 	\vspace{1.5cm}
 	{\huge\bfseries Travlendar \Plus \par}
@@ -47,16 +47,16 @@
 	{\Large\itshape Gianluigi Oliva, Marco Mussi e Lukasz Moskwa\par}
 	\vfill
 
-	
+
 	\vfill
-	
+
 	% Bottom of the page
 	{\large \today\par}
 \end{titlepage}
 
-\newpage 
+\newpage
 \tableofcontents
-\newpage 
+\newpage
 
 
 \chapter{Introduction}
@@ -125,7 +125,7 @@ The architecture must be designed with the intent of being maintainable and exte
 	\item \textbf{RASD}: Requirements Analysis and Specification Document
 	\item \textbf{DB}: Database
 	\item \textbf{DBMS}: Database Management System
-	\item \textbf{OS}: Operating System 
+	\item \textbf{OS}: Operating System
 	\item \textbf{HTML}: HyperText Markup Language
 	\item \textbf{CSS}: Cascading Style Sheets
 	\item \textbf{JS}: JavaScript
@@ -142,7 +142,7 @@ The architecture must be designed with the intent of being maintainable and exte
 	\item \textbf{UX}: User Experience
 	\item \textbf{URL}: Uniform Resource Locator
 	\item \textbf{OLTP}: On Line Transaction Processing
-	
+
 \end{itemize}
 
 \subsection*{Abbreviations}
@@ -151,7 +151,7 @@ The architecture must be designed with the intent of being maintainable and exte
 	\item \textbf{Rn}: n-th functional requirement
 	\item \textbf{Dn}: n-th domain
 	\item \textbf{Mn}: n-th mockup
-	\item \textbf{WebApp}: WebApplication 
+	\item \textbf{WebApp}: WebApplication
 \end{itemize}
 
 
@@ -167,9 +167,9 @@ Version, date and summary\\
 	\parbox[c][6ex]{6ex}{\centering 1.0.0} & \today & First release of this document\\
 	%	\parbox[c][6ex]{6ex}{\centering \textbf{Goal}} & 2 \\
 	\hline
-	
-	
-	
+
+
+
 \end{tabular}
 
 
@@ -183,9 +183,9 @@ We used the following documents:
 	\textbf{http://score-contest.org/2018/projects/travlendar.php}
 	\item The revised document of the assignment:\\
 	\textbf{https://goo.gl/9m1ojy}
-	
-	\item IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements Specifications. 
-	
+
+	\item IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements Specifications.
+
 	\item IEEE Std 1016tm-2009 Standard for Information Tecnology-System Design-Software Design Descriptions.
 \end{enumerate}
 
@@ -218,7 +218,7 @@ The Travlander+ system has a three tier architecture:
 	\caption{Graphical description of the High Level Architecture and relationship of the tiers}
 \end{figure}
 
-The client has only the presentation layer realized with a dynamic GUI, created due to informations retrieved by the server. The communication between client and server happens due to REST calls and JSON response.\\
+The client has only the presentation layer realized with a dynamic GUI, created due to information retrieved by the server. The communication between client and server happens due to REST calls and JSON response.\\
 
 The second tier contains the application logic layer and the methods for the communication with the Database Server.\\
 
@@ -240,7 +240,7 @@ Clients communicate only with the web application server and this kind of commun
 
 When the client has to perform a request, it sends a well formatted JSON string to the web application that will computate it, interacting as well with third part services and with the database if needed to save or to request usefull information, and provide a response.\\
 
-The client and the server communicate using both synchronous messages and asynchronous ones based on the purpose. For example, if the user wants to save some informations, a synchronous communication will be done. Otherwise if, for example, a client requires the informations of a map (that is retrieved with the Google's API) an asynchronous communication will be done.\\
+The client and the server communicate using both synchronous messages and asynchronous ones based on the purpose. For example, if the user wants to save some information, a synchronous communication will be done. Otherwise if, for example, a client requires the information of a map (that is retrieved with the Google's API) an asynchronous communication will be done.\\
 
 \begin{figure}[H]
 	\centering
@@ -264,10 +264,10 @@ The main components of the DBMS server are:
 \begin{itemize}
 	\item \textbf{DBMS}:\\\newline
 	This component deals with the operations of read and write of the data stored into the Database. It's implemented as OLTP, which is used to refer to processing in which the system responds immediately to user requests.\\
-	
+
 	\item \textbf{DBRequestHandler}:\\\newline
 	This module converts requests from the Application Server into SQL queries which are executed by the DBMS.\\
-	
+
 \end{itemize}
 
 
@@ -285,61 +285,61 @@ For our purpose we decided to merge together the Application and Web server. Thi
 
 In this layer we can also find a Web Server which is the component that handles the requests from the clients. These requests are based both on HTTP standard protocol and on the Web-Socket protocol. Once the page request is completed, a connection is estabilished with the Web-Socket protocol in order to have a full-duplex communication and refresh the web page content without reloading the whole page.\\
 
-The system must also provide a way to communicate with external systems with the purpose of collecting important data and informations which will allow the correct execution of operations.\\
+The system must also provide a way to communicate with external systems with the purpose of collecting important data and information which will allow the correct execution of operations.\\
 
 The main components are:
 \begin{itemize}
 	\item \textbf{UserManager}:\\\newline
-	This module will manage all the sensitive informations about the users. It will also allow the users to see and modify them when requested. It mananages as well the Login and Registration procedures.\\
-	
+	This module will manage all the sensitive information about the users. It will also allow the users to see and modify them when requested. It mananages as well the Login and Registration procedures.\\
+
 	\item \textbf{ScheduleManager}:\\\newline
 	This module contains the business and application logic that performs the computation of the best travel path and also verifies the schedule can fit in the user's timetable. In order to provide the best journey path, this module takes into account the weather forecast as well through the ExternalRequestManager.\\
-	
+
 	\item \textbf{ExternalRequestManager}:\\\newline
-	This module handles all the communications with third part services and retrives from them important informations which will be passed to other system's modules. \\
-	
+	This module handles all the communications with third part services and retrives from them important information which will be passed to other system's modules. \\
+
 	\item \textbf{PaymentHandler}:\\\newline
-	This module deals with all the procedures necessary to perform a payment. This occurs every time a user wants to purchase a ticket or a subscription for a specific journey in his schedule. In some cases, with third part services like car sharing or bike sharing, this module redirects those informations directly to the required service page.\\
-	
+	This module deals with all the procedures necessary to perform a payment. This occurs every time a user wants to purchase a ticket or a subscription for a specific journey in his schedule. In some cases, with third part services like car sharing or bike sharing, this module redirects those information directly to the required service page.\\
+
 	\item \textbf{SecurityAuthenticator}:\\\newline
 	This module manages all the security policies in order to prevent fraudulent accesses and guarantee the privacy of the users. It also provide a secure way to connect to the web application using a token-based mechanism in a Web-Socket context. \\
-	
+
 	\item \textbf{NotificationManager}:\\\newline
-	The Notification Manager purpose is to handle all the notifications to the user and communicate them even when the application is closed or in background. It also report the informations on different priority levels.\\
-	
+	The Notification Manager purpose is to handle all the notifications to the user and communicate them even when the application is closed or in background. It also report the information on different priority levels.\\
+
 	\item \textbf{RequestController}:\\\newline
 	This module has the task of managing all the user's requests and handle them to the proper system modules in order to fullfill their queries.\\
-	
+
 	\item \textbf{DataHandler}:\\\newline
-	This module allows the exchange of data and informations between the Application/WebServer and the Database Server. While the communication between the Client and the Web Application is made through a HTTPS standard protocol to ensure the connection safety, the communication between the Application Server and the Database is realized with HTTP. In fact, the firewall is configured to deny all the possible connections coming from sources different than the WebApp.\\
-	
+	This module allows the exchange of data and information between the Application/WebServer and the Database Server. While the communication between the Client and the Web Application is made through a HTTPS standard protocol to ensure the connection safety, the communication between the Application Server and the Database is realized with HTTP. In fact, the firewall is configured to deny all the possible connections coming from sources different than the WebApp.\\
+
 \end{itemize}
 
 \subsection*{Client}
 
 The client in our model architecture is a Thin Client, as the whole business logic and calculations are made on the Application Server side. Therefore the client realizes only the Presentation Layer.\\
 
-The Client side is meant for the mobile and desktop users and, in order to access to all the system features, it has to have implemented necessary methods to retrieve informations from its GPS hardware component.\\
+The Client side is meant for the mobile and desktop users and, in order to access to all the system features, it has to have implemented necessary methods to retrieve information from its GPS hardware component.\\
 
 The client's main components are:
 
-\begin{itemize}	
-	
+\begin{itemize}
+
 	\item \textbf{PositionController}:\\\newline
 	This module takes into account the position of the used device when the ApplicationController needs it. The user is asked either to insert manually his position or grant to the device the permission of using GPS position data.\\
-	
+
 	\item \textbf{UIManager}:\\\newline
-	This module is used to manage all the contents displayed to the user in a certain page he visits. It takes datas from the ApplicationController and show them. It is also responsible for the handling of user's input and form fullfilling.\\
-	
+	This module is used to manage all the contents displayed to the user in a certain page he visits. It takes data from the ApplicationController and show them. It is also responsible for the handling of user's input and form fullfilling.\\
+
 	\item \textbf{NotificationMonitor}:\\\newline
 	This software component has the purpose of listen the Application server notifications and display them immediatly or, if expected, store them for a while and then display them when scheduled.\\
-	
+
 	\item \textbf{ApplicationController}:\\\newline
 	This module acts as core of our client implementation. It contains the client's logic and allows an efficent communication between modules listed above.\\
-	
+
 	This software component deals with all the user's request and forward them through a specific protocol in a public network to the Application Server.
 	It also handles the retrived data received as responses from the Server side, and send them to the ApplicationController to be shown.\\
-	
+
 \end{itemize}
 
 
@@ -372,9 +372,9 @@ relevant and already seen cases. The purpose of each of the following sequence d
 	\caption{Sequence Diagram of the guest's registration to the application}
 \end{figure}
 
-As we can see in this Diagram, the guest can send a Serialized Form from the Application Controller module to the Request Controller, which will entrust the Data Handler of making a request to the Database Sever in order to know if a user with same datas already exists.\\
+As we can see in this Diagram, the guest can send a Serialized Form from the Application Controller module to the Request Controller, which will entrust the Data Handler of making a request to the Database Sever in order to know if a user with same data already exists.\\
 
-If not, the guest is added to the Database server and is sent an e-mail for account verification. Otherwise, the guest is notified that someone with the same datas already exists.
+If not, the guest is added to the Database server and is sent an e-mail for account verification. Otherwise, the guest is notified that someone with the same data already exists.
 
 \subsection*{Schedule Creation}
 
@@ -384,7 +384,7 @@ If not, the guest is added to the Database server and is sent an e-mail for acco
 	\caption{Sequence Diagram of the schedule creation}
 \end{figure}
 
-In this diagram is possible to see how the components interact between them in order to create a new schedule. Once the request reaches the Application server, several control are made and the External Request Manager grants informations about the Weather and path to be chosen.
+In this diagram is possible to see how the components interact between them in order to create a new schedule. Once the request reaches the Application server, several control are made and the External Request Manager grants information about the Weather and path to be chosen.
 
 
 \subsection*{Manage User's information}
@@ -398,15 +398,15 @@ In this diagram is possible to see how the components interact between them in o
 In this diagram it is possible to see how the Data Handler module deals with a request of the user to modify his data and preferences. All the changes are stored in the DB Server.
 
 
-\subsection*{Retrieve Weather Forecast informations}
+\subsection*{Retrieve Weather Forecast information}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.1\textwidth,angle=-0]{images/Goal4}
-	\caption{Sequence Diagram of the retrieving of Weather Forecast informations}
+	\caption{Sequence Diagram of the retrieving of Weather Forecast information}
 \end{figure}
 
-Both the guests and users can actually retrieve informations about the Weather Forecast. This is done by the External Request Manager that collect datas from the Openweather external API. Then these informations are sent to the Notification Manager module.
+Both the guests and users can actually retrieve information about the Weather Forecast. This is done by the External Request Manager that collect data from the Openweather external API. Then these information are sent to the Notification Manager module.
 
 \subsection*{Buy tickets and subscription for public transport}
 
@@ -416,7 +416,7 @@ Both the guests and users can actually retrieve informations about the Weather F
 	\caption{Sequence Diagram of the purchase of tickets and subscription for public transport}
 \end{figure}
 
-Here we can observe the procedure that deals with the purchase of tickets by the user. If the transaction done due to the Payment Handler goes well, the informations about the bought ticket are saved to the Database Server using the submitQuery method.
+Here we can observe the procedure that deals with the purchase of tickets by the user. If the transaction done due to the Payment Handler goes well, the information about the bought ticket are saved to the Database Server using the submitQuery method.
 
 \subsection*{Share user's schedule}
 
@@ -436,7 +436,7 @@ Whenever a user wants to share his own schedule of a given day of his choice, th
 	\caption{Sequence Diagram of updating user's schedule}
 \end{figure}
 
-As the preferences of every user are stored in the Database Server, whenever they want to change them the Data Handler's method submitQuery is called. Then the modifications are saved and updated immediatly in the DB server. 
+As the preferences of every user are stored in the Database Server, whenever they want to change them the Data Handler's method submitQuery is called. Then the modifications are saved and updated immediatly in the DB server.
 
 \subsection*{Manage user's preference about time for break}
 
@@ -446,7 +446,7 @@ As the preferences of every user are stored in the Database Server, whenever the
 	\caption{Sequence Diagram of managing user's preference about time for break}
 \end{figure}
 
-If a user decides to modify his break preferences, they are modified for all the upcoming schedules he decides to create. Already created schedules are not modified. 
+If a user decides to modify his break preferences, they are modified for all the upcoming schedules he decides to create. Already created schedules are not modified.
 
 
 \subsection*{User wants to see a schedule for specified day}
@@ -529,14 +529,14 @@ On the other hand, the server is represented by a mainframe which computate all 
 Here are listed the main pattern we chose to implement:
 \begin{itemize}
 	\item \textbf{Model View Controller}:\\\newline
-	The model role is covered by the Data center which mantains the data related to the users. The controller instead is covered by the Application \& Web Server which manage the events handling with both Model and View. Finally, the View is covered by the Client Application which displays data and informations in a way that is possibile to interact with them due to a User Interface.\\
-	
+	The model role is covered by the Data center which mantains the data related to the users. The controller instead is covered by the Application \& Web Server which manage the events handling with both Model and View. Finally, the View is covered by the Client Application which displays data and information in a way that is possibile to interact with them due to a User Interface.\\
+
 	\item \textbf{Proxy}:\\\newline
 	On the Application side we keep a copy of the tokens which allow the user to correctly login. In this way it is not necessary to request every time the database server in order to know if a user is currently logged in or not. Therefore we can actually even double check if a user is really connected with a random control over time.\\
-	
+
 	\item \textbf{Singleton}:\\\newline
 	The Application Server's module RequestController is a Singleton, as it is istatiated only once and handle all the possibile request by different users.\\
-		
+
 \end{itemize}
 
 
@@ -544,7 +544,7 @@ Here are listed the main pattern we chose to implement:
 
 We decided to display on the client side a map which displays the journey the user is willing to do. In order to achive this, we decided to use the Google Maps API.\\
 
-For the Weather Forecast instead we decided to requests informations to the OpenWeather API. In this way we can also display data about the forecast whenever the users' request them.\\
+For the Weather Forecast instead we decided to requests information to the OpenWeather API. In this way we can also display data about the forecast whenever the users' request them.\\
 
 To keep stored the session of any current user, we decide to implement the login procedure based on a token-exhange and verification. Therefore is possibile to keep alive a session up to an estabilished time (for example 5 min) and refresh it whenever a correct HTTP GET is performed.\\
 
@@ -560,9 +560,9 @@ In this section we will explain the algorithms that concern the critical part of
 The algorithm used for the creation of a journey has to take into account every aspect of a user profile. It has to follow these steps:\\
 \begin{enumerate}
 	\item Consider the schedule of a chosen by user day
-	\item Take informations about the Weather Forecast
+	\item Take information about the Weather Forecast
 	\item Take the user's preferences about the means of transport
-	\item Retrieve the information about the best path to take from Google Maps API 
+	\item Retrieve the information about the best path to take from Google Maps API
 	\item Verify that the combination of created Event and Journey in the Schedule does not overlap with another currently existing Event or Journey
 	\item Verify that there is always possibile to have an Event of type Break in the current Schedule
 	\item If the previous control is satisfied we can save the update Schedule into the Database Server
@@ -585,23 +585,23 @@ This is an example of a piece of code which can be used to apply the algorithm.
 			buf[idx] = symbols[random.nextInt(symbols.length)];
 			return new String(buf);
 	}
-	
+
 	public static final String special = "!%&/=#@";
-	
+
 	public static final String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	
+
 	public static final String lower = upper.toLowerCase(Locale.ROOT);
-	
+
 	public static final String digits = "0123456789";
-	
+
 	public static final String alphanum = upper + lower + digits;
-	
+
 	private final Random random;
-	
+
 	private final char[] symbols;
-	
+
 	private final char[] buf;
-	
+
 	public RandomString(int length, Random random, String symbols) {
 		if (length < 1) throw new IllegalArgumentException();
 			if (symbols.length() < 2) throw new IllegalArgumentException();
@@ -609,21 +609,21 @@ This is an example of a piece of code which can be used to apply the algorithm.
 			this.symbols = symbols.toCharArray();
 			this.buf = new char[length];
 	}
-	
+
 	/**
 	* Create an alphanumeric string generator.
 	*/
 	public RandomString(int length, Random random) {
 		this(length, random, alphanum);
 	}
-	
+
 	/**
 	* Create an alphanumeric strings from a secure generator.
 	*/
 	public RandomString(int length) {
 		this(length, new SecureRandom());
 	}
-	
+
 	/**
 	* Create session identifiers.
 	*/
@@ -795,7 +795,7 @@ Once we integrate all these components, we can let them communicate in order to 
 \end{figure}
 
 
-When all those implementations are done, it is effectively possibile to try and test the system as a whole. 
+When all those implementations are done, it is effectively possibile to try and test the system as a whole.
 
 
 
@@ -814,9 +814,9 @@ While working on the project, we always met to discuss main topics to provide mo
 	\hline
 	\parbox[c][8ex]{6ex}{\centering Gianluigi Oliva} & Group 30h and 5h alone \\
 	\hline
-	
-	
-	
+
+
+
 \end{tabular}
 
 \chapter{References}
@@ -826,7 +826,7 @@ While working on the project, we always met to discuss main topics to provide mo
 	\textbf{http://score-contest.org/2018/projects/travlendar.php}
 	\item The revised document of the assignment:\\
 	\textbf{https://goo.gl/9m1ojy}
-	\item IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements Specifications. 
+	\item IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements Specifications.
 	\item IEEE Std 1016tm-2009 Standard for Information Tecnology-System Design-Software Design Descriptions.
 	\item Phonegap: \\
 	https://phonegap.com/
