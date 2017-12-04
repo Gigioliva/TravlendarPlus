@@ -10,7 +10,7 @@ import dati.User;
 
 public class UserManager {
 
-	public String login(String username, String password) {
+	public static String login(String username, String password) {
 		try {
 			ResultSet rs = DataHandlerDBMS.sendQuery("select password from user where username='" + username + "'");
 			if (rs.next() && rs.getString("password").equals(password)) {
@@ -19,20 +19,20 @@ public class UserManager {
 		} catch (SQLException e) {
 			System.out.println("Error in login");
 		}
-		return ""; // sostituire con un eccezione throw new Exception
+		return "";
 	}
 
-	public boolean signUp(HashMap<String, String> param) {
+	public static boolean signUp(HashMap<String, String> param) {
 		try {
 			ResultSet rs = DataHandlerDBMS
 					.sendQuery("select count(*) as Num from user where username='" + param.get("username") + "'");
 			if (rs.next() && Integer.parseInt(rs.getString("Num")) == 0) {
 
 				String insert = "insert into user (username, password, name, surname, email, phone, drivingLicense, creditCard, maxWalk, maxHourMeans) values "
-						+ "(" + param.get("username") + "," + param.get("password") + "," + param.get("name") + ","
-						+ param.get("surname") + "," + param.get("email") + "," + param.get("phone") + ","
-						+ param.get("drivingLicense") + "," + param.get("creditCard") + "," + param.get("maxWalk") + ","
-						+ param.get("maxHourMeans") + ")";
+						+ "('" + param.get("username") + "','" + param.get("password") + "','" + param.get("name") + "','"
+						+ param.get("surname") + "','" + param.get("email") + "','" + param.get("phone") + "','"
+						+ param.get("drivingLicense") + "','" + param.get("creditCard") + "','" + param.get("maxWalk") + "','"
+						+ param.get("maxHourMeans") + "')";
 				if (DataHandlerDBMS.executeDML(insert)) {
 					return true;
 				}
@@ -44,7 +44,7 @@ public class UserManager {
 		return false;
 	}
 
-	public User getUserInformation(String username) {
+	public static User getUserInformation(String username) {
 		User user = null;
 		ResultSet rs = DataHandlerDBMS.sendQuery("select * from user where username='" + username + "'");
 		try {
@@ -62,21 +62,21 @@ public class UserManager {
 		return user;
 	}
 
-	private void getUserMeansPref(User user) {
+	private static void getUserMeansPref(User user) {
 		ResultSet rs = DataHandlerDBMS
 				.sendQuery("select typeMeans from meansPref where username='" + user.getUsername() + "'");
 		try {
 			while (rs.next()) {
-				user.addMeansPref(Enum.valueOf(TypeMeans.class, rs.getString("typeMeans").toUpperCase()));
+				user.addMeansPref(Enum.valueOf(TypeMeans.class, rs.getString("typeMeans")));
 			}
 		} catch (SQLException e) {
 			System.out.println("Error in getUserMeansPref");
 		}
 	}
 
-	private void getUserBreakPref(User user) {
+	private static void getUserBreakPref(User user) {
 		ResultSet rs = DataHandlerDBMS
-				.sendQuery("select * from breakPref where B.username='" + user.getUsername() + "'");
+				.sendQuery("select * from breakPref where username='" + user.getUsername() + "'");
 		try {
 			while (rs.next()) {
 				user.addBreakPref(new Break(rs.getString("name"), rs.getTime("start"), rs.getTime("end"),
@@ -87,12 +87,12 @@ public class UserManager {
 		}
 	}
 
-	public boolean setFieldUser(String username, String field, String newValue) {
+	public static boolean setFieldUser(String username, String field, String newValue) {
 		return DataHandlerDBMS
 				.executeDML("update user set " + field + "='" + newValue + "' where username='" + username + "'");
 	}
 
-	public boolean setFieldMeansPref(String username, boolean flag, TypeMeans means) {
+	public static boolean setFieldMeansPref(String username, boolean flag, TypeMeans means) {
 		if (flag) {
 			return DataHandlerDBMS.executeDML(
 					"insert into meansPref (username, typeMeans) values ('" + username + "','" + means + "')");
@@ -102,13 +102,13 @@ public class UserManager {
 		}
 	}
 
-	public boolean setBreakPref(String username, boolean flag, Break breakPref) {
+	public static boolean setBreakPref(String username, boolean flag, Break breakPref) {
 		if (flag) {
 			return DataHandlerDBMS.executeDML("insert into breakPref (username, name, start, end, duration) values ('"
 					+ username + "','" + breakPref.getName() + "','" + breakPref.getStart() + "','" + breakPref.getEnd()
-					+ "','" + breakPref.getEnd() + "')");
+					+ "','" + breakPref.getDuration() + "')");
 		} else {
-			return DataHandlerDBMS.executeDML("delete from breakPref where username='" + username + "' AND breakName='"
+			return DataHandlerDBMS.executeDML("delete from breakPref where username='" + username + "' AND name='"
 					+ breakPref.getName() + "'");
 		}
 	}

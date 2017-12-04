@@ -38,4 +38,8 @@ public class Break {
 		return Json.createObjectBuilder().add("name", name).add("start", start.toString()).add("end", end.toString())
 				.add("duration", duration.toString()).build().toString();
 	}
+	
+	public String toString() {
+		return name;
+	}
 }

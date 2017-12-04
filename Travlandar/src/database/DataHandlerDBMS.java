@@ -10,7 +10,7 @@ import java.sql.Statement;
 public class DataHandlerDBMS {
 
 	private static Connection DBMS;
-	private String url = "jdbc:mysql://localhost:3306/AUI?user=root&password=prova&useSSL=false";
+	private String url = "jdbc:mysql://localhost:3306/Travlandar?user=root&password=prova&useSSL=false";
 
 	public DataHandlerDBMS() {
 		try {
@@ -27,6 +27,7 @@ public class DataHandlerDBMS {
 			return res;
 		} catch (SQLException e) {
 			System.out.println("Error in sendQuery");
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -38,6 +39,7 @@ public class DataHandlerDBMS {
 			return ris>0;
 		} catch (SQLException e) {
 			System.out.println("Error in executeDML");
+			e.printStackTrace();
 			return false;
 		}
 	}
