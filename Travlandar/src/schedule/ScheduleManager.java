@@ -162,7 +162,7 @@ public class ScheduleManager {
 		ArrayList<Journey> jouney = new ArrayList<Journey>();
 		for (Journey el : schedule.getSchedule()) {
 			Time startEl = el.getStart();
-			Time endEl = new Time(el.getEvent().getStart().getTime() + el.getEvent().getStart().getTime() + 3600000);
+			Time endEl = new Time(el.getEvent().getStart().getTime() + el.getEvent().getDuration().getTime() + 3600000);
 			if ((startBreak.compareTo(endEl) < 0 && startBreak.compareTo(startEl) >= 0)
 					|| (startEl.compareTo(endBreak) < 0 && startEl.compareTo(startBreak) >= 0)) {
 				jouney.add(el);
@@ -172,7 +172,7 @@ public class ScheduleManager {
 		for (int i = 0; i < jouney.size() - 1; i++) {
 			Time startEl = jouney.get(i + 1).getStart();
 			Time endEl = new Time(jouney.get(i).getEvent().getStart().getTime()
-					+ jouney.get(i).getEvent().getStart().getTime() + 3600000);
+					+ jouney.get(i).getEvent().getDuration().getTime() + 3600000);
 			if ((br.getDuration().compareTo(new Time(startEl.getTime() - endEl.getTime() - 3600000)) < 0)
 					&& endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + 3600000)) >= 0) {
 				temp = endEl;
@@ -181,6 +181,14 @@ public class ScheduleManager {
 		}
 		if (jouney.size() == 0) {
 			temp = startBreak;
+		}
+		if (jouney.size() == 1) {
+			Journey event = jouney.get(0);
+			Time endEl = new Time(
+					event.getEvent().getStart().getTime() + event.getEvent().getDuration().getTime() + 3600000);
+			if (endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + 3600000)) >= 0) {
+				temp= endEl;
+			}
 		}
 		if (temp != null) {
 			ResultSet r = DataHandlerDBMS.sendQuery("select max(ID) as Max from event");
@@ -211,7 +219,7 @@ public class ScheduleManager {
 			for (Journey el : schedule.getSchedule()) {
 				Time startEl = el.getStart();
 				Time endEl = new Time(
-						el.getEvent().getStart().getTime() + el.getEvent().getStart().getTime() + 3600000);
+						el.getEvent().getStart().getTime() + el.getEvent().getDuration().getTime() + 3600000);
 				if ((startBreak.compareTo(endEl) < 0 && startBreak.compareTo(startEl) >= 0)
 						|| (startEl.compareTo(endBreak) < 0 && startEl.compareTo(startBreak) >= 0)) {
 					jouney.add(el);
@@ -221,11 +229,22 @@ public class ScheduleManager {
 			for (int i = 0; i < jouney.size() - 1; i++) {
 				Time startEl = jouney.get(i + 1).getStart();
 				Time endEl = new Time(jouney.get(i).getEvent().getStart().getTime()
-						+ jouney.get(i).getEvent().getStart().getTime() + 3600000);
+						+ jouney.get(i).getEvent().getDuration().getTime() + 3600000);
 				if ((br.getDuration().compareTo(new Time(startEl.getTime() - endEl.getTime() - 3600000)) < 0)
 						&& endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + 3600000)) >= 0) {
 					temp = endEl;
 					break;
+				}
+			}
+			if (jouney.size() == 0) {
+				temp = startBreak;
+			}
+			if (jouney.size() == 1) {
+				Journey event = jouney.get(0);
+				Time endEl = new Time(
+						event.getEvent().getStart().getTime() + event.getEvent().getDuration().getTime() + 3600000);
+				if (endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + 3600000)) >= 0) {
+					temp= endEl;
 				}
 			}
 			if (temp == null) {
