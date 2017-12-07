@@ -16,8 +16,9 @@ public class ExternalRequestManager {
 	// Si potrebbe aggiungere departure_time anche se dalle prove il tempo è sempre
 	// lo stesso
 	public static HashMap<String, Integer> getDistanceMatrixAPI(String origin, String destination, String mode) {
+		String url="";
 		try {
-			String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origin + "&destinations="
+			url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origin + "&destinations="
 					+ destination + "&" + mode + "&key=" + keyGoogle;
 			URL obj = new URL(url);
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -58,12 +59,11 @@ public class ExternalRequestManager {
 				str.append(in.nextLine() + "\n");
 			}
 			JSONObject risp = new JSONObject(str.toString());
-			int code = risp.getJSONObject("forecast").getJSONArray("forecastday").getJSONObject(0).getJSONObject("day")
-					.getJSONObject("condition").getInt("code");
+			int code = risp.getJSONObject("current").getJSONObject("condition").getInt("code");
 			in.close();
 			return code;
 		} catch (IOException | JSONException e) {
-			System.out.println("Error in getDistanceMatrixAPI");
+			System.out.println("Error in getWeatherForecast");
 			return 0;
 		}
 	}

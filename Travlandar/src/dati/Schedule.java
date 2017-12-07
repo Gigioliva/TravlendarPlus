@@ -34,8 +34,10 @@ public class Schedule {
 		for(Journey el: schedule) {
 			if(el.getEvent().getType() == EventType.BREAK) {
 				ris.add(el);
-				schedule.remove(el);
 			}
+		}
+		for(Journey el : ris) {
+			schedule.remove(el);
 		}
 		return ris;
 	}
