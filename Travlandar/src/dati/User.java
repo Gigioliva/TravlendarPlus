@@ -84,6 +84,15 @@ public class User {
 	public void addMeansPref(TypeMeans means) {
 		meansPref.add(means);
 	}
+	
+	public Break getBreakFromName(String name) {
+		for(Break el: breakPref) {
+			if(el.getName().equalsIgnoreCase(name)) {
+				return el;
+			}
+		}
+		return null;
+	}
 
 	private String getJsonJourneyBreak() {
 		JsonArrayBuilder array = Json.createArrayBuilder();

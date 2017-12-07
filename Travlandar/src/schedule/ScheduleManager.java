@@ -105,6 +105,10 @@ public class ScheduleManager {
 			}
 		}
 		if (t != null && meansUsed != null) {
+			int startJourney = (int) (event.getStart().getTime() - t.getTime() - 3600000);
+			if(startJourney < -3600000) {
+				return false;
+			}
 			Journey j = new Journey(new Time(event.getStart().getTime() - t.getTime() - 3600000), t, meansUsed, event,
 					origin);
 			boolean notOverlaps = true;
@@ -130,8 +134,11 @@ public class ScheduleManager {
 				DataHandlerDBMS.executeDML(
 						"insert into journey (username, day, start, duration, path, EventID, position) values ('"
 								+ username + "','" + day + "'," + j.stringValuesQuery() + ")");
-				for (Break el : user.getBreakPref()) {
-					addBreak(el, user, day);
+				for (Journey el : breakEx) {
+					Break br = user.getBreakFromName(el.getEvent().getName());
+					if (br != null) {
+						addBreak(br, user, day);
+					}
 				}
 				return true;
 			} else {
@@ -187,7 +194,7 @@ public class ScheduleManager {
 			Time endEl = new Time(
 					event.getEvent().getStart().getTime() + event.getEvent().getDuration().getTime() + 3600000);
 			if (endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + 3600000)) >= 0) {
-				temp= endEl;
+				temp = endEl;
 			}
 		}
 		if (temp != null) {
@@ -244,7 +251,7 @@ public class ScheduleManager {
 				Time endEl = new Time(
 						event.getEvent().getStart().getTime() + event.getEvent().getDuration().getTime() + 3600000);
 				if (endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + 3600000)) >= 0) {
-					temp= endEl;
+					temp = endEl;
 				}
 			}
 			if (temp == null) {
