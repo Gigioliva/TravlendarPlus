@@ -162,7 +162,7 @@ public class ScheduleManager {
 		return DataHandlerDBMS.executeDML("delete from event where ID='" + ID + "'");
 	}
 
-	public static void addBreak(Break br, User user, String day) {
+	private static void addBreak(Break br, User user, String day) {
 		Schedule schedule = getSchedule(user.getUsername(), day);
 		Time startBreak = br.getStart();
 		Time endBreak = br.getEnd();
@@ -217,7 +217,7 @@ public class ScheduleManager {
 
 	}
 
-	public static boolean canAddBreak(User user, String day, Schedule schedule) {
+	private static boolean canAddBreak(User user, String day, Schedule schedule) {
 		boolean flag = true;
 		for (Break br : user.getBreakPref()) {
 			Time startBreak = br.getStart();
