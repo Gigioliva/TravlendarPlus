@@ -69,7 +69,7 @@ public class UserInformation extends HttpServlet {
 				out.flush();
 				out.close();
 			} catch (JSONException e) {
-				System.out.print("Error in LoginServlet: " + data);
+				System.out.print("Error in UserInformationServlet: " + data);
 			}
 		}
 	}

@@ -2,13 +2,18 @@ package servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
+import java.io.PrintWriter;
+import javax.json.Json;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONException;
+import org.json.JSONObject;
+import userManager.SecurityAuthenticator;
+import userManager.UserManager;
 
 @WebServlet(name = "SetUserField", urlPatterns = { "/SetUserField" })
 @MultipartConfig
@@ -42,8 +47,36 @@ public class SetUserField extends HttpServlet {
 			}
 			String data = dati.toString();
 			System.out.println(data);
-			// data è JSON ed effettui il login
+			JSONObject requestJSON;
+			try {
+				requestJSON = new JSONObject(data);
+				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
+				String field = requestJSON.getString("field");
+				String newValue = requestJSON.getString("newValue");
+				String resp;
+				if(username != null) {
+					boolean ris = UserManager.setFieldUser(username, field, newValue);
+					if(ris) {
+						resp = getResponse("OK");
+					}else {
+						resp = getResponse("KO");
+					}
+				}else {
+					resp = getResponse("KO");
+				}
+				response.setContentType("text/plain");
+				PrintWriter out = response.getWriter();
+				out.println(resp);
+				out.flush();
+				out.close();
+			} catch (JSONException e) {
+				System.out.print("Error in SetUserFieldServlet: " + data);
+			}
 		}
+	}
+	
+	private static String getResponse(String status) {
+		return Json.createObjectBuilder().add("status", status).build().toString();
 	}
 
 }
