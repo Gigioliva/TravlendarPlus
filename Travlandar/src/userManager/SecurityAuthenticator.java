@@ -38,11 +38,20 @@ public class SecurityAuthenticator {
 	}
 
 	public static String getUsername(String tok) {
-		return token.get(tok);
+		if(token.containsKey(tok)) {
+			return token.get(tok);
+		}else {
+			return null;
+		}
 	}
 
-	public static void Logout(String tok) {
-		token.remove(tok);
+	public static boolean Logout(String tok) {
+		if(token.containsKey(tok)) {
+			token.remove(tok);
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }

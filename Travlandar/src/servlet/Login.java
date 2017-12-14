@@ -2,12 +2,20 @@ package servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.json.Json;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import userManager.UserManager;
 
 @WebServlet(name = "Login", urlPatterns = { "/Login" })
 @MultipartConfig
@@ -35,14 +43,37 @@ public class Login extends HttpServlet {
 					try {
 						bufferedReader.close();
 					} catch (IOException ex) {
-						throw ex;
+						System.out.print("Error in LoginServlet");
 					}
 				}
 			}
 			String data = dati.toString();
 			System.out.println(data);
-			// data è JSON ed effettui il login
+			JSONObject requestJSON;
+			try {
+				requestJSON = new JSONObject(data);
+				String username = requestJSON.getString("username");
+				String password = requestJSON.getString("password");
+				String token = UserManager.login(username, password);
+				String resp;
+				if (token != null) {
+					resp = getResponse("OK", token);
+				} else {
+					resp = getResponse("KO", "dati errati");
+				}
+				response.setContentType("text/plain");
+				PrintWriter out = response.getWriter();
+				out.println(resp);
+				out.flush();
+				out.close();
+			} catch (JSONException e) {
+				System.out.print("Error in LoginServlet: " + data);
+			}
 		}
+	}
+
+	private static String getResponse(String status, String token) {
+		return Json.createObjectBuilder().add("status", status).add("token", token).build().toString();
 	}
 
 }

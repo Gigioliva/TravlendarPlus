@@ -2,12 +2,21 @@ package servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+
+import javax.json.Json;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import userManager.UserManager;
 
 @WebServlet(name = "SignUp", urlPatterns = { "/SignUp" })
 @MultipartConfig
@@ -41,7 +50,39 @@ public class SignUp extends HttpServlet {
 			}
 			String data = dati.toString();
 			System.out.println(data);
-			//data è JSON ed effettui il login
+			JSONObject requestJSON;
+			try {
+				requestJSON = new JSONObject(data);
+				HashMap<String, String> param = new HashMap<String, String>();
+				param.put("username", requestJSON.getString("username"));
+				param.put("password", requestJSON.getString("password"));
+				param.put("name", requestJSON.getString("name"));
+				param.put("surname", requestJSON.getString("surname"));
+				param.put("email", requestJSON.getString("email"));
+				param.put("phone", requestJSON.getString("phone"));
+				param.put("drivingLicense", requestJSON.getString("drivingLicense"));
+				param.put("creditCard", requestJSON.getString("creditCard"));
+				param.put("maxWalk", "23:00:00");
+				param.put("maxHourMeans", "10000");
+				boolean flag = UserManager.signUp(param);
+				String resp;
+				if (flag) {
+					resp = getResponse("OK");
+				} else {
+					resp = getResponse("KO");
+				}
+				response.setContentType("text/plain");
+				PrintWriter out = response.getWriter();
+				out.println(resp);
+				out.flush();
+				out.close();
+			} catch (JSONException e) {
+				System.out.print("Error in LoginServlet: " + data);
+			}
 		}
+	}
+
+	private static String getResponse(String status) {
+		return Json.createObjectBuilder().add("status", status).build().toString();
 	}
 }

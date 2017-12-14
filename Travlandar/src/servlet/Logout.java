@@ -3,8 +3,6 @@ package servlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Time;
-
 import javax.json.Json;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,17 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import dati.Break;
 import userManager.SecurityAuthenticator;
-import userManager.UserManager;
 
-@WebServlet(name = "SetBreakPref", urlPatterns = { "/SetBreakPref" })
+@WebServlet(name = "Logout", urlPatterns = { "/Logout" })
 @MultipartConfig
-public class SetBreakPref extends HttpServlet {
+public class Logout extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,7 +40,7 @@ public class SetBreakPref extends HttpServlet {
 					try {
 						bufferedReader.close();
 					} catch (IOException ex) {
-						throw ex;
+						System.out.print("Error in LoginServlet");
 					}
 				}
 			}
@@ -55,18 +49,11 @@ public class SetBreakPref extends HttpServlet {
 			JSONObject requestJSON;
 			try {
 				requestJSON = new JSONObject(data);
-				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
-				boolean flagBreak = requestJSON.getBoolean("flag");
-				Break breakPref = new Break(requestJSON.getString("token"), new Time(requestJSON.getInt("start")),
-						new Time(requestJSON.getInt("end")), new Time(requestJSON.getInt("duration")));
+				String token = requestJSON.getString("token");
+				boolean flag = SecurityAuthenticator.Logout(token);
 				String resp;
-				if(username != null) {
-					boolean ris = UserManager.setBreakPref(username, flagBreak, breakPref);
-					if(ris) {
-						resp = getResponse("OK");
-					}else {
-						resp = getResponse("KO");
-					}
+				if(flag) {
+					resp = getResponse("OK");
 				}else {
 					resp = getResponse("KO");
 				}
@@ -80,8 +67,9 @@ public class SetBreakPref extends HttpServlet {
 			}
 		}
 	}
-	
+
 	private static String getResponse(String status) {
 		return Json.createObjectBuilder().add("status", status).build().toString();
 	}
+
 }

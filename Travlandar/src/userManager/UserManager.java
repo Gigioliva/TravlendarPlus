@@ -19,7 +19,7 @@ public class UserManager {
 		} catch (SQLException e) {
 			System.out.println("Error in login");
 		}
-		return "";
+		return null;
 	}
 
 	public static boolean signUp(HashMap<String, String> param) {
