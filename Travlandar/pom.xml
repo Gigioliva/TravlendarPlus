@@ -31,6 +31,11 @@
           <version>3.8.1</version>
           <scope>test</scope>
       </dependency>
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20171018</version>
+</dependency>
       <dependency>
           <groupId>javax.websocket</groupId>
           <artifactId>javax.websocket-client-api</artifactId>
@@ -40,16 +45,6 @@
           <groupId>com.google.code.gson</groupId>
           <artifactId>gson</artifactId>
           <version>2.8.2</version>
-      </dependency>
-      <dependency>
-          <groupId>org.glassfish.tyrus</groupId>
-          <artifactId>tyrus-client</artifactId>
-          <version>1.1</version>
-      </dependency>
-      <dependency>
-          <groupId>org.glassfish.tyrus</groupId>
-          <artifactId>tyrus-container-grizzly</artifactId>
-          <version>1.1</version>
       </dependency>
       <dependency>
           <groupId>javax.json</groupId>
