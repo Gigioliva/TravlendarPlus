@@ -2,13 +2,23 @@ package servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
+import java.io.PrintWriter;
+import java.sql.Time;
+import javax.json.Json;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONException;
+import org.json.JSONObject;
+import dati.Event;
+import dati.EventType;
+import dati.User;
+import schedule.ScheduleManager;
+import userManager.SecurityAuthenticator;
+import userManager.UserManager;
 
 @WebServlet(name = "AddEvent", urlPatterns = { "/AddEvent" })
 @MultipartConfig
@@ -42,7 +52,40 @@ public class AddEvent extends HttpServlet {
 			}
 			String data = dati.toString();
 			System.out.println(data);
-			// data è JSON ed effettui il login
+			JSONObject requestJSON;
+			try {
+				requestJSON = new JSONObject(data);
+				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
+				String resp;
+				if (username != null) {
+					User user = UserManager.getUserInformation(username);
+					String day = requestJSON.getString("day");
+					String origin = requestJSON.getString("origin");
+					Event event = new Event(ScheduleManager.getIntMax(), requestJSON.getString("eventName"),
+							new Time(requestJSON.getInt("eventStart")), new Time(requestJSON.getInt("eventDuration")),
+							Enum.valueOf(EventType.class, requestJSON.getString("eventType").toUpperCase()),
+							requestJSON.getString("eventPosition"));
+					boolean flag = ScheduleManager.addEvent(user, day, event, origin);
+					if(flag) {
+						resp = getResponse("OK", "Evento inserito");
+					}else {
+						resp = getResponse("KO", "Evento non inserito");
+					}
+				}else {
+					resp = getResponse("KO", "Token errato");
+				}
+				response.setContentType("text/plain");
+				PrintWriter out = response.getWriter();
+				out.println(resp);
+				out.flush();
+				out.close();
+			} catch (JSONException e) {
+				System.out.print("Error in GetWeatherServlet: " + data);
+			}
 		}
+	}
+	
+	private static String getResponse(String status, String details) {
+		return Json.createObjectBuilder().add("status", status).add("details", details).build().toString();
 	}
 }

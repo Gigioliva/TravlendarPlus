@@ -3,21 +3,22 @@ package servlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.json.Json;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import schedule.ScheduleManager;
-import userManager.SecurityAuthenticator;
 
-@WebServlet(name = "DeleteSchedule", urlPatterns = { "/DeleteSchedule" })
+import schedule.ExternalRequestManager;
+
+@WebServlet(name = "GetWeather", urlPatterns = { "/GetWeather" })
 @MultipartConfig
-public class DeleteSchedule extends HttpServlet {
+public class GetWeather extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -50,31 +51,17 @@ public class DeleteSchedule extends HttpServlet {
 			JSONObject requestJSON;
 			try {
 				requestJSON = new JSONObject(data);
-				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
+				String city = requestJSON.getString("city");
 				String day = requestJSON.getString("day");
-				String resp;
-				if (username != null) {
-					boolean flag = ScheduleManager.deleteSchedule(username, day);
-					if (flag) {
-						resp = getResponse("OK", "Schedule eliminato");
-					} else {
-						resp = getResponse("KO", "Schedule non trovato");
-					}
-				} else {
-					resp = getResponse("KO", "Token non valido");
-				}
+				String resp= ExternalRequestManager.getWeatherTot(city, day);
 				response.setContentType("text/plain");
 				PrintWriter out = response.getWriter();
 				out.println(resp);
 				out.flush();
 				out.close();
 			} catch (JSONException e) {
-				System.out.print("Error in DeleteScheduleServlet: " + data);
+				System.out.print("Error in GetWeatherServlet: " + data);
 			}
 		}
-	}
-	
-	private static String getResponse(String status, String details) {
-		return Json.createObjectBuilder().add("status", status).add("details", details).build().toString();
 	}
 }

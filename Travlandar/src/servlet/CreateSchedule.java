@@ -2,13 +2,18 @@ package servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
+import java.io.PrintWriter;
+import javax.json.Json;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONException;
+import org.json.JSONObject;
+import schedule.ScheduleManager;
+import userManager.SecurityAuthenticator;
 
 @WebServlet(name = "CreateSchedule", urlPatterns = { "/CreateSchedule" })
 @MultipartConfig
@@ -42,7 +47,39 @@ public class CreateSchedule extends HttpServlet {
 			}
 			String data = dati.toString();
 			System.out.println(data);
-			// data è JSON ed effettui il login
+			JSONObject requestJSON;
+			try {
+				requestJSON = new JSONObject(data);
+				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
+				String day = requestJSON.getString("day");
+				String resp;
+				if (username != null) {
+					boolean isPresent = ScheduleManager.hasSchedule(username, day);
+					if (isPresent) {
+						boolean deleted = ScheduleManager.deleteSchedule(username, day);
+						if (deleted) {
+							resp = getResponse("OK", "Schedule eliminato");
+						} else {
+							resp = getResponse("KO", "Errore eliminazione");
+						}
+					} else {
+						resp = getResponse("KO", "Schedule non trovato");
+					}
+				} else {
+					resp = getResponse("KO", "Token non valido");
+				}
+				response.setContentType("text/plain");
+				PrintWriter out = response.getWriter();
+				out.println(resp);
+				out.flush();
+				out.close();
+			} catch (JSONException e) {
+				System.out.print("Error in CreateScheduleServlet: " + data);
+			}
 		}
+	}
+
+	private static String getResponse(String status, String details) {
+		return Json.createObjectBuilder().add("status", status).add("details", details).build().toString();
 	}
 }

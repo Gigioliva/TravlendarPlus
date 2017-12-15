@@ -61,7 +61,6 @@ public class ScheduleManager {
 			}
 		} catch (SQLException e) {
 			System.out.println("Error in getSchedule");
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -160,6 +159,19 @@ public class ScheduleManager {
 
 	public static boolean deleteEvent(int ID) {
 		return DataHandlerDBMS.executeDML("delete from event where ID='" + ID + "'");
+	}
+	
+	public static int getIntMax() {
+		ResultSet r = DataHandlerDBMS.sendQuery("select max(ID) as Max from event");
+		try {
+			if(r.next()) {
+				return r.getInt("Max")+1;
+			}else {
+				return 0;
+			}
+		} catch (SQLException e) {
+			return 0;
+		}
 	}
 
 	private static void addBreak(Break br, User user, String day) {
