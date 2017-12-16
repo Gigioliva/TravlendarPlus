@@ -50,11 +50,16 @@ public class Logout extends HttpServlet {
 			try {
 				requestJSON = new JSONObject(data);
 				String token = requestJSON.getString("token");
-				boolean flag = SecurityAuthenticator.Logout(token);
+				String username = SecurityAuthenticator.getUsername(token);
 				String resp;
-				if(flag) {
-					resp = getResponse("OK");
-				}else {
+				if (username != null && username.equals(requestJSON.getString("username"))) {
+					boolean flag = SecurityAuthenticator.Logout(token);
+					if (flag) {
+						resp = getResponse("OK");
+					} else {
+						resp = getResponse("KO");
+					}
+				} else {
 					resp = getResponse("KO");
 				}
 				response.setContentType("text/plain");

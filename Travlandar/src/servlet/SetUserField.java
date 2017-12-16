@@ -54,7 +54,7 @@ public class SetUserField extends HttpServlet {
 				String field = requestJSON.getString("field");
 				String newValue = requestJSON.getString("newValue");
 				String resp;
-				if(username != null) {
+				if(username != null && username.equals(requestJSON.getString("username"))) {
 					boolean ris = UserManager.setFieldUser(username, field, newValue);
 					if(ris) {
 						resp = getResponse("OK");

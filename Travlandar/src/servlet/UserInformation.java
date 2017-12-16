@@ -57,7 +57,7 @@ public class UserInformation extends HttpServlet {
 				String token = requestJSON.getString("token");
 				String username = SecurityAuthenticator.getUsername(token);
 				String resp;
-				if (username != null) {
+				if (username != null && username.equals(requestJSON.getString("username"))) {
 					User user = UserManager.getUserInformation(username);
 					resp = getResponse("OK", user.getJson());
 				} else {

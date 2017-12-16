@@ -57,7 +57,7 @@ public class GetSchedule extends HttpServlet {
 				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
 				String day = requestJSON.getString("day");
 				String resp;
-				if (username != null) {
+				if (username != null && username.equals(requestJSON.getString("username"))) {
 					Schedule schedule = ScheduleManager.getSchedule(username, day);
 					if (schedule != null) {
 						resp = getResponse("OK", schedule.getJson());

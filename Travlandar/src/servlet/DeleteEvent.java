@@ -53,7 +53,7 @@ public class DeleteEvent extends HttpServlet {
 				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
 				int ID = requestJSON.getInt("ID");
 				String resp;
-				if (username != null) {
+				if (username != null && username.equals(requestJSON.getString("username"))) {
 					boolean deleted = ScheduleManager.deleteEvent(ID);
 					if (deleted) {
 						resp = getResponse("OK", "Evento eliminato");

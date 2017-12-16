@@ -55,7 +55,7 @@ public class SetMeansPref extends HttpServlet {
 				boolean flagBreak = requestJSON.getBoolean("flag");
 				TypeMeans means = Enum.valueOf(TypeMeans.class, requestJSON.getString("means").toLowerCase());
 				String resp;
-				if(username != null) {
+				if(username != null && username.equals(requestJSON.getString("username"))) {
 					boolean ris = UserManager.setFieldMeansPref(username, flagBreak, means);
 					if(ris) {
 						resp = getResponse("OK");

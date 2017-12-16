@@ -57,7 +57,7 @@ public class AddEvent extends HttpServlet {
 				requestJSON = new JSONObject(data);
 				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
 				String resp;
-				if (username != null) {
+				if (username != null && username.equals(requestJSON.getString("username"))) {
 					User user = UserManager.getUserInformation(username);
 					String day = requestJSON.getString("day");
 					String origin = requestJSON.getString("origin");

@@ -53,7 +53,7 @@ public class DeleteSchedule extends HttpServlet {
 				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
 				String day = requestJSON.getString("day");
 				String resp;
-				if (username != null) {
+				if (username != null && username.equals(requestJSON.getString("username"))) {
 					boolean flag = ScheduleManager.deleteSchedule(username, day);
 					if (flag) {
 						resp = getResponse("OK", "Schedule eliminato");

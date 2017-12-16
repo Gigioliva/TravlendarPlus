@@ -55,7 +55,7 @@ public class Schedule {
 	}
 
 	public String getJson() {
-		return Json.createObjectBuilder().add("username", username).add("day", day).add("schedule", getJsonJourney())
+		return Json.createObjectBuilder().add("username", username).add("day", day).add("singleSchedule", getJsonJourney())
 				.build().toString();
 	}
 }

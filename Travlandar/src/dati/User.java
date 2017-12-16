@@ -105,7 +105,7 @@ public class User {
 	private String getJsonJourneyMeans() {
 		JsonArrayBuilder array = Json.createArrayBuilder();
 		for (TypeMeans el : meansPref) {
-			array.add(el.toString());
+			array.add(Json.createObjectBuilder().add("type", el.toString()).build().toString());
 		}
 		return array.build().toString();
 	}

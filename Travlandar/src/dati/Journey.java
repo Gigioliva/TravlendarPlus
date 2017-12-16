@@ -46,7 +46,7 @@ public class Journey {
 
 	public String getJson() {
 		return Json.createObjectBuilder().add("start", start.toString()).add("duration", duration.toString())
-				.add("path", path.toString()).add("event", event.getJson()).add("position", position).build()
+				.add("means", path.toString()).add("event", event.getJson()).add("position", position).build()
 				.toString();
 	}
 

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import dati.TypeMeans;
 import schedule.ExternalRequestManager;
 
 @WebServlet(name = "GetPath", urlPatterns = { "/GetPath" })
@@ -51,7 +53,7 @@ public class GetPath extends HttpServlet {
 				String origin = requestJSON.getString("origin");
 				String destination = requestJSON.getString("destination");
 				String mode = requestJSON.getString("mode");
-				String resp= ExternalRequestManager.getPath(origin, destination, mode);
+				String resp= ExternalRequestManager.getPath(origin, destination, Enum.valueOf(TypeMeans.class, mode).getTypeAPI());
 				response.setContentType("text/plain");
 				PrintWriter out = response.getWriter();
 				out.println(resp);

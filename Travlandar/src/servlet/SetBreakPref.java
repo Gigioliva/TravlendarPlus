@@ -57,10 +57,10 @@ public class SetBreakPref extends HttpServlet {
 				requestJSON = new JSONObject(data);
 				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
 				boolean flagBreak = requestJSON.getBoolean("flag");
-				Break breakPref = new Break(requestJSON.getString("token"), new Time(requestJSON.getInt("start")),
+				Break breakPref = new Break(requestJSON.getString("name"), new Time(requestJSON.getInt("start")),
 						new Time(requestJSON.getInt("end")), new Time(requestJSON.getInt("duration")));
 				String resp;
-				if(username != null) {
+				if(username != null && username.equals(requestJSON.getString("username"))) {
 					boolean ris = UserManager.setBreakPref(username, flagBreak, breakPref);
 					if(ris) {
 						resp = getResponse("OK");
