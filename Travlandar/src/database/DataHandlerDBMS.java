@@ -14,9 +14,12 @@ public class DataHandlerDBMS {
 
 	public DataHandlerDBMS() {
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			DBMS = DriverManager.getConnection(url);
-		} catch (SQLException e) {
+			System.out.println("DBSM inizializzato");
+		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println("Errore apertura DBMS");
+			e.printStackTrace();
 		}
 	}
 
@@ -35,8 +38,8 @@ public class DataHandlerDBMS {
 	public static boolean executeDML(String query) {
 		try {
 			PreparedStatement stm = DBMS.prepareStatement(query);
-			int ris=stm.executeUpdate();
-			return ris>0;
+			int ris = stm.executeUpdate();
+			return ris > 0;
 		} catch (SQLException e) {
 			System.out.println("Error in executeDML");
 			e.printStackTrace();
