@@ -17,9 +17,11 @@ public class DataHandlerDBMS {
 			Class.forName("com.mysql.jdbc.Driver");
 			DBMS = DriverManager.getConnection(url);
 			System.out.println("DBSM inizializzato");
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException e) {
 			System.out.println("Errore apertura DBMS");
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.println("Assenza driver mySQL");
 		}
 	}
 
@@ -45,6 +47,10 @@ public class DataHandlerDBMS {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	public static String test() {
+		return "ciao";
 	}
 
 }
