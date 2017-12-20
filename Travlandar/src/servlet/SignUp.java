@@ -62,8 +62,8 @@ public class SignUp extends HttpServlet {
 				param.put("phone", requestJSON.getString("phone"));
 				param.put("drivingLicense", requestJSON.getString("drivingLicense"));
 				param.put("creditCard", requestJSON.getString("creditCard"));
-				param.put("maxWalk", "23:00:00");
-				param.put("maxHourMeans", "10000");
+				param.put("maxWalk", "10000");
+				param.put("maxHourMeans", "23:00:00");
 				boolean flag = UserManager.signUp(param);
 				String resp;
 				if (flag) {
