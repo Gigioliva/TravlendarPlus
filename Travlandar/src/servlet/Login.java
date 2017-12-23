@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import dati.User;
 import userManager.UserManager;
 
 @WebServlet(name = "Login", urlPatterns = { "/Login" })
@@ -57,9 +58,10 @@ public class Login extends HttpServlet {
 				String token = UserManager.login(username, password);
 				String resp;
 				if (token != null) {
-					resp = getResponse("OK", token);
+					User user = UserManager.getUserInformation(username);
+					resp = getResponse("OK", token, user.getName(), user.getSurname());
 				} else {
-					resp = getResponse("KO", "dati errati");
+					resp = getResponse("KO", "dati errati", "", "");
 				}
 				response.setContentType("text/plain");
 				PrintWriter out = response.getWriter();
@@ -73,8 +75,9 @@ public class Login extends HttpServlet {
 		}
 	}
 
-	private static String getResponse(String status, String token) {
-		return Json.createObjectBuilder().add("status", status).add("token", token).build().toString();
+	private static String getResponse(String status, String token, String name, String surname) {
+		return Json.createObjectBuilder().add("status", status).add("token", token).add("name", name)
+				.add("surname", surname).build().toString();
 	}
 
 }
