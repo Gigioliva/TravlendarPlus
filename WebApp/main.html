@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Main | Travlendar + </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/w3.css">
+    <!-- Libraries CSS Files -->
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/popup.css">
+
+    <!-- Main Stylesheet File -->
+    <link href='css/fullcalendar.min.css' rel='stylesheet' />
+    <link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- STUFF -->
+<link rel="stylesheet" href="css/jquery_mobile.css" />
+
+    <script src="lib/jquery/jquery.min.js"></script>
+<!--<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>-->
+    <script src="lib/jquery/jquery-migrate.min.js"></script>
+<!--<script src="js/jquery_mobile.js"></script> 
+<!--    <script src="js/jquery_ui.js"></script>-->
+
+    <!-- =======================================================
+    Theme Name: Regna
+    Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
+
+<body style="display: none">
+
+    <!--==========================
+  Header
+  ============================-->
+    <header id="header">
+        <div class="container">
+
+            <div id="logo" class="pull-left">
+                <!--<a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>-->
+                <!-- Uncomment below if you prefer to use a text logo -->
+                <h1 style="font-family: myTitle; color: white">Travlendar +</h1>
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <div class="container dunno">
+                        <div class="row">
+                            <div class="col-md-2 col-xs-2 col-sm-2">
+                                <img src="img/profile.png" width="40%" style="padding-bottom: 10px;">
+                                <br>
+                                <span style="color: white; font-weight: bold">Nome Cognome</span>
+                                <hr style="border: 1px solid white;">
+                            </div>
+                        </div>
+                    </div>
+                    <li class="menu-active"><a href="#hero">Schedules</a>
+                    </li>
+                    <li><a href="profile.html">Profile</a>
+                    </li>
+                    <li><a href="ticket.html">Tickets</a>
+                    </li>
+                    <li><a href="weather.html">Weather</a>
+                    </li>
+                    <li><a id="logout_button" href="">Logout</a></li>
+                </ul>
+            </nav>
+            <!-- #nav-menu-container -->
+        </div>
+    </header>
+    <!-- #header -->
+
+    <!--==========================
+    Hero Section
+  ============================-->
+    <section id="hero" style="height: 90px; background-color: #010150;">
+
+    </section>
+    <!-- #hero -->
+    <main id="main">
+        <section id="about" style="padding: 20px">
+            <div class="container">
+                <div class="row">
+                    <div id="new_container" class="container">
+                        <div class="row">
+                            <div class="col-md-2 col-xs-2 col-sm-2"></div>
+                            <div id="quella_centrata" class="col-md-8 col-xs-8 col-sm-8"></div>
+                            <div class="col-md-2 col-xs-2 col-sm-2"></div>
+                        </div>
+                    </div>
+                    <div id='calendar' style="width: 100%; min-height: 500px"></div>
+                </div>
+            </div>
+        </section>
+        <!-- #about -->
+    </main>
+
+    <!-- SPAZIO POPUP -->
+
+    <div>
+        <div class="popup" data-popup="popup-1" style="z-index: 999; color: black; overflow-y: scroll;">
+            <div class="popup-inner" style="background-color: #212170; text-align: center; height: 90vh; overflow: scroll;">
+                <h1 style="font-family: myTitle; color: white; margin: 0;">Create Event</h1>
+                <div class="container">
+                    <div class="row">
+                        <div id="popup_current_date" class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: center; text-decoration: underline;">
+                            Date
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 15px;">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Event name
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-sm-6">
+                            <input type="text" name="" placeholder="Name of the event" style="width: 100%">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Category
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-sm-6">
+                            <select style="width: 100%">
+                      <option value="meeting">Meeting</option>
+                      <option value="break">Break</option>
+                      <option value="party">Party</option>
+                      <option value="other">Other..</option>
+                    </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Origin position
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-sm-6">
+                            <input id="searchTextField1" type="text" style="width: 100%">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Event position
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-sm-6">
+                            <input id="searchTextField2" type="text" style="width: 100%">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Time start
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-sm-6">
+                            <input id="time_event_start" type="time" style="width: 100%">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Time end
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-sm-6">
+                            <input id="time_event_end" type="time" style="width: 100%">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 15px; padding-bottom: 15px;">
+                        <div class="col-md-6 col-xs-6 col-sm-6">
+                            <button id="submit_new_event" class="w3-button w3-indigo" style="width: 100%">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <a class="popup-close" data-popup-close="popup-1" style="color: white; position: absolute; z-index: 999; right: 13px; top:13px;">x</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SPAZIO BOTTONI -->
+    <div class="mini_button">
+        <div class="container" style="position: fixed; bottom: 3vh; left: 3vh">
+            <div class="row">
+                <div class="col-md-2 col-xs-2 col-sm-2" data-popup-open="popup-1" style="border-radius: 50px; background-color: #212170; height: 13vh; width: 13vh; line-height: 13vh;">
+                    <img src="img/event.png" width="100%">
+                </div>
+                <div class="col-md-2 col-xs-2 col-sm-2"></div>
+                <div class="col-md-2 col-xs-2 col-sm-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--==========================
+    Footer
+  ============================-->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+
+            </div>
+        </div>
+    </footer>
+    <!-- #footer -->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/superfish/hoverIntent.js"></script>
+    <script src="lib/superfish/superfish.min.js"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>-->
+    <script type="text/javascript" src="./js/google_maps.js"></script>
+
+    <!-- Contact Form JavaScript File -->
+    <script src="contactform/contactform.js"></script>
+
+    <!-- Template Main Javascript File -->
+    <script src="js/main.js"></script>
+    <script src='./js/moment.min.js'></script>
+    <!--<script src="lib/jquery/jquery.min.js"></script>-->
+    <script src='./js/fullcalendar.js'></script>
+    <script>
+        /*right: 'listDay,listWeek,month' Da inserire da qualche parte*/
+        $(window).ready(function() {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'title',
+                    right: 'prev,next today month agendaDay',
+
+                },
+                dayClick: function(date, jsEvent, view, resourceObj) {
+
+                    $('#calendar').fullCalendar("gotoDate", date);
+                    $('#calendar').fullCalendar('changeView', 'agendaDay');
+
+                },
+
+                // customize the button names,
+                // otherwise they'd all just say "list"
+                views: {
+                    listDay: {
+                        buttonText: 'Day'
+                    },
+                    listWeek: {
+                        buttonText: 'Week'
+                    }
+                },
+
+                defaultView: 'agendaDay',
+                navLinks: true, // can click day/week names to navigate views
+                editable: false,
+                eventLimit: true, // allow "more" link when too many events
+                events: [{
+                    title: 'All Day Event',
+                    start: '2017-11-01'
+                }, {
+                    title: 'Long Event',
+                    start: '2017-11-07',
+                    end: '2017-11-10'
+                }, {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: '2017-11-09T16:00:00'
+                }, {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: '2017-11-16T16:00:00'
+                }, {
+                    title: 'Conference',
+                    start: '2017-11-11',
+                    end: '2017-11-13'
+                }, {
+                    title: 'Meeting',
+                    start: '2017-11-12T10:30:00',
+                    end: '2017-11-12T12:30:00'
+                }, {
+                    title: 'Lunch',
+                    start: '2017-11-12T12:00:00'
+                }, {
+                    title: 'Meeting',
+                    start: '2017-12-07T14:30:00'
+                }, {
+                    title: 'Happy Hour',
+                    start: '2017-12-07T17:30:00'
+                }, {
+                    title: 'Dinner',
+                    start: '2017-12-07T20:00:00'
+                }, {
+                    title: 'Birthday Party',
+                    start: '2017-12-07T07:00:00'
+                }, {
+                    title: 'Click for Google',
+                    url: 'http://google.com/',
+                    start: '2017-11-28'
+                }],
+                eventColor: '#212170',
+                eventTextColor: "white",
+                eventBorderColor: "blue"
+            });
+                    $('#calendar').fullCalendar("gotoDate", date);
+                    $('#calendar').fullCalendar('changeView', 'agendaDay');
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".fc-left>h2").attr("style", "color:darkgreen; text-align:center; font-size: 24px");
+            $(".fc-right").attr("style", "text-align:center;");
+            $(".fc-right").removeClass('fc-right').addClass('fc-left');
+            $(".fc-left").css("margin-bottom", '10px');
+            $("#calendar").attr("style", "z-index:0;width: 100%;min-height: 500px;")
+
+            // Roba da popup 
+            $('[data-popup-open]').on('click', function(e) {
+                var targeted_popup_class = jQuery(this).attr('data-popup-open');
+                $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+                var moment = $('#calendar').fullCalendar('getDate');
+                var splitted_moment = String(moment).split(' ');
+                $("#popup_current_date").html("Day: " + splitted_moment[0]+ " " + splitted_moment[1] + " " +splitted_moment[2] + " " + splitted_moment[3]);
+                e.preventDefault();
+            });
+            $('[data-popup-close]').on('click', function(e) {
+                var targeted_popup_class = jQuery(this).attr('data-popup-close');
+                $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+            });
+
+            $("#logout_button").on("click", function(){
+                 window.localStorage.removeItem("my_travlendar");
+                 location.assign("index.html");
+                 return false;
+            });
+
+            function initialize() {
+
+            var input = document.getElementById('searchTextField1');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            }
+            function initialize2() {
+
+            var input = document.getElementById('searchTextField2');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+            google.maps.event.addDomListener(window, 'load', initialize2);
+
+        });
+    </script>
+
+</body>
+
+</html>
