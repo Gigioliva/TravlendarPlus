@@ -3,25 +3,26 @@ package servlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.ArrayList;
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import dati.User;
+import dati.Event;
+import dati.Journey;
+import dati.Schedule;
+import schedule.ScheduleManager;
 import userManager.SecurityAuthenticator;
-import userManager.UserManager;
 
-@WebServlet(name = "UserInformation", urlPatterns = { "/UserInformation" })
+@WebServlet(name = "GetAllSchedule", urlPatterns = { "/GetAllSchedule" })
 @MultipartConfig
-public class UserInformation extends HttpServlet {
+public class GetAllSchedule extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -54,14 +55,13 @@ public class UserInformation extends HttpServlet {
 			JSONObject requestJSON;
 			try {
 				requestJSON = new JSONObject(data);
-				String token = requestJSON.getString("token");
-				String username = SecurityAuthenticator.getUsername(token);
+				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
 				String resp;
 				if (username != null && username.equals(requestJSON.getString("username"))) {
-					User user = UserManager.getUserInformation(username);
-					resp = getResponse("OK", user.getJson());
+					ArrayList<Schedule> schedules = ScheduleManager.getSchedules(username);
+					resp = getResponse("OK", schedules);
 				} else {
-					resp = getResponse("KO", "token errato");
+					resp = getResponse("KO", null);
 				}
 				response.setContentType("text/plain");
 				PrintWriter out = response.getWriter();
@@ -74,12 +74,34 @@ public class UserInformation extends HttpServlet {
 				out.flush();
 				out.close();
 			} catch (JSONException e) {
-				System.out.print("Error in UserInformationServlet: " + data);
+				System.out.print("Error in GetScheduleServlet: " + data);
 			}
 		}
 	}
 
-	private static String getResponse(String status, String user) {
-		return Json.createObjectBuilder().add("status", status).add("user", user).build().toString();
+	private static String getResponse(String status, ArrayList<Schedule> schedules) {
+		if (schedules != null) {
+			JsonArrayBuilder array = Json.createArrayBuilder();
+			for (Schedule el : schedules) {
+				array.add(getSingleSchedule(el));
+			}
+			return Json.createObjectBuilder().add("status", status).add("schedule", array.build().toString()).build()
+					.toString();
+		} else {
+			return Json.createObjectBuilder().add("status", status).add("schedule", "Schedule non trovato").build()
+					.toString();
+		}
+
+	}
+
+	private static String getSingleSchedule(Schedule schedule) {
+		JsonArrayBuilder array = Json.createArrayBuilder();
+		for (Journey el : schedule.getSchedule()) {
+			Event ev = el.getEvent();
+			array.add(Json.createObjectBuilder().add("name", ev.getName()).add("start", ev.getStart().toString())
+					.add("duration", ev.getDuration().toString()).build().toString());
+		}
+		return Json.createObjectBuilder().add("day", schedule.getDay()).add("events", array.build().toString()).build()
+				.toString();
 	}
 }

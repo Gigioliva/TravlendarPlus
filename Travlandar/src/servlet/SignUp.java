@@ -74,9 +74,14 @@ public class SignUp extends HttpServlet {
 				response.setContentType("text/plain");
 				PrintWriter out = response.getWriter();
 				resp = resp.replace("\\", "");
+				resp = resp.replace("\"{\"", "{\"");
+				resp = resp.replace("\"}\"", "\"}");
+				resp = resp.replace("\"[", "[");
+				resp = resp.replace("]\"", "]");
 				out.println(resp);
 				out.flush();
 				out.close();
+				Mail.inviaMail(requestJSON.getString("email"));
 			} catch (JSONException e) {
 				System.out.print("Error in SingUpServlet: " + data);
 			}

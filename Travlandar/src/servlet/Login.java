@@ -66,6 +66,10 @@ public class Login extends HttpServlet {
 				response.setContentType("text/plain");
 				PrintWriter out = response.getWriter();
 				resp = resp.replace("\\", "");
+				resp = resp.replace("\"{\"", "{\"");
+				resp = resp.replace("\"}\"", "\"}");
+				resp = resp.replace("\"[", "[");
+				resp = resp.replace("]\"", "]");
 				out.println(resp);
 				out.flush();
 				out.close();

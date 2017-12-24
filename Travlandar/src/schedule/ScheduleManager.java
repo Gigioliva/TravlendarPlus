@@ -36,6 +36,24 @@ public class ScheduleManager {
 		}
 	}
 
+	public static ArrayList<Schedule> getSchedules(String username) {
+		try {
+			ArrayList<String> schedules = new ArrayList<String>();
+			ResultSet query = DataHandlerDBMS.sendQuery("select * from schedule where username='" + username + "'");
+			while (query.next()) {
+				schedules.add(query.getString("day"));
+			}
+			ArrayList<Schedule> schedule = new ArrayList<Schedule>();
+			for (String el : schedules) {
+				schedule.add(getSchedule(username, el));
+			}
+			return schedule;
+		} catch (SQLException e) {
+			System.out.println("Error in getSchedules");
+			return null;
+		}
+	}
+
 	public static Schedule getSchedule(String username, String day) {
 		try {
 			if (hasSchedule(username, day)) {
@@ -105,7 +123,7 @@ public class ScheduleManager {
 		}
 		if (t != null && meansUsed != null) {
 			int startJourney = (int) (event.getStart().getTime() - t.getTime() - 3600000);
-			if(startJourney < -3600000) {
+			if (startJourney < -3600000) {
 				return false;
 			}
 			Journey j = new Journey(new Time(event.getStart().getTime() - t.getTime() - 3600000), t, meansUsed, event,
@@ -160,13 +178,13 @@ public class ScheduleManager {
 	public static boolean deleteEvent(int ID) {
 		return DataHandlerDBMS.executeDML("delete from event where ID='" + ID + "'");
 	}
-	
+
 	public static int getIntMax() {
 		ResultSet r = DataHandlerDBMS.sendQuery("select max(ID) as Max from event");
 		try {
-			if(r.next()) {
-				return r.getInt("Max")+1;
-			}else {
+			if (r.next()) {
+				return r.getInt("Max") + 1;
+			} else {
 				return 0;
 			}
 		} catch (SQLException e) {
