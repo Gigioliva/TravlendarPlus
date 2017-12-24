@@ -39,7 +39,7 @@ def login():
 			print(Back.YELLOW + "==========")
 			print(Fore.WHITE + Back.YELLOW + "### RESPONSE is:")
 			my_response = {
-				"status" : "ok",
+				"status" : "OK",
 				"token" : tempToken
 			}
 			pprint(my_response)
@@ -48,7 +48,7 @@ def login():
 		else:
 			print(Back.RED+ Fore.WHITE + "Error!!")
 			my_response = {
-				"status" : "ko",
+				"status" : "KO",
 				"token" : "Qualcosa è andato male..."
 			}
 			pprint(my_response)
@@ -66,7 +66,7 @@ def sign_up():
 			print(Back.YELLOW + "==========")
 			print(Fore.WHITE + Back.YELLOW + "### RESPONSE is:")
 			my_response = {
-				"status" : "ok",
+				"status" : "OK",
 			}
 			pprint(my_response)
 			print(Style.RESET_ALL)
@@ -74,11 +74,107 @@ def sign_up():
 		else:
 			print(Back.RED+ Fore.WHITE + "Error!!")
 			my_response = {
-				"status" : "ko",
+				"status" : "KO",
 				"token" : "Qualcosa è andato male..."
 			}
 			pprint(my_response)
 			return json.dumps(my_response)
+
+
+# Test del metodo del UserInformation
+@app.route('/UserInformation', methods=['POST'])
+def sign_up():
+	if request.method == 'POST':
+		data_loaded = json.loads((request.data).decode("utf-8"))
+		if data_loaded["my_travlendar"] is not None:
+			print(Fore.WHITE + Back.YELLOW + "### REQUEST made on /UserInformation")
+			pprint(data_loaded)
+			print(Back.YELLOW + "==========")
+			print(Fore.WHITE + Back.YELLOW + "### RESPONSE is:")
+			my_response = {
+				"status": "OK",
+				"user" : {
+					"username": "admin",
+					"name": "luke",
+					"surname" : "mos",
+					"email" : "lukaszmoskwa94@gmail.com",
+					"phone" : "92381983",
+					"drivingLicense" : "ASD123QWE567,
+					"creditCard" : "ZXC123ASD123",
+					"maxWalk" : "1km",
+					"maxHourMeans" : "2",
+					"breakPref" : [
+					],
+					"meansPref" : [
+					]
+				}
+			}
+			pprint(my_response)
+			print(Style.RESET_ALL)
+			return json.dumps(my_response)
+		else:
+			print(Back.RED+ Fore.WHITE + "Error!!")
+			my_response = {
+				"status" : "KO",
+				"token" : "Qualcosa è andato male..."
+			}
+			pprint(my_response)
+			return json.dumps(my_response)
+
+
+# Test del metodo del GetWeather
+# Has a fixed position and date only for testing purposes
+@app.route('/GetWeather', methods=['POST'])
+def sign_up():
+	if request.method == 'POST':
+		data_loaded = json.loads((request.data).decode("utf-8"))
+		if data_loaded["my_travlendar"] is not None:
+			print(Fore.WHITE + Back.YELLOW + "### REQUEST made on /GetWeather")
+			pprint(data_loaded)
+			print(Back.YELLOW + "==========")
+			print(Fore.WHITE + Back.YELLOW + "### RESPONSE is:")
+			my_response = {
+				{"location":{"name":"Desio","region":"Lombardia","country":"Italy","lat":45.62,"lon":9.22,"tz_id":"Europe/Rome","localtime_epoch":1514127113,"localtime":"2017-12-24 15:51"},"current":{"last_updated_epoch":1514126710,"last_updated":"2017-12-24 15:45","temp_c":13.0,"temp_f":55.4,"is_day":1,"condition":{"text":"Soleggiato","icon":"//cdn.apixu.com/weather/64x64/day/113.png","code":1000},"wind_mph":4.3,"wind_kph":6.8,"wind_degree":280,"wind_dir":"W","pressure_mb":1026.0,"pressure_in":30.8,"precip_mm":0.0,"precip_in":0.0,"humidity":62,"cloud":0,"feelslike_c":12.8,"feelslike_f":55.0,"vis_km":10.0,"vis_miles":6.0},"forecast":{"forecastday":[]}}
+			}
+			pprint(my_response)
+			print(Style.RESET_ALL)
+			return json.dumps(my_response)
+		else:
+			print(Back.RED+ Fore.WHITE + "Error!!")
+			my_response = {
+				"status" : "KO",
+				"token" : "Qualcosa è andato male..."
+			}
+			pprint(my_response)
+			return json.dumps(my_response)
+
+
+# Test del metodo del SetUserField
+# Has a fixed position and date only for testing purposes
+@app.route('/SetUserField', methods=['POST'])
+def sign_up():
+	if request.method == 'POST':
+		data_loaded = json.loads((request.data).decode("utf-8"))
+		if data_loaded["my_travlendar"] is not None and data_loaded["field"] is not None and data_loaded["newValue"] is not None:
+			print(Fore.WHITE + Back.YELLOW + "### REQUEST made on /GetWeather")
+			pprint(data_loaded)
+			print(Back.YELLOW + "==========")
+			print(Fore.WHITE + Back.YELLOW + "### RESPONSE is:")
+			my_response = {
+			
+			}
+			pprint(my_response)
+			print(Style.RESET_ALL)
+			return json.dumps(my_response)
+		else:
+			print(Back.RED+ Fore.WHITE + "Error!!")
+			my_response = {
+				"status" : "KO",
+				"token" : "Qualcosa è andato male..."
+			}
+			pprint(my_response)
+			return json.dumps(my_response)
+
 
 #Added route to see images files from flask
 @app.route("/img/<path:path>")
