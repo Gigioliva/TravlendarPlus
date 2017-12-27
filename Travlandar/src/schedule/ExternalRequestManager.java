@@ -95,7 +95,7 @@ public class ExternalRequestManager {
 
 	public static String getPath(String origin, String destination, String mode) {
 		try {
-			String url = "https://maps.googleapis.com/maps/api/directions/json?origins=" + origin + "&destination="
+			String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination="
 					+ destination + "&" + mode + "&key=" + keyGoogle;
 			URL obj = new URL(url);
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();

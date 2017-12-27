@@ -98,7 +98,7 @@ public class GetAllSchedule extends HttpServlet {
 		JsonArrayBuilder array = Json.createArrayBuilder();
 		for (Journey el : schedule.getSchedule()) {
 			Event ev = el.getEvent();
-			array.add(Json.createObjectBuilder().add("name", ev.getName()).add("start", ev.getStart().toString())
+			array.add(Json.createObjectBuilder().add("ID", ev.getID()).add("name", ev.getName()).add("start", ev.getStart().toString())
 					.add("duration", ev.getDuration().toString()).build().toString());
 		}
 		return Json.createObjectBuilder().add("day", schedule.getDay()).add("events", array.build().toString()).build()
