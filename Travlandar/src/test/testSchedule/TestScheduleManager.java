@@ -97,6 +97,11 @@ public class TestScheduleManager {
 		//assert(bool3);
 	}
 	
-	
+	@Test
+	public void testDeleteEvent() {
+		PowerMockito.mockStatic(DataHandlerDBMS.class);
+		PowerMockito.when(DataHandlerDBMS.executeDML(Matchers.anyString())).thenReturn(true);
+		ScheduleManager.deleteEvent(123);
+	}
 	
 }
