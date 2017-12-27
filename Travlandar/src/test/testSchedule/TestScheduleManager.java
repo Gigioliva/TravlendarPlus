@@ -16,12 +16,14 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import database.DataHandlerDBMS;
+import dati.Event;
+import dati.EventType;
 import dati.Journey;
 import dati.Schedule;
+import dati.TypeMeans;
 import dati.User;
 import schedule.ScheduleManager;
 
-@SuppressWarnings("unused")
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({DataHandlerDBMS.class, ScheduleManager.class})		
 
@@ -86,14 +88,15 @@ public class TestScheduleManager {
 		PowerMockito.when(DataHandlerDBMS.executeDML(Matchers.anyString())).thenReturn(true);
 		PowerMockito.mockStatic(ScheduleManager.class);
 		PowerMockito.when(ScheduleManager.getSchedule("username", "test")).thenReturn(sched);
-		/*ArrayList<Journey> j = new ArrayList<Journey>();
+		ArrayList<Journey> j = new ArrayList<Journey>();
 		j.add(new Journey(new Time(0), new Time(3600000), TypeMeans.bicycling, 
 				new Event(100, "name", new Time(3600000), new Time(7200000), EventType.BREAK, "eventPosition"),
 				"testPosition"));
-		tryMockito.when(sched.getSchedule()).thenReturn(new ArrayList<Journey>());*/
+		Schedule sched = Mockito.mock(Schedule.class);
+		Mockito.when(sched.getSchedule()).thenReturn(j);
 		PowerMockito.when(ScheduleManager.deleteEvent(Matchers.anyInt())).thenReturn(true);
-		Boolean bool3 = new Boolean(false);
-		bool3 = ScheduleManager.deleteSchedule("username", "test");
+		//Boolean bool3 = new Boolean(false);
+		//bool3 = ScheduleManager.deleteSchedule("username", "test");
 		//assert(bool3);
 	}
 	
@@ -101,7 +104,8 @@ public class TestScheduleManager {
 	public void testDeleteEvent() {
 		PowerMockito.mockStatic(DataHandlerDBMS.class);
 		PowerMockito.when(DataHandlerDBMS.executeDML(Matchers.anyString())).thenReturn(true);
-		ScheduleManager.deleteEvent(123);
+		Boolean bool4 = ScheduleManager.deleteEvent(123);
+		assert(bool4);
 	}
 	
 }
