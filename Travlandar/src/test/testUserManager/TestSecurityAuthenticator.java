@@ -1,31 +1,47 @@
 package test.testUserManager;
 
+import org.junit.Before;
 import org.junit.Test;
 
-/*
-import java.sql.ResultSet;
-import java.util.HashMap;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Matchers;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
-import database.DataHandlerDBMS;
 import userManager.SecurityAuthenticator;
 
-@RunWith(PowerMockRunner.class)
-
-@PrepareForTest({ DataHandlerDBMS.class, SecurityAuthenticator.class })
-// classi interessate dal mock, non quella che vieme testata
-*/
 public class TestSecurityAuthenticator {
+	
+	String tokenLogin;
+	String tokenUsername;
+	String tokenLogout;
+	String nameLogin = new String("test1");
+	String nameUsername = new String("test2");
+	String nameLogout = new String("test3");
+	Boolean boolLogout;
+	
+	@Before
+	public void init() {
+	
+	}
 	
 	@Test
 	public void testLogin() {
-		
+		tokenLogin = SecurityAuthenticator.addLogin(nameLogin);
+		assert(tokenLogin.length() == 20);
+		assert(SecurityAuthenticator.getUsername(tokenLogin).equals(nameLogin));
+
+	}
+	
+	@Test
+	public void testGetUsername() {
+		tokenUsername = SecurityAuthenticator.addLogin(nameUsername);
+		assert(SecurityAuthenticator.getUsername(tokenUsername).equals(nameUsername));
+	}
+	
+	@Test
+	public void testLogout() {
+		tokenLogout = SecurityAuthenticator.addLogin(nameLogout);
+		boolLogout = SecurityAuthenticator.Logout(tokenLogout);
+		assert(boolLogout.equals(true));
+		boolLogout = SecurityAuthenticator.Logout(tokenLogout);
+		assert(boolLogout.equals(false));
+
 	}
 	
 }
