@@ -30,7 +30,7 @@ import userManager.UserManager;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ SecurityAuthenticator.class, UserManager.class, ScheduleManager.class })
-public class TestAdEvent {
+public class TestAddEvent {
 	
 	@Mock
 	private HttpServletRequest request;
