@@ -142,7 +142,7 @@ public class ScheduleManager {
 					break;
 				}
 			}
-			if (notOverlaps && canAddBreak(user, day, schedule)) {
+			if (notOverlaps && canAddBreak(user, schedule)) {
 				for (Journey el : breakEx) {
 					deleteEvent(el.getEvent().getID());
 				}
@@ -247,7 +247,7 @@ public class ScheduleManager {
 
 	}
 
-	private static boolean canAddBreak(User user, String day, Schedule schedule) {
+	public static boolean canAddBreak(User user, Schedule schedule) {
 		boolean flag = true;
 		for (Break br : user.getBreakPref()) {
 			Time startBreak = br.getStart();

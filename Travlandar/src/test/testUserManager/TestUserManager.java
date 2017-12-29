@@ -10,7 +10,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import database.DataHandlerDBMS;
 import dati.Break;
 import dati.TypeMeans;
-import dati.User;
 import userManager.SecurityAuthenticator;
 import userManager.UserManager;
 
@@ -21,14 +20,23 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({DataHandlerDBMS.class, SecurityAuthenticator.class})		
+@PrepareForTest({UserManager.class, DataHandlerDBMS.class, SecurityAuthenticator.class})		
 	//classi interessate dal mock, non quella che vieme testata
 public class TestUserManager {
 
 	@Mock
 	private ResultSet resultSet;
 		// strutture ausiliarie
+	/*
+	private UserManager myClass;
 
+	@Before
+    public void setup() throws Exception {
+        myClass = PowerMockito.spy(new UserManager());
+        PowerMockito.doNothing().when(myClass, "getUserMeansPref");
+        PowerMockito.doNothing().when(myClass, "getUserBreakPref");
+    }
+	*/
 	@Test
 	public void testLogin() throws SQLException {
 		Mockito.when(resultSet.getString("password")).thenReturn("password");
@@ -71,23 +79,6 @@ public class TestUserManager {
 		PowerMockito.mockStatic(DataHandlerDBMS.class);
 		PowerMockito.when(DataHandlerDBMS.executeDML(Matchers.anyString())).thenReturn(true);
 		assertEquals(true, UserManager.setFieldMeansPref("name",true,TypeMeans.bicycling));
-	}
-	
-	@Test
-	public void testGetUserInformation() throws SQLException {
-		// check only some field to verify the matching
-		User user;
-		Mockito.when(resultSet.getString("username")).thenReturn("marco");
-		Mockito.when(resultSet.getString("name")).thenReturn("aaa");
-		Mockito.when(resultSet.getString("surname")).thenReturn("bbb");
-		Mockito.when(resultSet.next()).thenReturn(true);
-		PowerMockito.mockStatic(DataHandlerDBMS.class);
-		PowerMockito.when(DataHandlerDBMS.sendQuery(Matchers.anyString())).thenReturn(resultSet);
-		user = UserManager.getUserInformation("marco");
-		assertEquals("marco",user.getUsername());
-		assertEquals("aaa",user.getName());
-		assertEquals("bbb",user.getSurname());
-		
 	}
 	
 }

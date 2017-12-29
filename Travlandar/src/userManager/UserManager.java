@@ -62,7 +62,7 @@ public class UserManager {
 		return user;
 	}
 
-	private static void getUserMeansPref(User user) {
+	public static void getUserMeansPref(User user) {
 		ResultSet rs = DataHandlerDBMS
 				.sendQuery("select typeMeans from meansPref where username='" + user.getUsername() + "'");
 		try {
@@ -74,7 +74,7 @@ public class UserManager {
 		}
 	}
 
-	private static void getUserBreakPref(User user) {
+	public static void getUserBreakPref(User user) {
 		ResultSet rs = DataHandlerDBMS
 				.sendQuery("select * from breakPref where username='" + user.getUsername() + "'");
 		try {

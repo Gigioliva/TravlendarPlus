@@ -132,18 +132,15 @@ public class TestScheduleManager {
 	}
 
 	@Test
-	public void testGetSchedule() {
+	public void testGetSchedule() throws SQLException {
 		PowerMockito.mockStatic(ScheduleManager.class);
-		PowerMockito.when(ScheduleManager.hasSchedule(Matchers.anyString(), Matchers.anyString()))
-				.thenReturn(true);
+		PowerMockito.when(ScheduleManager.hasSchedule(Matchers.anyString(), Matchers.anyString())).thenReturn(true);
+		ResultSet res = Mockito.mock(ResultSet.class);
+		Mockito.when(res.next()).thenReturn(false);
 		PowerMockito.mockStatic(DataHandlerDBMS.class);
-		PowerMockito.when(DataHandlerDBMS.sendQuery(Matchers.anyString())).thenReturn(resultSet);
-		try {
-			Mockito.when(resultSet.next()).thenReturn(false);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		//Assert.assertNotNull(ScheduleManager.getSchedule("testUsername","01-01-2000"));
+		PowerMockito.when(DataHandlerDBMS.sendQuery(Matchers.anyString())).thenReturn(res);
+		Mockito.when(resultSet.next()).thenReturn(false);
+
 	}
 
 	@Test
@@ -158,7 +155,17 @@ public class TestScheduleManager {
 
 	@Test
 	public void testcanAddBreak() {
-
+		Schedule testSched = new Schedule("testusername", "01-01-2000");
+		Event ev = new Event(1, "testOtherEvent", new Time(75600000), new Time(3600000), EventType.OTHER, "eventPos");
+		Journey j = new Journey(new Time(72000000), new Time(3600000), TypeMeans.bicycling, ev, "posStart");
+		testSched.addJourney(j);
+		User us = new User("testUsername", "name", "surname", "mail", "123456789", "AB123456", "1111222233334444", 1000,
+				new Time(32400000));
+		Break br1 = new Break("Lunch", new Time(36000000), new Time(39600000), new Time(1800000));
+		Break br2 = new Break("Dinner", new Time(64800000), new Time(68400000), new Time(1800000));
+		us.addBreakPref(br1);
+		us.addBreakPref(br2);
+		Assert.assertTrue(ScheduleManager.canAddBreak(us, testSched));
 	}
 
 }
