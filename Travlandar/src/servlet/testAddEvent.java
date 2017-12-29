@@ -46,12 +46,12 @@ public class TestAddEvent {
 		String str = "{\"username\": \"testUsername\"," + 
 				"\"token\" : \"tok\"," + 
 				"\"day\" : \"01-01-2000\"," + 
-				"\"origin\" : \"luogo origine partenza\"," + 
-				"\"eventName\" : \"Nome evento\"," + 
+				"\"origin\" : \"eventStart\"," + 
+				"\"eventName\" : \"EventName\"," + 
 				"\"eventStart\" : \"3600000\"," + 
 				"\"eventDuration\" : \"3600000\"," + 
 				"\"eventType\" : \"other\"," + 
-				"\"eventPosition\": \"posizione evento\"}";
+				"\"eventPosition\": \"eventPos\"}";
 		InputStream is = new ByteArrayInputStream(str.getBytes());
 		BufferedReader buff = new BufferedReader(new InputStreamReader(is));
 		Mockito.when(request.getReader()).thenReturn(buff);
