@@ -1,0 +1,399 @@
+\documentclass[numbers=noenddot, 12pt, a4paper, oneside]{scrbook}
+\usepackage{blindtext}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\def\Plus{\texttt{+}}
+\usepackage[final]{pdfpages}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+
+
+\lstdefinelanguage{JavaScript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+\lstset{
+	language=JavaScript,
+	backgroundcolor=\color{lightgray},
+	extendedchars=true,
+	basicstyle=\footnotesize\ttfamily,
+	showstringspaces=false,
+	showspaces=false,
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=9pt,
+	tabsize=2,
+	breaklines=true,
+	showtabs=false,
+	captionpos=b
+}
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{red},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+
+\begin{document}
+
+ 
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE Politecnico di Milano \par}
+	\vspace{1cm}
+	\includegraphics[width=0.65\textwidth]{polimi-logo}\par
+	\vspace{1cm}
+		
+	{\scshape\Large Software Engineering 2 Course\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Travlendar \Plus \par}
+	\vspace{6cm}
+	{\Large\itshape di\par}
+	{\Large\itshape Gianluigi Oliva, Marco Mussi e Lukasz Moskwa\par}
+	\vfill
+
+	
+	\vfill
+	
+	% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+
+\newpage 
+\tableofcontents
+\newpage 
+
+\chapter{Introduction and Scope}
+Travlendar+ allows to create a calendar which fits the meetings and other kind of commitments. The key feature of this application is to determine if the meeting location is reachable in the scheduled time and then provide a fast way to get to the destionation, otherwise it notify the user that it is not possibile by any mean to fullfill the request. Furthermore the application also arranges the schedule in a flexible way for some kind of events (like the lunch) and offers the possibility to slightly change its time.\\
+In the creation of the user's calendar it also takes into account the current weather condition to make smarter decisions. As example, if the user show interest in using bike or a bike sharing service, during a sunny day, the system will favor a suitable path.\\\newline
+
+This document have the scope o present all things implemented related to that described in the RASD and DD and will be underlined the functionalities and the requirements that are and aren't implemented with the related motivations. \\\newline
+
+In the following pages will be described the procedure that permit to install and start the whole platform showing all the external software and configuration files required to execute the system properly.
+Furthermore in order to easy the usage will be provided an URL through which is possible to use the platform without installing any software. \\\newline
+With the purpose to validate both the server side both the client side they will be written some tests with the aim to verify the correctness of the execution using dedicated tools. \\\newpage
+
+
+\chapter{Requirements and Functionalities}
+
+In this chapter we will talk about the Functional Requirements that were implemented and those that were not with a motivation for each one.\\
+
+In particular we implemented the following functionalities:
+\begin{itemize}
+	\item Register to Travlendar+
+	\item Create a daily schedule
+	\item Manage user's own data
+	\item Retrieve information about the weather forecast
+	\item Modify an already completed schedule for a certain day
+	\item Modify user's preferred time for having a meal
+	\item Receive information about the current journey
+\end{itemize}
+
+These were implemented in order to provide all the basic functionalities that allow an effective use of the platform.\\\newline
+
+On the other hand, we could not implement the following functionalities:
+\begin{itemize}
+	\item Buy tickets and subscriptions
+	\begin{itemize}
+		\item We have no access to the API of the ATM and Trenord for the purchase of tickets and subscriptions
+	\end{itemize}
+	\item Reservation of car and mobile sharing services
+	\begin{itemize}
+		\item We have no access to the API of the shared means of transport (like Enjoy, Mobike, OFO ect)
+	\end{itemize}
+\end{itemize}
+
+
+\chapter{Frameworks}
+
+As explained prevously in the DD, while realizing the application we used the follwing programming and markup languages and frameworks:
+
+\section*{Programming Languages}
+
+For the \underline{server side} we used the following programming languages:
+\begin{itemize}
+	\item \textbf{Java 8}
+	\begin{itemize}
+		\item We decided to use Java 8 to deply the main server of our application\\
+		\textbf{PRO}: Ease the collaboration one the same code and it is portable. It also has a huge number of available libraries free to use\\ 
+		\textbf{CON}: It's slow
+	\end{itemize}
+	\item \textbf{Python}
+	\begin{itemize}
+		\item We used python to develop a server with the only purpose to validate the interaction between the client and server side.\\
+		\textbf{PRO}: Reliable and allows a fast implementation of the software required.\\
+		\textbf{CON}: No perceivable cons
+	\end{itemize}
+	\item \textbf{SQL}
+	\begin{itemize}
+		\item We used SQL for the management of data\\
+		\textbf{PRO}: It supports relational databases and work on all the main DBMS\\
+	\end{itemize}
+\end{itemize}
+
+
+
+For the \underline{client side} we used the following programming and markdown languages:
+\begin{itemize}
+	\item \textbf{HTML 5}
+	\begin{itemize}
+		\item Last version of the common used language to develop web sites\\
+		\textbf{PRO}: Easy to use, supported by all the browsers\\
+	\end{itemize}
+	\item \textbf{CSS 3}
+	\begin{itemize}
+		\item Last version of the common used language to edit style of web pages\\
+		\textbf{PRO}: Really awesome effects\\
+		\textbf{CON}: Lack of variables easy to use\\
+	\end{itemize}
+	\item \textbf{JavaScript}
+	\begin{itemize}
+		\item Common used language to perform dynamic actions on web pages\\
+		\textbf{PRO}: Lot of libraries and not so hard to implement\\
+		\textbf{CON}: There is no debugging in easy way. Sometimes workarounds are required in order to make an acceptable code
+		\\
+	\end{itemize}
+\end{itemize}
+
+
+\section*{Framework}
+
+For the server side we used the following libraries and frameworks:
+\begin{itemize}
+	\item \textbf{Java}:
+	\begin{itemize}
+		\item JavaEE
+		\item JUnit
+		\item org.json
+		\item google.gson
+		\item org.PostgreSQL
+		\item PowerMockito
+		\item Mockito
+	\end{itemize}
+	\item \textbf{Python}:
+	\begin{itemize}
+		\item colorama
+		\item Flask
+		\item json
+		\item pprint
+	\end{itemize}
+\end{itemize}
+
+For the client side we used the following libraries and frameworks:
+\begin{itemize}
+	\item \textbf{Template}: REGNA Template (Free Version)
+	\item \textbf{Phonegap} and Cordova for cross-compiling
+	\item \textbf{Javascript} Libraries:
+	\begin{itemize}
+		\item fullcalendar.js (from fullcalendar.io)
+		\item jQuery
+		\item Bootstrap
+		\item maps.googleapis.com
+		\item Moment
+	\end{itemize}	
+\end{itemize}
+
+\section*{Other software used}
+
+\begin{itemize}
+	\item Tomcat
+	\item MySQL
+	\item Postgress
+	\item Flask
+	\item Heroku
+\end{itemize}
+
+The last one was used to deploy the application server to a remote host. Due to this, in order to use the platform, is enough to connect to a URL provided in the respective section of installation. 
+
+\section*{Used API}
+
+\begin{itemize}
+	\item \textbf{Google API}: These are used to diplay and receive information about the path and everything concerning the journey.
+	
+	\item \textbf{APIXU API}: These are use in order to receinve and display the data about the weather forecast in a particular day
+\end{itemize}
+
+
+
+\chapter{Structure of the code}
+
+
+As often said in the other documents, the system was parted in three layers: presentation, application and data layer. Each of these levels is executed on a separate machine/server in order to guarantee a three-tier architecture, as explained in the DD, increasing the overall security.\\
+
+\section*{Server Side}
+\lstset{language=Java}
+The Data layer is built with tables that are populated with the information of all the users and implemented with SQL language.\\
+On the other hand, the Application layer contains all the business logic and functions and it was implemented in Java. That also allowed a logical partition of different modules:
+\begin{itemize}
+	\item \textbf{DataHandlerDBMS}: This module takes care of the connection and communication with the DBMS, enabling the possibility of receiving query and DML commands.
+	\item \textbf{UserManager}: This module handles all the data of a single user and functions like Login, Logout and information update. For the login and logout it also take advantage of the SecurityAuthenticator for handling the token that identifies the user.
+	\item \textbf{ScheduleManager}: This module takes care of the user's schedule management by enabling the function of creating a new one, making sure it does not already exist, populate it with events of any kind, making sure there are no overlaps and using the best route for a journey. For the selection of the path we make use of ExternalRequestManager class which interfaces with an external API to get information about the route and the weather.
+	\item \textbf{Servlet}: This module is responsible for the communication of the application layer with the presentation one by defining the endpoints on which the GET and POST will work, handling requests and returning the result of the application server for the requested function.
+	\item \textbf{Data}: This module contains all the classes that represent the data stored in the DB in order to facilitate their use when required. Also within them, there are the methods that transform those data in JSON and then send them to various clients.
+\end{itemize}
+
+% Esempio di codice da inserire per Java
+
+\begin{lstlisting}
+	public void main(int qualcosa){
+		System.out.println("Esempio per GG");
+	}
+\end{lstlisting}
+
+\section*{Client Side}
+
+The Presentation Layer instead is written mainly with Web based laguages like HTML5, CSS3 and JavaScript. Then, in order to obtain a mobile version executable, the Web Application is parsed and compiled with Phonegap. \\
+
+The website is parted as follows in order to cover all the functions required:
+\begin{itemize}
+	\item \textbf{index.html}: This is the intial page with a welcome screen and a brief description of the application. From this page is actually possibile to perform a Sign Up action to register a new user or a Sign In action to login with an existing user.
+	\item \textbf{main.html}: This is the main page where a calendar with all the schedules can be seen. It is also possibile to change the basic view of the calendar from day to month and create a new Schedule for a chosen day. Then, the user can also create a new Event filling a brief form. 
+	\item \textbf{profile.html}: In this page the user can actually see all the information about his/her profile and update them: it is possible to set a preferred range for a break during a day with a schedule, adding/removing means of transport from the preferred ones and change personal information like credit card number, driving license number and update the profile picture.
+	\item \textbf{weather.html}: In this page a user can actually check the weather for a chosen day
+	\item \textbf{ticket.html}: This page was realized only for the sake of completeness. As we can't realize a concrete communication with third part API for the purchase of tickets and subscription, there is only a layout left for future implementations.
+\end{itemize}
+
+About the code structure, the business logic of the client was completely implemented with JavaScript and some of its libraries. Some examples are provided as follows:\\ 
+
+\lstset{language=JavaScript}
+\textbf{Example of code for basic client-server request}:
+
+\begin{lstlisting}
+	var isPhoneGap = true; //changed on server side to false, true for mobile
+	var herokuURL = "";
+	if (isPhoneGap) {
+		herokuURL = "http://travlendarmom.herokuapp.com";
+	}
+
+
+	$.ajax({
+		dataType: "text",
+		contentType: "text/plain; charset=utf-8",
+		type: "POST",
+		url: herokuURL + "/ExampleEndpoint",
+		data: JSON.stringify(dataToSend),
+		success: function(response) {
+			//Function to execute in case of success
+		}
+	});
+\end{lstlisting}
+
+This type of request is often performed in order to receive information from the server side. The response is then analyzed and parsed in order to show data to the user on the client side.\\
+
+\textbf{Working code for retrieving data and create a calendar}:
+
+\begin{lstlisting}
+	$('#calendar').fullCalendar({
+		header: {
+			left: 'title',
+			right: 'prev,next today month agendaDay'
+		},
+		dayClick: function(date, jsEvent, view, resourceObj) {
+			$('#calendar').fullCalendar("gotoDate", date);
+			$('#calendar').fullCalendar('changeView', 'agendaDay');
+		},
+		views: {
+			listDay: {
+				buttonText: 'Day'
+			},
+			listWeek: {
+				buttonText: 'Week'
+			}
+		},
+		eventClick: function(calEvent, jsEvent, view) {
+		
+			var moment = $('#calendar').fullCalendar('getDate');
+			var time_no = String(moment.format()).split("T")[0].split("-");
+			var time_send = time_no[2] + "-" + time_no[1] + "-" + time_no[0];
+			var coseDaMandare = {
+				"username": localStorage.getItem("my_username"),
+				"token": localStorage.getItem("my_travlendar"),
+				"day": time_send
+			};
+			$.ajax({
+				dataType: "text",
+				contentType: "text/plain; charset=utf-8",
+				type: "POST",
+				url: herokuURL + "/GetSchedule",
+				data: JSON.stringify(coseDaMandare),
+				success: function(response) {
+					response = JSON.parse(response);
+					var scorrimento = response["schedule"]["singleSchedule"];
+					for (var i = 0; i < scorrimento.length; i++) {
+						if (scorrimento[i]["event"]["ID"] == calEvent.id) {
+							var coseDaMandare = {
+								"origin": scorrimento[i]["position"],
+								"destination": scorrimento[i]["event"]["position"],
+								"mode": scorrimento[i]["means"]
+							};
+							$.ajax({
+								dataType: "text",
+								contentType: "text/plain; charset=utf-8",
+								type: "POST",
+								url: herokuURL + "/GetPath",
+								data: JSON.stringify(coseDaMandare),
+								success: function(response) {
+									console.log(response);
+								}
+							});
+						}
+					}
+				}
+			});
+		},
+		defaultView: 'agendaDay',
+		navLinks: true, 
+		editable: false,
+		eventLimit: true,
+		events: returnArray, 
+		eventColor: '#212170',
+		eventTextColor: "white",
+		eventBorderColor: "blue"
+	});
+\end{lstlisting}
+
+As it's possible to see by the code, in order to view the calendar the user is required to have an access token provided by the application server, then he need to previously login.
+
+
+\chapter{Testing}
+
+In order to proof the correctness of the most important parts of the code will be provided a complete test of all the main parts of the code. \\\newline
+On server side the Java EE code has been tested using the tools that Java provide with some additional libraries. In particular were used the JUnit libraries to test the part that works completely in the local system without using external resources like DBMS and network.
+To emulate the part which requires the interaction with external component was used a framework called Mockito to test all the part regarding the not static class and method of the code and another derivative tool called PowerMockito to emulate the response of the parts of the code which are the static methods of the code. 
+Furthermore in order to measure the performance of the whole server side will be showed in the next pages some report of the performance measure extracted by real situation using Apache JMeter. 
+The test of the Java EE server is available with the source code of the whole Web Application. \\\newline
+With the aim to provide a test also at the client side of the application was created a purpose specific Python server to test the response of the client at some predetermined situation that the server provide statically. 
+The test of the client will be provided partly with the source code and partly in the following pages. \\\newpage
+
+\chapter{Installation instructions}
+
+\end{document}
