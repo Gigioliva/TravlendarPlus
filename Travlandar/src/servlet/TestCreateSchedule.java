@@ -21,7 +21,6 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import dati.Event;
 import dati.User;
 import schedule.ScheduleManager;
 
@@ -30,8 +29,8 @@ import userManager.UserManager;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ SecurityAuthenticator.class, UserManager.class, ScheduleManager.class })
-public class TestAddEvent {
-	
+public class TestCreateSchedule {
+
 	@Mock
 	private HttpServletRequest request;
 	
@@ -40,35 +39,32 @@ public class TestAddEvent {
 	
 	@Test
 	public void testDoPost() throws IOException, ServletException {
+		
 		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
 		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 		Mockito.when(request.getMethod()).thenReturn("POST");
-		String str = "{\"username\": \"testUsername\"," + 
-				"\"token\" : \"tok\"," + 
-				"\"day\" : \"01-01-2000\"," + 
-				"\"origin\" : \"luogo origine partenza\"," + 
-				"\"eventName\" : \"Nome evento\"," + 
-				"\"eventStart\" : \"3600000\"," + 
-				"\"eventDuration\" : \"3600000\"," + 
-				"\"eventType\" : \"other\"," + 
-				"\"eventPosition\": \"posizione evento\"}";
+		String str = "{\"username\" : \"testUsername\"," + 
+				"\"token\" : \"token\",\n" + 
+				"\"day\" : \"giorno-mese-anno\"}";
 		InputStream is = new ByteArrayInputStream(str.getBytes());
 		BufferedReader buff = new BufferedReader(new InputStreamReader(is));
 		Mockito.when(request.getReader()).thenReturn(buff);
+
 		PowerMockito.mockStatic(SecurityAuthenticator.class);
 		PowerMockito.when(SecurityAuthenticator.getUsername(Matchers.anyString())).thenReturn("testUsername");
 		PowerMockito.mockStatic(UserManager.class);
 		PowerMockito.when(UserManager.getUserInformation(Matchers.anyString())).thenReturn(new User("testUsername",
 				"name", "surname", "mail", "phone", "drivinglicence", "creditcard", 1, new Time(3600000)));
 		PowerMockito.mockStatic(ScheduleManager.class);
-		PowerMockito.when(ScheduleManager.getIntMax()).thenReturn(200);
-		PowerMockito.when(ScheduleManager.addEvent(Matchers.any(User.class), Matchers.anyString(),
-				Matchers.any(Event.class), Matchers.anyString())).thenReturn(true);
+		PowerMockito.when(ScheduleManager.hasSchedule(Matchers.anyString(), Matchers.anyString())).thenReturn(false);
+		PowerMockito.when(ScheduleManager.createSchedule(Matchers.any(User.class), Matchers.anyString())).thenReturn(true);
 		PrintWriter pr = new PrintWriter(System.out, false);
 		Mockito.when(response.getWriter()).thenReturn(pr);
-		new AddEvent().doPost(request, response);
+		new CreateSchedule().doPost(request, response);
 		Mockito.verify(request, Mockito.times(1)).getReader();
 		Mockito.verify(response, Mockito.times(1)).getWriter();
+		
 	}
 
 }
+

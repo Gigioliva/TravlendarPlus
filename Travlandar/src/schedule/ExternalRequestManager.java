@@ -15,7 +15,7 @@ public class ExternalRequestManager {
 
 	// Si potrebbe aggiungere departure_time anche se dalle prove il tempo è sempre
 	// lo stesso
-	public static HashMap<String, Integer> getDistanceMatrixAPI(String origin, String destination, String mode) {
+	public static HashMap<String, Integer> getDistanceMatrixAPI  (String origin, String destination, String mode) {
 		String url="";
 		try {
 			url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origin + "&destinations="
@@ -39,8 +39,13 @@ public class ExternalRequestManager {
 			ris.put("duration", temp);
 			ris.put("distance", distance);
 			return ris;
-		} catch (IOException | JSONException e) {
-			System.out.println("Error in getDistanceMatrixAPI");
+		} 
+		catch (JSONException e) {
+			System.out.println("JSONException Error in getDistanceMatrixAPI");
+			return null; // occhio a gestirlo
+		}
+		catch(IOException e) {
+			System.out.println("IOException Error in getDistanceMatrixAPI");
 			return null; // occhio a gestirlo
 		}
 	}
@@ -62,10 +67,16 @@ public class ExternalRequestManager {
 			int code = risp.getJSONObject("current").getJSONObject("condition").getInt("code");
 			in.close();
 			return code;
-		} catch (IOException | JSONException e) {
-			System.out.println("Error in getWeatherForecast");
+		} catch (IOException e) {
+			System.out.println("IOException Error in getWeatherForecast");
 			return 0;
 		}
+		
+		catch (JSONException e) {
+			System.out.println("JSONException Error in getWeatherForecast");
+			return 0;
+		}
+		
 	}
 	// 1000 Soleggiato
 	// 1003 Parzialmente nuvoloso
