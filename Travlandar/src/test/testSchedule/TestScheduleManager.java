@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,10 +27,11 @@ import dati.Schedule;
 import dati.TypeMeans;
 import dati.User;
 import junit.framework.Assert;
+import schedule.ExternalRequestManager;
 import schedule.ScheduleManager;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ DataHandlerDBMS.class, ScheduleManager.class })
+@PrepareForTest({ DataHandlerDBMS.class, ScheduleManager.class, ExternalRequestManager.class })
 
 public class TestScheduleManager {
 
@@ -145,12 +147,22 @@ public class TestScheduleManager {
 
 	@Test
 	public void testAddEvent() {
-		// Richiede ExternalRequestManager ch da un problema di compatibilità
-	}
-
-	@Test
-	public void testAddBreak() {
-
+		PowerMockito.mockStatic(ExternalRequestManager.class);
+		PowerMockito.when(ExternalRequestManager.getWeatherForecast(Matchers.anyString(),Matchers.anyString())).thenReturn(100);
+		PowerMockito.when(ExternalRequestManager.getDistanceMatrixAPI(Matchers.anyString(),Matchers.anyString(),Matchers.anyString()))
+				.thenReturn(new HashMap<String,Integer>());
+		PowerMockito.mockStatic(DataHandlerDBMS.class);
+		PowerMockito.when(DataHandlerDBMS.executeDML(Matchers.anyString())).thenReturn(true);
+		User us = new User("testUsername", "name", "surname", "mail", "123456789", "AB123456", "1111222233334444", 1000,
+				new Time(32400000));
+		Schedule testSched = new Schedule("testusername", "01-01-2000");
+		Event ev = new Event(1, "testOtherEvent", new Time(75600000), new Time(3600000), EventType.OTHER, "eventPos");
+		Journey j = new Journey(new Time(72000000), new Time(3600000), TypeMeans.bicycling, ev, "posStart");
+		testSched.addJourney(j);
+		PowerMockito.mockStatic(ScheduleManager.class);
+		PowerMockito.when(ScheduleManager.getSchedule(Matchers.anyString(), Matchers.anyString())).thenReturn(testSched);
+		Assert.assertFalse(ScheduleManager.addEvent(us, "01-01-2000", ev, "origin"));
+		
 	}
 
 	@Test
