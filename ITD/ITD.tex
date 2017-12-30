@@ -263,10 +263,100 @@ On the other hand, the Application layer contains all the business logic and fun
 
 % Esempio di codice da inserire per Java
 
+\textbf{Example of code for database request}:
 \begin{lstlisting}
-	public void main(int qualcosa){
-		System.out.println("Esempio per GG");
+	public static ResultSet sendQuery(String query) {
+		try {
+				Statement stm = DBMS.createStatement();
+				ResultSet res = stm.executeQuery(query);
+				return res;
+		} catch (SQLException e) {
+				System.out.println("Error in sendQuery");
+				e.printStackTrace();
+		}
+		return null;
 	}
+\end{lstlisting}
+
+\textbf{Example of code for addEvent}:
+\begin{lstlisting}
+public static boolean addEvent(User user, String day, Event event, String origin) {
+	String username = user.getUsername();
+	ArrayList < TypeMeans > means = user.getMeansPref();
+	Schedule schedule = getSchedule(username, day);
+	Time t = null;
+	TypeMeans meansUsed = null;
+	int wheater = ExternalRequestManager.getWeatherForecast(origin, day);
+	for (TypeMeans el: means) {
+		HashMap < String, Integer > ris = ExternalRequestManager.getDistanceMatrixAPI(origin, event.getPosition(),
+		el.getTypeAPI());
+		if (ris != null) {
+				Time temp = new Time((ris.get("duration") - 3600) * 1000);
+					if (el == TypeMeans.bicycling && wheater == 1000) {
+						if (t == null || temp.compareTo(t) < 0) {
+							t = temp;
+							meansUsed = el;
+						}
+					}
+				if (el == TypeMeans.walking && ris.get("distance") <= user.getMaxWalk()) {
+					if (t == null || temp.compareTo(t) < 0) {
+						t = temp;
+						meansUsed = el;
+					}
+				}
+				if (el == TypeMeans.driving) {
+					if (t == null || temp.compareTo(t) < 0) {
+						t = temp;
+						meansUsed = el;
+					}
+				}
+				if (el.isTransit() && user.getMaxHoursMeans().compareTo(event.getStart()) >= 0) {
+					if (t == null || temp.compareTo(t) < 0) {
+						t = temp;
+						meansUsed = el;
+					}
+				}
+			}
+		}
+		if (t != null && meansUsed != null) {
+			int startJourney = (int)(event.getStart().getTime() - t.getTime() - 3600000);
+			if (startJourney < -3600000) {
+				return false;
+			}
+			Journey j = new Journey(new Time(event.getStart().getTime() - t.getTime() - 3600000), t, meansUsed, event, origin);
+			boolean notOverlaps = true;
+			ArrayList < Journey > breakEx = schedule.getAndRemoveBreak();
+			Time startj = j.getStart();
+			Time endj = new Time(event.getStart().getTime() + event.getDuration().getTime() + 3600000);
+			for (Journey el: schedule.getSchedule()) {
+				Time startEl = el.getStart();
+				Time endEl = new Time(
+				el.getEvent().getStart().getTime() + el.getEvent().getStart().getTime() + 3600000);
+				if ((startj.compareTo(startEl) > 0 && startj.compareTo(endEl) < 0) || (endj.compareTo(startEl) > 0 && endj.compareTo(endEl) < 0)) {
+					notOverlaps = false;
+					break;
+				}
+			}
+			if (notOverlaps && canAddBreak(user, schedule)) {
+				for (Journey el: breakEx) {
+					deleteEvent(el.getEvent().getID());
+				}
+			DataHandlerDBMS.executeDML("insert into event (ID, name, start, duration, type, position) values (" + event.stringValuesQuery() + ")");
+			DataHandlerDBMS.executeDML( "insert into journey (username, day, start, duration, path, EventID, position) values ('" + username + "','" + day + "'," + j.stringValuesQuery() + ")");
+			for (Journey el: breakEx) {
+				Break br = user.getBreakFromName(el.getEvent().getName());
+				if (br != null) {
+					addBreak(br, user, day);
+				}
+			}
+			return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+}
 \end{lstlisting}
 
 \section*{Client Side}
