@@ -1,0 +1,6 @@
+\contentsline {chapter}{\numberline {1}Introduction and Scope}{3}
+\contentsline {chapter}{\numberline {2}Requirements and Functionalities}{4}
+\contentsline {chapter}{\numberline {3}Frameworks}{5}
+\contentsline {chapter}{\numberline {4}Structure of the code}{8}
+\contentsline {chapter}{\numberline {5}Testing}{12}
+\contentsline {chapter}{\numberline {6}Installation instructions}{13}
