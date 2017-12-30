@@ -25,7 +25,7 @@ public class UserManager {
 	public static String getImage(String username) {
 		try {
 			ResultSet rs = DataHandlerDBMS.sendQuery("select img from user where username='" + username + "'");
-			if (rs.next() && !rs.getString("img").equals("null")) {
+			if (rs.next() && !rs.getString("img").equals("noSet")) {
 				return rs.getString("img");
 			}
 		} catch (SQLException e) {
@@ -40,11 +40,11 @@ public class UserManager {
 					.sendQuery("select count(*) as Num from user where username='" + param.get("username") + "'");
 			if (rs.next() && Integer.parseInt(rs.getString("Num")) == 0) {
 
-				String insert = "insert into user (username, password, name, surname, email, phone, drivingLicense, creditCard, maxWalk, maxHourMeans) values "
+				String insert = "insert into user (username, password, name, surname, email, phone, drivingLicense, creditCard, maxWalk, maxHourMeans, img) values "
 						+ "('" + param.get("username") + "','" + param.get("password") + "','" + param.get("name") + "','"
 						+ param.get("surname") + "','" + param.get("email") + "','" + param.get("phone") + "','"
 						+ param.get("drivingLicense") + "','" + param.get("creditCard") + "','" + param.get("maxWalk") + "','"
-						+ param.get("maxHourMeans") + "')";
+						+ param.get("maxHourMeans") + "','" + param.get("img") +"')";
 				if (DataHandlerDBMS.executeDML(insert)) {
 					return true;
 				}
