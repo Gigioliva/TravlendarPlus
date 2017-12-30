@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -50,12 +51,15 @@ public class TestSetUserField {
 		PowerMockito.when(SecurityAuthenticator.getUsername(Matchers.anyString())).thenReturn("testUsername");
 		PowerMockito.mockStatic(UserManager.class);
 		PowerMockito.when(UserManager.setFieldUser(Matchers.anyString(), Matchers.anyString(), Matchers.anyString())).thenReturn(true);
-		PrintWriter pr = new PrintWriter(System.out, false);
+		StringWriter sw = new StringWriter();
+		PrintWriter pr = new PrintWriter(sw, false);
+		//PrintWriter pr = new PrintWriter(System.out, false);
 		Mockito.when(response.getWriter()).thenReturn(pr);
 		new SetUserField().doPost(request, response);
 		Mockito.verify(request, Mockito.times(1)).getReader();
 		Mockito.verify(response, Mockito.times(1)).getWriter();
-	
+		assert(sw.toString().equals("{\"status\":\"OK\"}\n"));
+		
 	}
 
 }

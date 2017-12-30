@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Time;
 
 import javax.servlet.ServletException;
@@ -44,7 +45,7 @@ public class TestCreateSchedule {
 		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 		Mockito.when(request.getMethod()).thenReturn("POST");
 		String str = "{\"username\" : \"testUsername\"," + 
-				"\"token\" : \"token\",\n" + 
+				"\"token\" : \"token\"," + 
 				"\"day\" : \"giorno-mese-anno\"}";
 		InputStream is = new ByteArrayInputStream(str.getBytes());
 		BufferedReader buff = new BufferedReader(new InputStreamReader(is));
@@ -58,12 +59,15 @@ public class TestCreateSchedule {
 		PowerMockito.mockStatic(ScheduleManager.class);
 		PowerMockito.when(ScheduleManager.hasSchedule(Matchers.anyString(), Matchers.anyString())).thenReturn(false);
 		PowerMockito.when(ScheduleManager.createSchedule(Matchers.any(User.class), Matchers.anyString())).thenReturn(true);
-		PrintWriter pr = new PrintWriter(System.out, false);
+		StringWriter sw = new StringWriter();
+		PrintWriter pr = new PrintWriter(sw, false);
+		//PrintWriter pr = new PrintWriter(System.out, false);
 		Mockito.when(response.getWriter()).thenReturn(pr);
 		new CreateSchedule().doPost(request, response);
 		Mockito.verify(request, Mockito.times(1)).getReader();
 		Mockito.verify(response, Mockito.times(1)).getWriter();
-		
+		assert(sw.toString().equals("{\"status\":\"OK\",\"details\":\"Schedule creato\"}\n"));
+	
 	}
 
 }
