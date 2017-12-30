@@ -22,6 +22,18 @@ public class UserManager {
 		return null;
 	}
 
+	public static String getImage(String username) {
+		try {
+			ResultSet rs = DataHandlerDBMS.sendQuery("select img from user where username='" + username + "'");
+			if (rs.next() && !rs.getString("img").equals("null")) {
+				return rs.getString("img");
+			}
+		} catch (SQLException e) {
+			System.out.println("Error in getImage");
+		}
+		return "";
+	}
+	
 	public static boolean signUp(HashMap<String, String> param) {
 		try {
 			ResultSet rs = DataHandlerDBMS

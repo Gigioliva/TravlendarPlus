@@ -41,7 +41,7 @@ public class SecurityAuthenticator {
 		if(token.containsKey(tok)) {
 			return token.get(tok);
 		}else {
-			return null;
+			return "";
 		}
 	}
 
