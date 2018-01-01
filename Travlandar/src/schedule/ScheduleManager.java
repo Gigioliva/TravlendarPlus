@@ -16,6 +16,8 @@ import dati.User;
 
 public class ScheduleManager {
 
+	private static final int FUSO = 3600000; 
+	
 	public static boolean createSchedule(User user, String day) {
 		String username = user.getUsername();
 		DataHandlerDBMS.executeDML("insert into schedule (username, day) values ('" + username + "','" + day + "')");
@@ -94,7 +96,7 @@ public class ScheduleManager {
 			HashMap<String, Integer> ris = ExternalRequestManager.getDistanceMatrixAPI(origin, event.getPosition(),
 					el.getTypeAPI());
 			if (ris != null) {
-				Time temp = new Time((ris.get("duration") - 3600) * 1000);
+				Time temp = new Time((ris.get("duration") * 1000) - FUSO);
 				if (el == TypeMeans.bicycling && wheater == 1000) {
 					if (t == null || temp.compareTo(t) < 0) {
 						t = temp;
@@ -122,20 +124,20 @@ public class ScheduleManager {
 			}
 		}
 		if (t != null && meansUsed != null) {
-			int startJourney = (int) (event.getStart().getTime() - t.getTime() - 3600000);
-			if (startJourney < -3600000) {
+			int startJourney = (int) (event.getStart().getTime() - t.getTime() - FUSO);
+			if (startJourney < -FUSO) {
 				return false;
 			}
-			Journey j = new Journey(new Time(event.getStart().getTime() - t.getTime() - 3600000), t, meansUsed, event,
+			Journey j = new Journey(new Time(event.getStart().getTime() - t.getTime() - FUSO), t, meansUsed, event,
 					origin);
 			boolean notOverlaps = true;
 			ArrayList<Journey> breakEx = schedule.getAndRemoveBreak();
 			Time startj = j.getStart();
-			Time endj = new Time(event.getStart().getTime() + event.getDuration().getTime() + 3600000);
+			Time endj = new Time(event.getStart().getTime() + event.getDuration().getTime() + FUSO);
 			for (Journey el : schedule.getSchedule()) {
 				Time startEl = el.getStart();
 				Time endEl = new Time(
-						el.getEvent().getStart().getTime() + el.getEvent().getStart().getTime() + 3600000);
+						el.getEvent().getStart().getTime() + el.getEvent().getStart().getTime() + FUSO);
 				if ((startj.compareTo(startEl) > 0 && startj.compareTo(endEl) < 0)
 						|| (endj.compareTo(startEl) > 0 && endj.compareTo(endEl) < 0)) {
 					notOverlaps = false;
@@ -199,7 +201,7 @@ public class ScheduleManager {
 		ArrayList<Journey> jouney = new ArrayList<Journey>();
 		for (Journey el : schedule.getSchedule()) {
 			Time startEl = el.getStart();
-			Time endEl = new Time(el.getEvent().getStart().getTime() + el.getEvent().getDuration().getTime() + 3600000);
+			Time endEl = new Time(el.getEvent().getStart().getTime() + el.getEvent().getDuration().getTime() + FUSO);
 			if ((startBreak.compareTo(endEl) < 0 && startBreak.compareTo(startEl) >= 0)
 					|| (startEl.compareTo(endBreak) < 0 && startEl.compareTo(startBreak) >= 0)) {
 				jouney.add(el);
@@ -209,9 +211,9 @@ public class ScheduleManager {
 		for (int i = 0; i < jouney.size() - 1; i++) {
 			Time startEl = jouney.get(i + 1).getStart();
 			Time endEl = new Time(jouney.get(i).getEvent().getStart().getTime()
-					+ jouney.get(i).getEvent().getDuration().getTime() + 3600000);
-			if ((br.getDuration().compareTo(new Time(startEl.getTime() - endEl.getTime() - 3600000)) < 0)
-					&& endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + 3600000)) >= 0) {
+					+ jouney.get(i).getEvent().getDuration().getTime() + FUSO);
+			if ((br.getDuration().compareTo(new Time(startEl.getTime() - endEl.getTime() - FUSO)) < 0)
+					&& endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + FUSO)) >= 0) {
 				temp = endEl;
 				break;
 			}
@@ -222,8 +224,8 @@ public class ScheduleManager {
 		if (jouney.size() == 1) {
 			Journey event = jouney.get(0);
 			Time endEl = new Time(
-					event.getEvent().getStart().getTime() + event.getEvent().getDuration().getTime() + 3600000);
-			if (endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + 3600000)) >= 0) {
+					event.getEvent().getStart().getTime() + event.getEvent().getDuration().getTime() + FUSO);
+			if (endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + FUSO)) >= 0) {
 				temp = endEl;
 			}
 		}
@@ -233,7 +235,7 @@ public class ScheduleManager {
 				if (r.next()) {
 					Event event = new Event(r.getInt("Max") + 1, br.getName(), temp, br.getDuration(), EventType.BREAK,
 							"Milan");
-					Journey j = new Journey(event.getStart(), new Time(-3600000), TypeMeans.walking, event, "Milan");
+					Journey j = new Journey(event.getStart(), new Time(-FUSO), TypeMeans.walking, event, "Milan");
 					DataHandlerDBMS.executeDML("insert into event (ID, name, start, duration, type, position) values ("
 							+ event.stringValuesQuery() + ")");
 					DataHandlerDBMS.executeDML(
@@ -256,7 +258,7 @@ public class ScheduleManager {
 			for (Journey el : schedule.getSchedule()) {
 				Time startEl = el.getStart();
 				Time endEl = new Time(
-						el.getEvent().getStart().getTime() + el.getEvent().getDuration().getTime() + 3600000);
+						el.getEvent().getStart().getTime() + el.getEvent().getDuration().getTime() + FUSO);
 				if ((startBreak.compareTo(endEl) < 0 && startBreak.compareTo(startEl) >= 0)
 						|| (startEl.compareTo(endBreak) < 0 && startEl.compareTo(startBreak) >= 0)) {
 					jouney.add(el);
@@ -266,9 +268,9 @@ public class ScheduleManager {
 			for (int i = 0; i < jouney.size() - 1; i++) {
 				Time startEl = jouney.get(i + 1).getStart();
 				Time endEl = new Time(jouney.get(i).getEvent().getStart().getTime()
-						+ jouney.get(i).getEvent().getDuration().getTime() + 3600000);
-				if ((br.getDuration().compareTo(new Time(startEl.getTime() - endEl.getTime() - 3600000)) < 0)
-						&& endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + 3600000)) >= 0) {
+						+ jouney.get(i).getEvent().getDuration().getTime() + FUSO);
+				if ((br.getDuration().compareTo(new Time(startEl.getTime() - endEl.getTime() - FUSO)) < 0)
+						&& endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + FUSO)) >= 0) {
 					temp = endEl;
 					break;
 				}
@@ -279,8 +281,8 @@ public class ScheduleManager {
 			if (jouney.size() == 1) {
 				Journey event = jouney.get(0);
 				Time endEl = new Time(
-						event.getEvent().getStart().getTime() + event.getEvent().getDuration().getTime() + 3600000);
-				if (endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + 3600000)) >= 0) {
+						event.getEvent().getStart().getTime() + event.getEvent().getDuration().getTime() + FUSO);
+				if (endBreak.compareTo(new Time(endEl.getTime() + br.getDuration().getTime() + FUSO)) >= 0) {
 					temp = endEl;
 				}
 			}
