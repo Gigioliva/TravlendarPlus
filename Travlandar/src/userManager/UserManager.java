@@ -119,6 +119,10 @@ public class UserManager {
 			User user = getUserInformation(username);
 			Time startBreak = breakPref.getStart();
 			Time endBreak = breakPref.getEnd();
+			if (startBreak.compareTo(endBreak) > 0
+					|| breakPref.getDuration().compareTo(new Time(endBreak.getTime() - startBreak.getTime())) > 0) {
+				return false;
+			}
 			boolean overlaps = false;
 			for (Break el : user.getBreakPref()) {
 				Time start = el.getStart();
