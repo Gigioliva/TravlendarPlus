@@ -67,10 +67,17 @@
           <div class="row">
             <div class="col-md-2 col-xs-2 col-sm-2" style="text-align: center;">
               <img id="profile_picture" src="./img/profile.png" style="width: 100%; margin-bottom: 20px;">
+              <form class="custom-file-upload" method="POST" action="http://travlendarmom.herokuapp.com/upload" enctype="multipart/form-data" >
               <label class="custom-file-upload">
                 <input type="file"/>
-                Update Picture
+                Load Picture
               </label>
+              <label>
+                <input type="submit" style="width: 80%" />
+              </label>
+              <input id="image_username" type="text" value="gigidiso" name="username"/>
+            <input id="image_token" type="text" value="abcdef" name="token"/>
+            </form>
             </div>
             <div class="col-md-4 col-xs-4 col-sm-4" style="text-align: left;">
               <h3 class="profile_name" style="color: darkgreen">Nome Cognome</h3>
@@ -105,10 +112,10 @@
                   <option value="2">Bycycling</option>
                   <option value="3">Walking</option>
                   <option value="4">Bus</option>
-                  <option value="4">Subway</option>
-                  <option value="4">Train</option>
-                  <option value="4">Tram</option>
-                  <option value="4">Rail</option>
+                  <option value="5">Subway</option>
+                  <option value="6">Train</option>
+                  <option value="7">Tram</option>
+                  <option value="8">Rail</option>
                 </select>
             </div>
             <div class="col-lg-3 col-xs-2 col-sm-2" style="text-align: center;">
@@ -118,6 +125,24 @@
                <button id="remove_meanspref" class="w3-button w3-red" style="width: 100%; text-align: center; display: inline-block">Remove transport</button>
             </div>    
           </div>
+          <div class="row" style="padding-top: 20px">
+              <div class="col-lg-2 col-xs-2 col-sm-2" style="text-align: center;"></div>
+              <div class="col-lg-4 col-xs-10 col-sm-10" style="text-align: left;">
+                <select id="means_pref" style="width: 100%; margin-bottom: 10px">
+                  <option value="1">Credit Card</option>
+                  <option value="2">Driving License</option>
+                  <option value="3">Phone Number</option>
+                  <option value="4">Email</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-xs-2 col-sm-2" style="text-align: center;">
+              <input id="update_userinfos_value" style="width: 100%; text-align: center; display: inline-block">
+            </div>  
+            <div class="col-lg-3 col-xs-2 col-sm-2" style="text-align: center;">
+              <button id="update_userinfos" class="w3-button w3-green" style="width: 100%; text-align: center; display: inline-block">Update</button>
+            </div>   
+          </div>
+
         </div>
       </section>
       <!-- #about -->
@@ -160,7 +185,7 @@
         location.assign("index.html");
         return false;
     });
-    var isPhoneGap = true;
+    var isPhoneGap = false;
     var herokuURL = "";
     if (isPhoneGap) {
         herokuURL = "http://travlendarmom.herokuapp.com";
@@ -168,7 +193,11 @@
     //$("#submit_signin").click(function(){
     /* codice di test */
     //location.assign("main.html");
-    /* Codice funzionante */
+
+    $("#image_username").val(localStorage.getItem("my_username"));
+    $("#image_token").val(localStorage.getItem("my_travlendar"));
+
+    // Funzione per prendere i dati di base del profilo utente 
     var coseDaMandare = {
         "username": localStorage.getItem("my_username"),
         "token": localStorage.getItem("my_travlendar")
@@ -180,7 +209,7 @@
         url: herokuURL + "/UserInformation",
         data: JSON.stringify(coseDaMandare),
         success: function(response) {
-          //alert(response);
+          alert(response);
             if ((JSON.parse(response))["status"] == "OK") {
                 response = JSON.parse(response);
                 $("#profile_email").html(response["user"]["mail"]);
@@ -197,6 +226,9 @@
             }
         }
     });
+
+
+    // Funzione per aggioranre la preferenza per quanto riguarda il break time
     $("#update_breakpref").on("click", function() {
         var timeStart = $("#breakpreftime_start").val();
         var timeEnd = $("#breakpreftime_end").val();
@@ -249,6 +281,32 @@
 
 
 
+    // Funzione per aggiornare i dati dell'utente quando richiesto
+    $("#update_userinfos").on("click", function() {
+        var newValue = $("#update_userinfos_value").val();
+        alert(newValue);
+        var coseDaMandare = {
+            "username": localStorage.getItem("my_username"),
+            "token": localStorage.getItem("my_travlendar"),
+            "field": "drivingLicense",
+            "newValue" : newValue
+        };
+        $.ajax({
+            dataType: "text",
+            contentType: "text/plain; charset=utf-8",
+            type: "POST",
+            url: herokuURL + "/SetUserField",
+            data: JSON.stringify(coseDaMandare),
+            success: function(response) {
+              alert(response);
+                location.assign("profile.html");
+            }
+        });
+    });
+
+
+
+    // Funzione per aggiornare le preferenze dell'utente per i mezzi
 
     $("#add_meanspref").on("click", function() {
         var selezionato = $("#means_pref option:selected").text();
@@ -270,6 +328,7 @@
         });
     });
 
+    // Funzione per rimuovere un mezzo di trasporto tra quelli preferiti dall'utente
     $("#remove_meanspref").on("click", function() {
         
         var selezionato = $("#means_pref option:selected").text();

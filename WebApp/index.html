@@ -6,6 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
+  <meta http-equiv="Content-Security-Policy" content="connect-src http://travlendarmom.herokuapp.com">
 
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
@@ -84,7 +85,7 @@
 
           <div class="col-lg-6 content order-lg-1 order-2">
             <h2 class="title">Few Words About Us</h2>
-            <p>
+            <p id="just_for_debug">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
@@ -190,7 +191,7 @@
   <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="lib/easing/easing.min.js"></script>
   <script src="lib/wow/wow.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8HeI8o-c1NppZA-92oYlXakhDPYR7XMY"></script>
+  <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8HeI8o-c1NppZA-92oYlXakhDPYR7XMY"></script>-->
 
   <script src="lib/waypoints/waypoints.min.js"></script>
   <script src="lib/counterup/counterup.min.js"></script>
@@ -258,7 +259,7 @@
         $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
     });
 
-  var isPhoneGap = true;
+  var isPhoneGap = false;
   var herokuURL = "";
   if (isPhoneGap) {
     herokuURL = "http://travlendarmom.herokuapp.com";
@@ -267,20 +268,21 @@
     $("#submit_signin").click(function(){
       /* codice di test */
       //location.assign("main.html");
-      
+      $("#just_for_debug").append("Tasto cliccato");
       /* Codice funzionante */
       var coseDaMandare  = { 
         "username" : $("#login_email").val(),
         "password" : $("#login_password").val()
       };
+      $("#just_for_debug").append(JSON.stringify(coseDaMandare));
       $.ajax( {
         dataType : "text",
         contentType: "text/plain; charset=utf-8",
         type: "POST",
-        url: herokuURL + "/Login",
+        url: herokuURL + "/Login", 
         data: JSON.stringify(coseDaMandare),
         success: function( response ) {
-          //alert(response);
+          $("#just_for_debug").append(response);
           if((JSON.parse(response))["status"]=="OK"){
             localStorage.setItem("my_travlendar", (JSON.parse(response))["token"]);
             localStorage.setItem("my_name", (JSON.parse(response))["name"]);
@@ -290,6 +292,9 @@
           }else{
             alert("Login errato");  
           } 
+         },
+         error: function(jqXHR, textStatus, errorThrown){
+          $("#just_for_debug").append("ERRORE : " + JSON.stringify(jqXHR) + "ALTRO" + JSON.stringify(textStatus) + errorThrown);
          }
       });
 
