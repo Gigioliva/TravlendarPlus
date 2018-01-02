@@ -2,7 +2,7 @@ jQuery(document).ready(function($) {
 
     // Header fixed and Back to top button
     $(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
+        if ($(this).scrollTop() > 0) {
             $('.back-to-top').fadeIn('slow');
             $('#header').addClass('header-fixed');
         } else {
@@ -27,6 +27,8 @@ jQuery(document).ready(function($) {
         },
         speed: 400
     });
+
+    
 
     // Mobile Navigation
     if ($('#nav-menu-container').length) {
@@ -139,9 +141,10 @@ jQuery(document).ready(function($) {
     **/
     function daPiccolo() {
         $(".dunno").show();
-        $(".mini_button").show();
+        $(".meh_dunno").hide();
+        //$(".mini_button").show();
         $("#profile_picture").css("width", "60%");
-;
+        $(".profile_name").html(localStorage.getItem("my_name") +  " " + localStorage.getItem("my_surname"));
         //$(".fc-left").appendTo("#quella_centrata");
         //$(".fc-right").appendTo("#quella_centrata");
         $("body").fadeIn(800);
@@ -149,8 +152,10 @@ jQuery(document).ready(function($) {
 
     function daGrande() {
         $(".dunno").hide();
-        $(".mini_button").hide();
+        $(".meh_dunno").show();
+        //$(".mini_button").hide();
         $("#profile_picture").css("width", "100%");
+        $(".profile_name").html(localStorage.getItem("my_name") +  " " + localStorage.getItem("my_surname"));
         $("body").fadeIn(800);
     };
 

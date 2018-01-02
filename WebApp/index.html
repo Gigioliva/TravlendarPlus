@@ -280,9 +280,12 @@
         url: herokuURL + "/Login",
         data: JSON.stringify(coseDaMandare),
         success: function( response ) {
-          alert(response);
+          //alert(response);
           if((JSON.parse(response))["status"]=="OK"){
-            window.localStorage.setItem("my_travlendar", (JSON.parse(response))["token"]);
+            localStorage.setItem("my_travlendar", (JSON.parse(response))["token"]);
+            localStorage.setItem("my_name", (JSON.parse(response))["name"]);
+            localStorage.setItem("my_surname", (JSON.parse(response))["surname"]);
+            localStorage.setItem("my_username", $("#login_email").val());
             location.assign("main.html");
           }else{
             alert("Login errato");  

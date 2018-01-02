@@ -57,6 +57,7 @@
                     <li><a href="profile.html">Profile</a></li>
                     <li><a href="ticket.html">Tickets</a></li>
                     <li><a href="weather.html">Weather</a></li>
+                    <li><a id="logout_button" href="">Logout</a></li>
                 </ul>
             </nav>
             <!-- #nav-menu-container -->
@@ -78,10 +79,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-2 col-xs-2 col-sm-2" style="text-align: center;">
-                        <img id="profile_picture" src="./img/weather.gif" style="width: 100%; margin-bottom: 20px;">
+                        <img id="_weather_icon" src="./img/weather.gif" style="width: 100%; margin-bottom: 20px;">
                     </div>
                     <div class="col-md-10 col-xs-10 col-sm-10" style="text-align: left;">
-                        <h3 style="color: white">Check the weather forecast</h3>
+                        <h3 id="_weather_description" style="color: white">Check the weather forecast</h3>
                         <hr style="border: 1px solid white">
                       <h5 style="color: white;">Select a city and a date:</h5>
                       <input id="weather_city" type="text">
@@ -159,16 +160,23 @@
                 url: herokuURL + "/GetWeather",
                 data: JSON.stringify(coseDaMandare),
                 success: function(response) {
-                    //alert(response);
+                    alert(response);
                     response = JSON.parse(response);
                     var _weather_icon = response["current"]["condition"]["icon"];
-                    var _weahter_description = response["current"]["condition"]["text"];
-                    alert(_weather_icon);
+                    var _weather_description = response["current"]["condition"]["text"];
+                    $("#_weather_description").html( _weather_description);
+                    $("#_weather_icon").attr("src", _weather_icon);
                 }
             });
 
 
         });
+
+        $("#logout_button").on("click", function(){
+                 window.localStorage.removeItem("my_travlendar");
+                 location.assign("index.html");
+                 return false;
+            });
 
     });
 </script>
