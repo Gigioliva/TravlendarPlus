@@ -88,12 +88,15 @@
                         <h5><span style="font-weight: bold">Driving License: </span><span id="profile_license"> 2324782748</span></h5>
                         <h5><span style="font-weight: bold">Credit Card: </span><span id="profile_credit"> 2324782748</span></h5>
                         <h5 style="text-decoration: underline;">Break preference time</h5>
+                        <div id="lista_di_preferenze_break"></div>
                         <label>
-                        <label class="text-center">Break start:<br><input id="breakpreftime_start" type="time" name=""></label>
-                        <label class="text-center">Break end:<br><input id="breakpreftime_end" type="time" name=""></label>
+                        <label class="text-center">Break range start:<br><input id="breakpreftime_start" type="time" name=""></label>
+                        <label class="text-center">Break range end:<br><input id="breakpreftime_end" type="time" name=""></label>
+                        <label class="text-center">Break duration:<br><input id="breakpreftime_duration" type="time" name=""></label>
+                        <label class="text-center">Break name:<br><input id="breakprefname" type="text" name=""></label>
                         </label>
                         <label>
-                            <button id="update_breakpref" class="w3-button w3-indigo">Update Break</button>
+                            <button id="update_breakpref" class="w3-button w3-indigo">Update break</button>
                         </label>
                     </div>
                     <div class="row" style="margin-top: 10px ">
@@ -129,10 +132,10 @@
                     <div class="row" style="padding-top: 20px">
                         <div class="col-lg-2 col-xs-2 col-sm-2" style="text-align: center;"></div>
                         <div class="col-lg-4 col-xs-10 col-sm-10" style="text-align: left;">
-                            <select id="means_pref" style="width: 100%; margin-bottom: 10px">
+                            <select id="means_pref_update" style="width: 100%; margin-bottom: 10px">
                   <option value="1">Credit Card</option>
                   <option value="2">Driving License</option>
-                  <option value="3">Phone Number</option>
+                  <option value="3">Phone</option>
                   <option value="4">Email</option>
                 </select>
                         </div>
@@ -195,7 +198,7 @@
 
         setImage();
 
-        var isPhoneGap = false;
+        var isPhoneGap = true;
         var herokuURL = "";
         if (isPhoneGap) {
             herokuURL = "http://travlendarmom.herokuapp.com";
@@ -219,13 +222,37 @@
             url: herokuURL + "/UserInformation",
             data: JSON.stringify(coseDaMandare),
             success: function(response) {
-                alert(response);
+                //alert(response);
                 if ((JSON.parse(response))["status"] == "OK") {
                     response = JSON.parse(response);
                     $("#profile_email").html(response["user"]["mail"]);
                     $("#profile_phone").html(response["user"]["phone"]);
                     $("#profile_license").html(response["user"]["drivingLicense"]);
                     $("#profile_credit").html(response["user"]["creditCard"]);
+                    for(var i = 0; i < response["user"]["breakPref"].length; i++){
+                        $("#lista_di_preferenze_break").append("<div>Name :" + response["user"]["breakPref"][i]["name"] + "|Start time:" + response["user"]["breakPref"][i]["start"].slice(0, -3) + " | End Time: " + response["user"]["breakPref"][i]["end"].slice(0, -3) + "</div><div id='breakpref_name_" + response["user"]["breakPref"][i]["name"] + "' class='remove_breakpref' style='color:red;'>Delete</div>");
+
+
+                        $(".remove_breakpref").on("click", function(e) {
+                                var real_id = e.target.id.slice(15);
+                                var coseDaCancellare = {
+                                    "username": localStorage.getItem("my_username"),
+                                    "token": localStorage.getItem("my_travlendar"),
+                                    "flag": false,
+                                    "name": real_id
+                                };
+                                $.ajax({
+                                    dataType: "text",
+                                    contentType: "text/plain; charset=utf-8",
+                                    type: "POST",
+                                    url: herokuURL + "/SetBreakPref",
+                                    data: JSON.stringify(coseDaCancellare),
+                                    success: function(response) {
+                                        window.location.assign("profile.html");
+                                    }
+                                });
+                            });
+                    }
                     $("#breakpreftime_start").val(response["user"]["breakPref"][0]["start"].slice(0, -3));
                     $("#breakpreftime_end").val(response["user"]["breakPref"][0]["end"].slice(0, -3));
                     for (var i = 0; i < response["user"]["meansPref"].length; i++) {
@@ -242,27 +269,30 @@
         $("#update_breakpref").on("click", function() {
             var timeStart = $("#breakpreftime_start").val();
             var timeEnd = $("#breakpreftime_end").val();
+            var timeDuration = $("#breakpreftime_duration").val();
             var timeStartParts = timeStart.split(":");
             var timeEndParts = timeEnd.split(":");
+            var timeDurationParts = timeDuration.split(":");
             var finalStart = (+timeStartParts[0] * (60000 * 60)) + (+timeStartParts[1] * 60000);
             var finalEnd = (+timeEndParts[0] * (60000 * 60)) + (+timeEndParts[1] * 60000);
+            var finalDuration = (+timeDurationParts[0] * (60000 * 60)) + (+timeDurationParts[1] * 60000);
             var coseDaCancellare = {
                 "username": localStorage.getItem("my_username"),
                 "token": localStorage.getItem("my_travlendar"),
                 "flag": false,
-                "name": "Break",
+                "name": $("#breakprefname").val(),
                 "start": finalStart,
                 "end": finalEnd,
-                "duration": finalEnd - finalStart
+                "duration": finalDuration
             };
             var coseDaMandare = {
                 "username": localStorage.getItem("my_username"),
                 "token": localStorage.getItem("my_travlendar"),
                 "flag": true,
-                "name": "Break",
+                "name": $("#breakprefname").val(),
                 "start": finalStart,
                 "end": finalEnd,
-                "duration": finalEnd - finalStart
+                "duration": finalDuration
             };
             $.ajax({
                 dataType: "text",
@@ -281,7 +311,7 @@
                             if ((JSON.parse(response))["status"] == "OK") {
                                 window.location.assign("profile.html");
                             } else {
-                                alert("Error");
+                               // alert("Error");
                             }
                         }
                     });
@@ -293,12 +323,16 @@
 
         // Funzione per aggiornare i dati dell'utente quando richiesto
         $("#update_userinfos").on("click", function() {
+            var selezionato = $("#means_pref_update option:selected").text();
+            selezionato = selezionato.replace(/\s/g, '');
+            selezionato = selezionato.charAt(0).toLowerCase() + selezionato.slice(1);
             var newValue = $("#update_userinfos_value").val();
-            alert(newValue);
+            //alert(selezionato);
+
             var coseDaMandare = {
                 "username": localStorage.getItem("my_username"),
                 "token": localStorage.getItem("my_travlendar"),
-                "field": "drivingLicense",
+                "field": selezionato,
                 "newValue": newValue
             };
             $.ajax({
@@ -308,7 +342,7 @@
                 url: herokuURL + "/SetUserField",
                 data: JSON.stringify(coseDaMandare),
                 success: function(response) {
-                    alert(response);
+                    //alert(response);
                     location.assign("profile.html");
                 }
             });
@@ -364,7 +398,7 @@
         //});
 
         function setImage() {
-            var isPhoneGap = false;
+            var isPhoneGap = true;
             var herokuURL = "";
             if (isPhoneGap) {
                 herokuURL = "http://travlendarmom.herokuapp.com";

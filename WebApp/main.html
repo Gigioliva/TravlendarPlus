@@ -140,7 +140,7 @@ Hero Section
                             Origin position
                         </div>
                         <div class="col-md-9 col-xs-9 col-sm-9">
-                            <input id="searchTextField1" type="text" style="width: 100%">
+                            <input id="searchTextField1" type="text" style="width: 100%" placeholder="Ex. Milano via Golgi 20">
                         </div>
                     </div>
                     <div class="row">
@@ -148,7 +148,7 @@ Hero Section
                             Event position
                         </div>
                         <div class="col-md-9 col-xs-9 col-sm-9">
-                            <input id="searchTextField2" type="text" style="width: 100%">
+                            <input id="searchTextField2" type="text" style="width: 100%" placeholder="Ex. Milano via Golgi 20">
                         </div>
                     </div>
                     <div class="row">
@@ -268,7 +268,7 @@ Footer
     <script>
         /*right: 'listDay,listWeek,month' Da inserire da qualche parte*/
         $(window).ready(function() {
-            var isPhoneGap = true;
+            var isPhoneGap = false;
             var herokuURL = "";
             if (isPhoneGap) {
                 herokuURL = "http://travlendarmom.herokuapp.com";
@@ -517,7 +517,7 @@ Footer
             
             setImage();
             
-            var isPhoneGap = true;
+            var isPhoneGap = false;
             var herokuURL = "";
             if (isPhoneGap) {
                 herokuURL = "http://travlendarmom.herokuapp.com";

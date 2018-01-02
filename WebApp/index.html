@@ -116,7 +116,7 @@
                 <div id="signin" class="w3-container little_tab row" style="background-color: white; display:none; padding-bottom: 20px; margin-top: 20px; height: 50vh; vertical-align: middle;">
                   <div class="row" style=" padding-top: 2vh;">
                     <div class="col-md-3 col-xs-3 col-sm-3">Username</div>
-                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="login_email" type="text" name="" placeholder="Insert your email" style="width: 100%"></div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="login_email" type="text" name="" placeholder="Insert your username" style="width: 100%"></div>
                   </div> 
                   <div class="row" style="">
                     <div class="col-md-3 col-xs-3 col-sm-3">Password</div>
@@ -259,7 +259,7 @@
         $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
     });
 
-  var isPhoneGap = false;
+  var isPhoneGap = true;
   var herokuURL = "";
   if (isPhoneGap) {
     herokuURL = "http://travlendarmom.herokuapp.com";
