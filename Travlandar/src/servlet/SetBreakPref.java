@@ -25,6 +25,7 @@ import userManager.UserManager;
 public class SetBreakPref extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final int FUSO = 3600000;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -57,8 +58,8 @@ public class SetBreakPref extends HttpServlet {
 				requestJSON = new JSONObject(data);
 				String username = SecurityAuthenticator.getUsername(requestJSON.getString("token"));
 				boolean flagBreak = requestJSON.getBoolean("flag");
-				Break breakPref = new Break(requestJSON.getString("name"), new Time(requestJSON.getInt("start")),
-						new Time(requestJSON.getInt("end")), new Time(requestJSON.getInt("duration")));
+				Break breakPref = new Break(requestJSON.getString("name"), new Time(requestJSON.getInt("start") - FUSO),
+						new Time(requestJSON.getInt("end") - FUSO), new Time(requestJSON.getInt("duration") - FUSO));
 				String resp;
 				if(username != null && username.equals(requestJSON.getString("username"))) {
 					boolean ris = UserManager.setBreakPref(username, flagBreak, breakPref);

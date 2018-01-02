@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Time;
 
 import javax.servlet.ServletException;
@@ -40,7 +41,7 @@ public class TestLogin {
 		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
 		HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 		Mockito.when(request.getMethod()).thenReturn("POST");
-		String str = "{\"username\": \"testUsername\",\n" + 
+		String str = "{\"username\": \"testUsername\"," + 
 				"\"password\": \"pass\"}";
 		InputStream is = new ByteArrayInputStream(str.getBytes());
 		BufferedReader buff = new BufferedReader(new InputStreamReader(is));
@@ -49,11 +50,16 @@ public class TestLogin {
 		PowerMockito.when(UserManager.login(Matchers.anyString(),Matchers.anyString())).thenReturn("tok");
 		PowerMockito.when(UserManager.getUserInformation(Matchers.anyString())).thenReturn(new User("testUsername",
 				"name", "surname", "mail", "phone", "drivinglicence", "creditcard", 1, new Time(3600000)));
-		PrintWriter pr = new PrintWriter(System.out, false);
+
+		StringWriter sw = new StringWriter();
+		PrintWriter pr = new PrintWriter(sw, false);
+		//PrintWriter pr = new PrintWriter(System.out, false);
 		Mockito.when(response.getWriter()).thenReturn(pr);
 		new Login().doPost(request, response);
 		Mockito.verify(request, Mockito.times(1)).getReader();
 		Mockito.verify(response, Mockito.times(1)).getWriter();
+		assert(sw.toString().equals("{\"status\":\"OK\",\"token\":\"tok\",\"name\":\"name\",\"surname\":\"surname\"}\n"));
+	
 	}
 
 }

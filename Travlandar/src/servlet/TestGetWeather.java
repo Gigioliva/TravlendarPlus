@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -46,11 +47,14 @@ import schedule.ExternalRequestManager;
 			Mockito.when(request.getReader()).thenReturn(buff);
 			PowerMockito.mockStatic(ExternalRequestManager.class);
 			PowerMockito.when(ExternalRequestManager.getWeatherTot(Matchers.anyString(),Matchers.anyString())).thenReturn("WheatherInformationJson");
-			PrintWriter pr = new PrintWriter(System.out, false);
+			StringWriter sw = new StringWriter();
+			PrintWriter pr = new PrintWriter(sw, false);
+			//PrintWriter pr = new PrintWriter(System.out, false);
 			Mockito.when(response.getWriter()).thenReturn(pr);
 			new GetWeather().doPost(request, response);
 			Mockito.verify(request, Mockito.times(1)).getReader();
 			Mockito.verify(response, Mockito.times(1)).getWriter();
+			assert(sw.toString().equals("WheatherInformationJson\n"));
 			
 		}
 

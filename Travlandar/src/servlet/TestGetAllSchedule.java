@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -54,12 +55,15 @@ public class TestGetAllSchedule {
 		ArrayList<Schedule> schedules = new ArrayList<Schedule>();
 		schedules.add(new Schedule("testUsername", "01-01-2000"));
 		PowerMockito.when(ScheduleManager.getSchedules(Matchers.anyString())).thenReturn(schedules);
-		PrintWriter pr = new PrintWriter(System.out, false);
+		StringWriter sw = new StringWriter();
+		PrintWriter pr = new PrintWriter(sw, false);
+		//PrintWriter pr = new PrintWriter(System.out, false);
 		Mockito.when(response.getWriter()).thenReturn(pr);
 		new GetAllSchedule().doPost(request, response);
 		Mockito.verify(request, Mockito.times(1)).getReader();
 		Mockito.verify(response, Mockito.times(1)).getWriter();
-		
+		assert(sw.toString().equals("{\"status\":\"OK\",\"schedule\":[{\"day\":\"01-01-2000\",\"events\":[]}]}\n"));
+	
 	}
 
 }

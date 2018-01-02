@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,20 +38,23 @@ import schedule.ExternalRequestManager;
 			HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
 			HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 			Mockito.when(request.getMethod()).thenReturn("POST");
-			String str = "{\"origin\":\"testOrigin\",\n" + 
-					"\"destination\":\"testDest\",\n" + 
+			String str = "{\"origin\":\"testOrigin\"," + 
+					"\"destination\":\"testDest\"," + 
 					"\"mode\":\"driving\"}";
 			InputStream is = new ByteArrayInputStream(str.getBytes());
 			BufferedReader buff = new BufferedReader(new InputStreamReader(is));
 			Mockito.when(request.getReader()).thenReturn(buff);
 			PowerMockito.mockStatic(ExternalRequestManager.class);
 			PowerMockito.when(ExternalRequestManager.getPath(Matchers.anyString(),Matchers.anyString(),Matchers.anyString())).thenReturn("PathFromGoogle");
-			PrintWriter pr = new PrintWriter(System.out, false);
+			StringWriter sw = new StringWriter();
+			PrintWriter pr = new PrintWriter(sw, false);
+			//PrintWriter pr = new PrintWriter(System.out, false);
 			Mockito.when(response.getWriter()).thenReturn(pr);
 			new GetPath().doPost(request, response);
 			Mockito.verify(request, Mockito.times(1)).getReader();
 			Mockito.verify(response, Mockito.times(1)).getWriter();
-			
+			assert(sw.toString().equals("PathFromGoogle\n"));
+		
 		}
 
 }

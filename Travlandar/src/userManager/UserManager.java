@@ -2,6 +2,7 @@ package userManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.HashMap;
 import database.DataHandlerDBMS;
 import dati.Break;
@@ -22,17 +23,29 @@ public class UserManager {
 		return null;
 	}
 
+	public static String getImage(String username) {
+		try {
+			ResultSet rs = DataHandlerDBMS.sendQuery("select img from user where username='" + username + "'");
+			if (rs.next() && !rs.getString("img").equals("noSet")) {
+				return rs.getString("img");
+			}
+		} catch (SQLException e) {
+			System.out.println("Error in getImage");
+		}
+		return "";
+	}
+
 	public static boolean signUp(HashMap<String, String> param) {
 		try {
 			ResultSet rs = DataHandlerDBMS
 					.sendQuery("select count(*) as Num from user where username='" + param.get("username") + "'");
 			if (rs.next() && Integer.parseInt(rs.getString("Num")) == 0) {
 
-				String insert = "insert into user (username, password, name, surname, email, phone, drivingLicense, creditCard, maxWalk, maxHourMeans) values "
-						+ "('" + param.get("username") + "','" + param.get("password") + "','" + param.get("name") + "','"
-						+ param.get("surname") + "','" + param.get("email") + "','" + param.get("phone") + "','"
-						+ param.get("drivingLicense") + "','" + param.get("creditCard") + "','" + param.get("maxWalk") + "','"
-						+ param.get("maxHourMeans") + "')";
+				String insert = "insert into user (username, password, name, surname, email, phone, drivingLicense, creditCard, maxWalk, maxHourMeans, img) values "
+						+ "('" + param.get("username") + "','" + param.get("password") + "','" + param.get("name")
+						+ "','" + param.get("surname") + "','" + param.get("email") + "','" + param.get("phone") + "','"
+						+ param.get("drivingLicense") + "','" + param.get("creditCard") + "','" + param.get("maxWalk")
+						+ "','" + param.get("maxHourMeans") + "','" + param.get("img") + "')";
 				if (DataHandlerDBMS.executeDML(insert)) {
 					return true;
 				}
@@ -75,8 +88,7 @@ public class UserManager {
 	}
 
 	public static void getUserBreakPref(User user) {
-		ResultSet rs = DataHandlerDBMS
-				.sendQuery("select * from breakPref where username='" + user.getUsername() + "'");
+		ResultSet rs = DataHandlerDBMS.sendQuery("select * from breakPref where username='" + user.getUsername() + "'");
 		try {
 			while (rs.next()) {
 				user.addBreakPref(new Break(rs.getString("name"), rs.getTime("start"), rs.getTime("end"),
@@ -104,12 +116,29 @@ public class UserManager {
 
 	public static boolean setBreakPref(String username, boolean flag, Break breakPref) {
 		if (flag) {
-			return DataHandlerDBMS.executeDML("insert into breakPref (username, name, start, end, duration) values ('"
-					+ username + "','" + breakPref.getName() + "','" + breakPref.getStart() + "','" + breakPref.getEnd()
-					+ "','" + breakPref.getDuration() + "')");
+			User user = getUserInformation(username);
+			Time startBreak = breakPref.getStart();
+			Time endBreak = breakPref.getEnd();
+			boolean overlaps = false;
+			for (Break el : user.getBreakPref()) {
+				Time start = el.getStart();
+				Time end = el.getEnd();
+				if ((startBreak.compareTo(end) < 0 && startBreak.compareTo(start) >= 0)
+						|| (start.compareTo(endBreak) < 0 && start.compareTo(startBreak) >= 0)) {
+					overlaps = true;
+				}
+			}
+			if (!overlaps) {
+				return DataHandlerDBMS
+						.executeDML("insert into breakPref (username, name, start, end, duration) values ('" + username
+								+ "','" + breakPref.getName() + "','" + breakPref.getStart() + "','"
+								+ breakPref.getEnd() + "','" + breakPref.getDuration() + "')");
+			} else {
+				return false;
+			}
 		} else {
-			return DataHandlerDBMS.executeDML("delete from breakPref where username='" + username + "' AND name='"
-					+ breakPref.getName() + "'");
+			return DataHandlerDBMS.executeDML(
+					"delete from breakPref where username='" + username + "' AND name='" + breakPref.getName() + "'");
 		}
 	}
 }

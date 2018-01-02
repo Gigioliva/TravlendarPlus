@@ -25,6 +25,7 @@ import userManager.UserManager;
 public class AddEvent extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final int FUSO = 3600000;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -62,7 +63,7 @@ public class AddEvent extends HttpServlet {
 					String day = requestJSON.getString("day");
 					String origin = requestJSON.getString("origin");
 					Event event = new Event(ScheduleManager.getIntMax(), requestJSON.getString("eventName"),
-							new Time(requestJSON.getInt("eventStart")), new Time(requestJSON.getInt("eventDuration")),
+							new Time(requestJSON.getInt("eventStart") - FUSO), new Time(requestJSON.getInt("eventDuration") - FUSO),
 							Enum.valueOf(EventType.class, requestJSON.getString("eventType").toUpperCase()),
 							requestJSON.getString("eventPosition"));
 					boolean flag = ScheduleManager.addEvent(user, day, event, origin);

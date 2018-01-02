@@ -10,6 +10,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import database.DataHandlerDBMS;
 import dati.Break;
 import dati.TypeMeans;
+import dati.User;
 import userManager.SecurityAuthenticator;
 import userManager.UserManager;
 
@@ -17,6 +18,7 @@ import static org.junit.Assert.assertEquals;
 import org.mockito.Matchers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.HashMap;
 
 @RunWith(PowerMockRunner.class)
@@ -27,16 +29,7 @@ public class TestUserManager {
 	@Mock
 	private ResultSet resultSet;
 		// strutture ausiliarie
-	/*
-	private UserManager myClass;
 
-	@Before
-    public void setup() throws Exception {
-        myClass = PowerMockito.spy(new UserManager());
-        PowerMockito.doNothing().when(myClass, "getUserMeansPref");
-        PowerMockito.doNothing().when(myClass, "getUserBreakPref");
-    }
-	*/
 	@Test
 	public void testLogin() throws SQLException {
 		Mockito.when(resultSet.getString("password")).thenReturn("password");
@@ -61,10 +54,17 @@ public class TestUserManager {
 	}
 	
 	@Test
-	public void testSetBreakPref() throws SQLException {
+	public void testSetBreakPref() throws Exception {
 		PowerMockito.mockStatic(DataHandlerDBMS.class);
 		PowerMockito.when(DataHandlerDBMS.executeDML(Matchers.anyString())).thenReturn(true);
-		assertEquals(true, UserManager.setBreakPref("name", true, new Break(null, null, null, null)));
+		PowerMockito.mockStatic(UserManager.class);
+		User user = new User("testUsername","name","surname","mail","phone",
+				"drivinglicence","0000111122223333",100, new Time(36000000));
+		user.addBreakPref(new Break("Lunch", new Time(36000000),new Time(39600000),new Time(3600000)));
+		PowerMockito.spy(UserManager.class);
+		PowerMockito.doReturn(user).when(UserManager.class,"getUserInformation",Matchers.anyString());
+		assertEquals(true, UserManager.setBreakPref("testUsername", true, 
+				new Break("breakName", new Time(72000000),new Time(75600000),new Time(3600000))));
 	}
 	
 	@Test
