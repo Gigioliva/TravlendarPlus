@@ -185,10 +185,10 @@
         location.assign("index.html");
         return false;
     });
-    var isPhoneGap = false;
+    var isPhoneGap = true;
     var herokuURL = "";
     if (isPhoneGap) {
-        herokuURL = "http://travlendarmom.herokuapp.com";
+        herokuURL = "http://" + window.location.host + "/Travlandar";;
     }
     //$("#submit_signin").click(function(){
     /* codice di test */

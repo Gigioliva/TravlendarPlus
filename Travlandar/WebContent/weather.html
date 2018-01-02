@@ -137,10 +137,10 @@
 </body>
 <script type="text/javascript">
     $(document).ready(function() {
-        var isPhoneGap = false;
+        var isPhoneGap = true;
         var herokuURL = "";
         if (isPhoneGap) {
-            herokuURL = "http://travlendarmom.herokuapp.com";
+            herokuURL = "http://" + window.location.host + "/Travlandar";;
         }
 
         $("#submit_weather").click(function() {

@@ -259,10 +259,10 @@ Footer
     <script>
         /*right: 'listDay,listWeek,month' Da inserire da qualche parte*/
         $(window).ready(function() {
-            var isPhoneGap = false;
+            var isPhoneGap = true;
             var herokuURL = "";
             if (isPhoneGap) {
-                herokuURL = "http://travlendarmom.herokuapp.com";
+                herokuURL = "http://" + window.location.host + "/Travlandar";
             }
 
 
@@ -473,10 +473,10 @@ Footer
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var isPhoneGap = false;
+            var isPhoneGap = true;
             var herokuURL = "";
             if (isPhoneGap) {
-                herokuURL = "http://travlendarmom.herokuapp.com";
+                herokuURL = "http://" + window.location.host + "/Travlandar";;
             }
             $(".fc-left>h2").attr("style", "color:darkgreen; text-align:center; font-size: 24px");
             $(".fc-right").attr("style", "text-align:center;");
