@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>File Upload</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+    <form class="custom-file-upload" method="POST" action="http://travlendarmom.herokuapp.com/upload" enctype="multipart/form-data">
+        <div>
+            <input type="file" name="file" id="file" />
+            <button id="file_buttom">Select File</button>
+        </div>
+        <br>
+        <input type="submit" value="Upload" name="upload" id="upload" />
+        <input id="image_username" type="text" value="gigidiso" name="username" style="display: none" />
+        <input id="image_token" type="text" value="abcdef" name="token" style="display: none" />
+    </form>
+</body>
+
+<script src="lib/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#file_buttom").on("click", function(e) {
+            e.preventDefault();
+            $("#file").trigger('click');
+        });
+    });
+</script>
+
+</html>
