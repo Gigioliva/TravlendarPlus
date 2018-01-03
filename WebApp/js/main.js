@@ -105,6 +105,34 @@ jQuery(document).ready(function($) {
         }
     });
 
+    $("#logout_button").on("click", function() {
+
+                 var isPhoneGap = true;
+                 var herokuURL = "";
+                  if (isPhoneGap) {
+                    herokuURL = "http://travlendarmom.herokuapp.com";
+                  }
+
+                window.localStorage.removeItem("my_travlendar");
+                var coseDaMandare  = { 
+                    "username": localStorage.getItem("my_username"),
+                    "token": localStorage.getItem("my_travlendar")
+                  };
+                  $.ajax( {
+                    dataType : "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/Logout",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function( response ) {
+                        alert(response);
+                        window.localStorage.removeItem("my_travlendar");
+                        //location.assign("index.html");
+                     }
+                  });
+                  //location.assign("index.html");
+            });
+
     // Porfolio filter
     $("#portfolio-flters li").click(function() {
         $("#portfolio-flters li").removeClass('filter-active');
@@ -145,6 +173,8 @@ jQuery(document).ready(function($) {
         //$(".mini_button").show();
         $("#profile_picture").css("width", "60%");
         $(".profile_name").html(localStorage.getItem("my_name") +  " " + localStorage.getItem("my_surname"));
+        $(".mini_img_profile").html(`<img src="`+localStorage.getItem("profile_url")+`" alt="ciao" height="100px" style="padding-bottom: 10px;">`);
+        //console.log(localStorage.getItem("profile_url"));
         //$(".fc-left").appendTo("#quella_centrata");
         //$(".fc-right").appendTo("#quella_centrata");
         $("body").fadeIn(800);
@@ -159,13 +189,13 @@ jQuery(document).ready(function($) {
         $("body").fadeIn(800);
     };
 
-    if ($(window).width() <= 1000) {
+    if ($(window).width() <= 700) {
         daPiccolo();
     } else {
         daGrande();
     }
     $(window).resize(function() {
-        if ($(window).width() <= 1000) {
+        if ($(window).width() <= 700) {
             daPiccolo();
         } else {
             daGrande();

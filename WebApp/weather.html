@@ -47,7 +47,7 @@
                     <div class="container dunno">
                         <div class="row">
                             <div class="col-md-2 col-xs-2 col-sm-2">
-                                <img src="img/profile.png" width="40%" style="padding-bottom: 10px;"><br>
+                               <div class="mini_img_profile"></div><br>
                                 <span style="color: white; font-weight: bold">Nome Cognome</span>
                                 <hr style="border: 1px solid white;">
                             </div>
@@ -85,7 +85,7 @@
                         <h3 id="_weather_description" style="color: white">Check the weather forecast</h3>
                         <hr style="border: 1px solid white">
                       <h5 style="color: white;">Select a city and a date:</h5>
-                      <input id="weather_city" type="text">
+                      <input id="weather_city" type="text" placeholder="City name">
                       <input id="weather_date" type="date" name="">
                       <button id="submit_weather" class="w3-button w3-indigo">Submit</button>
                     </div>
@@ -137,7 +137,7 @@
 </body>
 <script type="text/javascript">
     $(document).ready(function() {
-        var isPhoneGap = false;
+        var isPhoneGap = true;
         var herokuURL = "";
         if (isPhoneGap) {
             herokuURL = "http://travlendarmom.herokuapp.com";
@@ -160,9 +160,10 @@
                 url: herokuURL + "/GetWeather",
                 data: JSON.stringify(coseDaMandare),
                 success: function(response) {
-                    alert(response);
                     response = JSON.parse(response);
                     var _weather_icon = response["current"]["condition"]["icon"];
+                    _weather_icon = _weather_icon.replace("//", "");
+                    _weather_icon = "http://" + _weather_icon;
                     var _weather_description = response["current"]["condition"]["text"];
                     $("#_weather_description").html( _weather_description);
                     $("#_weather_icon").attr("src", _weather_icon);

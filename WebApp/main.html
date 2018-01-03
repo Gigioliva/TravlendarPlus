@@ -55,7 +55,8 @@
                     <div class="container dunno">
                         <div class="row">
                             <div class="col-md-2 col-xs-2 col-sm-2">
-                                <img src="img/profile.png" width="40%" style="padding-bottom: 10px;">
+                                <div class="mini_img_profile"></div>
+                                    
                                 <br>
                                 <span class="profile_name" style="color: white; font-weight: bold">Nome Cognome</span>
                                 <hr style="border: 1px solid white;">
@@ -235,40 +236,12 @@ Footer
     <script src='./js/moment.min.js'></script>
     <!--<script src="lib/jquery/jquery.min.js"></script>-->
     <script src='./js/fullcalendar.js'></script>
-    <script type="text/javascript">
-        // The only purpose of this script is to redirect a non logged user to the index
-        $(document).ready(function() {
-            /*
-                        var isPhoneGap = true;
-                        var herokuURL = "";
-                        if (isPhoneGap) {
-                            herokuURL = "http://travlendarmom.herokuapp.com";
-                        }
-                        var coseDaMandare = {
-                            "username": localStorage.getItem("my_username") | "ciao",
-                            "token": localStorage.getItem("my_travlendar") | "altro"
-                        };
-                        $.ajax({
-                            dataType: "text",
-                            contentType: "text/plain; charset=utf-8",
-                            type: "POST",
-                            url: herokuURL + "/UserInformation",
-                            data: JSON.stringify(coseDaMandare),
-                            success: function(response) {
-                                //alert(response);
-                                response = JSON.parse(response);
-                                if(response["status"]=="KO"){
-                                    location.assign("index.html");
-                                }
-                            }
-                        });*/
-        });
-
-    </script>
+    <script src='./js/sloggami.js'></script>
+    
     <script>
         /*right: 'listDay,listWeek,month' Da inserire da qualche parte*/
         $(window).ready(function() {
-            var isPhoneGap = false;
+            var isPhoneGap = true;
             var herokuURL = "";
             if (isPhoneGap) {
                 herokuURL = "http://travlendarmom.herokuapp.com";
@@ -517,7 +490,7 @@ Footer
             
             setImage();
             
-            var isPhoneGap = false;
+            var isPhoneGap = true;
             var herokuURL = "";
             if (isPhoneGap) {
                 herokuURL = "http://travlendarmom.herokuapp.com";
@@ -570,11 +543,7 @@ Footer
                 var targeted_popup_class = jQuery(this).attr('data-popup-close');
                 $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
             });
-            $("#logout_button").on("click", function() {
-                window.localStorage.removeItem("my_travlendar");
-                location.assign("index.html");
-                return false;
-            });
+            
             $("#submit_new_event").on("click", function() {
 
                 var moment = $('#calendar').fullCalendar('getDate');
@@ -662,7 +631,7 @@ Footer
             $("#nome_e_cognome").html(localStorage.getItem("my_name") + " " + localStorage.getItem("my_surname"));
 
             function setImage() {
-                var isPhoneGap = false;
+                var isPhoneGap = true;
                 var herokuURL = "";
                 if (isPhoneGap) {
                     herokuURL = "http://travlendarmom.herokuapp.com";
@@ -681,6 +650,8 @@ Footer
                         response = JSON.parse(response);
                         if (response.status === "OK") {
                             $("#profile_picture").attr("src", response.url);
+                            $("#mini_img_profile").attr("src", response.url);
+                            localStorage.setItem("profile_url", response.url);
                         }
                     }
                 });
