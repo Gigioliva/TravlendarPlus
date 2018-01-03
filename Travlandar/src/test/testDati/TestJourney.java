@@ -46,7 +46,7 @@ public class TestJourney {
 		assert (journey.getDuration().equals(durationJ));
 		assert (journey.getEvent().equals(event));
 		assert (journey.getPath().equals(path));
-		assert (journey.getLatitude().equals(positionJ));
+		assert (journey.getPosition().equals(positionJ));
 	}
 
 	@Test

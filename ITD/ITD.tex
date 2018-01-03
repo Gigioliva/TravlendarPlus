@@ -557,4 +557,33 @@ System.out.println("Qui il codice dei test");
 
 \chapter{Installation instructions}
 
+Per poter utilizzare l'applicazione è possibile procedere in due modi: accedere all'apposito sito o installare tutti i componenti in locale.\\
+
+Nel primo caso è sufficiente accedere all'url \textbf{http://travlendarmom.herokuapp.com}. Una volta caricata la pagina si effettua il login cliccando su "Get Started" e successivamente procedere o effettuando il "Sign Up" o accedere direttamente con le credenziali di prova (username = "admin" e password = "pass").\\
+
+Per il secondo caso occorre innanzitutto scaricare i seguenti file:
+\begin{itemize}
+	\item File sorgenti JavaEE dalla repository https://github.com/Gigioliva/OlivaMussiMoskwa
+	\item Il file di dump del database Dump.sql presente nella stessa repository
+	\item Eclipse for JavaEE http://www.eclipse.org/downloads/eclipse-packages/
+	\item MySQL https://dev.mysql.com/downloads/mysql/
+	\item MySQL Workbench https://dev.mysql.com/downloads/workbench/
+	\item Tomcat 8.5.24 https://tomcat.apache.org/download-80.cgi
+\end{itemize}
+
+Una volta scaricati tutti file procedere con l'installazione guidata di MySQL. Quando richiesti i parametri indicare la porta 3306, user = root e password = prova.\\
+Una volta completata l'installazione di MySQL consigliamo l'installazione di MySQL Workbench per poter gestire il database mediante una GUI.\\
+A questo punto è necessario eseguire il dump della struttura dati o mediante CLI (https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html) o mediante Workbench (Server $\,\to\,$ Data Import $\,\to\,$ Import from Self-Contained File $\,\to\,$ Dump Structure Only $\,\to\,$ Start Import).\\
+
+Terminata l'inizializzazione del database si può procedere all'installazione del server.
+\begin{itemize}
+	\item Scompattare l'archivio contenente Tomcat
+	\item Aprire Eclipse e da "file" selezionare "import"
+	\item Selezionare "Existing Maven Projects" e quindi la cartella Travlandar scaricata dalla repository
+	\item Una volta importato il progetto cliccarlo con il tasto destro e premere poi "Properties"
+	\item Selezionare quindi "Targeted Runtimes" e se non presente alcun server premere su "new..." e seguire la procedura guidata per la configurazione di Tomcat.
+	\item Infine fare click sul progetto con il tasto destro $\,\to\,$  Run As $\,\to\,$ Run On Server $\,\to\,$ selezionare il server creato $\,\to\,$ Finish
+\end{itemize}
+
+
 \end{document}

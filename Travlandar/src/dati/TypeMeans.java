@@ -1,8 +1,14 @@
 package dati;
 
+/**
+ * Enum that contains all means type
+ */
 public enum TypeMeans {
 	driving, bicycling, walking, bus, subway, train, tram, rail;
 
+	/**
+	 * @return the {@link String} for the requests to the Google's API
+	 */
 	public String getTypeAPI() {
 		switch (this) {
 		case driving:

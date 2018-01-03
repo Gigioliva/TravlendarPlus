@@ -3,6 +3,9 @@ package userManager;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * Class that contains the logic of security authenticator of the user
+ */
 public class SecurityAuthenticator {
 
 	private static HashMap<String, String> token = new HashMap<String, String>();
@@ -12,6 +15,13 @@ public class SecurityAuthenticator {
 	public static final String digits = "0123456789";
 	public static final String alphanum = upper + lower + digits + special;
 
+	/**
+	 * 
+	 * @param username
+	 *            the username of the user who wants to login
+	 * @return the {@link String} that represents a unique token associated with the
+	 *         user
+	 */
 	public static String addLogin(String username) {
 		if (token.containsValue(username)) {
 			for (String el : token.keySet()) {
@@ -37,19 +47,31 @@ public class SecurityAuthenticator {
 		return str.toString();
 	}
 
+	/**
+	 * 
+	 * @param tok
+	 *            the tok associated with the user
+	 * @return the {@link String} that contains the user's username
+	 */
 	public static String getUsername(String tok) {
-		if(token.containsKey(tok)) {
+		if (token.containsKey(tok)) {
 			return token.get(tok);
-		}else {
+		} else {
 			return null;
 		}
 	}
 
+	/**
+	 * 
+	 * @param tok
+	 *            the tok associated with the user
+	 * @return the {@link Boolean} indicating the result of the action
+	 */
 	public static boolean Logout(String tok) {
-		if(token.containsKey(tok)) {
+		if (token.containsKey(tok)) {
 			token.remove(tok);
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
