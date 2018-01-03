@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \def\Plus{\texttt{+}}
 \usepackage[final]{pdfpages}
-\usepackage{listings}
+\usepackage[procnames]{listings}
 \usepackage{color}
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
@@ -61,6 +61,20 @@
 	breakatwhitespace=true,
 	tabsize=3
 }
+
+\definecolor{keywords}{RGB}{255,0,90}
+\definecolor{comments}{RGB}{0,0,113}
+\definecolor{red}{RGB}{160,0,0}
+\definecolor{green}{RGB}{0,150,0}
+
+\lstset{language=Python, 
+	basicstyle=\ttfamily\small, 
+	keywordstyle=\color{keywords},
+	commentstyle=\color{comments},
+	stringstyle=\color{red},
+	showstringspaces=false,
+	identifierstyle=\color{green},
+	procnamekeys={def,class}}
 
 
 \begin{document}
@@ -483,6 +497,58 @@ Furthermore in order to measure the performance of the whole server side will be
 The test of the Java EE server is available with the source code of the whole Web Application. \\\newline
 With the aim to provide a test also at the client side of the application was created a purpose specific Python server to test the response of the client at some predetermined situation that the server provide statically. 
 The test of the client will be provided partly with the source code and partly in the following pages. \\\newpage
+
+
+\section*{Client Testing}
+
++	Per la creazione del server in python è stata utilizzata la libreria Flask
++	Per ogni endpoint sono state definite delle route come nell'esempio che segue
+
+\lstset{language=Python}
+\begin{lstlisting}
+	# Test del metodo del login
+	@app.route('/Login', methods=['POST'])
+	def login():
+		if request.method == 'POST':
+			data_loaded = json.loads((request.data).decode("utf-8"))
+			if data_loaded['username'] == tempUsername and data_loaded['password'] == tempPassword:
+				print(Fore.WHITE + Back.YELLOW + "### REQUEST made on /Login")
+				pprint(data_loaded)
+				print(Back.YELLOW + "==========")
+				print(Fore.WHITE + Back.YELLOW + "### RESPONSE is:")
+				my_response = {
+					"status" : "OK",
+					"token" : tempToken
+				}
+				pprint(my_response)
+				print(Style.RESET_ALL)
+				return json.dumps(my_response)
+			else:
+				print(Back.RED+ Fore.WHITE + "Error!!")
+				pprint(data_loaded)
+				my_response = {
+					"status" : "KO",
+					"token" : "Qualcosa e' andato male..."
+				}
+				pprint(my_response)
+				return json.dumps(my_response)
+\end{lstlisting}
+
++ Il server testa che il client invii le cose con il formato corretto e in caso contrario mostra a schermo che c'è stato un errore
+
++ Un esempio del funzionamento del server è nel seguente screen, dove inizialmente si ha un accesso errato e in seguito uno che va a buon fine 
+(piazzi uno screen)
+
+
++ I test di Java, Jmeter e altro qui sotto invece
+
+\lstset{language=Java}
+\begin{lstlisting}
+	public void main(int prova, int altro){
+		System.out.println("Qui il codice dei test");
+	}
+\end{lstlisting}
+
 
 \chapter{Installation instructions}
 

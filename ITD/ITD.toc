@@ -3,4 +3,4 @@
 \contentsline {chapter}{\numberline {3}Frameworks}{5}
 \contentsline {chapter}{\numberline {4}Structure of the code}{8}
 \contentsline {chapter}{\numberline {5}Testing}{15}
-\contentsline {chapter}{\numberline {6}Installation instructions}{16}
+\contentsline {chapter}{\numberline {6}Installation instructions}{17}
