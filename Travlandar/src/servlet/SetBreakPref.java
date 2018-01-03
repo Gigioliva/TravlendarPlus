@@ -20,6 +20,19 @@ import dati.Break;
 import userManager.SecurityAuthenticator;
 import userManager.UserManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /SetBreakPref. Allows
+ * only POST requests with URL parameters:
+ * * { 
+ * 		"username": "",
+ * 		"token": "",
+ * 		"flag": "",
+ * 		"name" : "",
+ * 		"start" : "",
+ * 		"end" : "",
+ * 		"duration" : ""
+ * }
+ */
 @WebServlet(name = "SetBreakPref", urlPatterns = { "/SetBreakPref" })
 @MultipartConfig
 public class SetBreakPref extends HttpServlet {

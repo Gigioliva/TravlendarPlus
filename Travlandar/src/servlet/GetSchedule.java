@@ -19,6 +19,15 @@ import dati.Schedule;
 import schedule.ScheduleManager;
 import userManager.SecurityAuthenticator;
 
+/**
+ * This class represents the servlet that manages the endpoint /GetSchedule. Allows
+ * only POST requests with URL parameters:
+ * * { 
+ * 		"username": "",
+ * 		"token": "",
+ * 		"day": ""
+ * }
+ */
 @WebServlet(name = "GetSchedule", urlPatterns = { "/GetSchedule" })
 @MultipartConfig
 public class GetSchedule extends HttpServlet {

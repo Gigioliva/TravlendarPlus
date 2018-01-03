@@ -15,6 +15,16 @@ import org.json.JSONObject;
 import userManager.SecurityAuthenticator;
 import userManager.UserManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /SetUserField. Allows
+ * only POST requests with URL parameters:
+ * { 
+ * 		"username": "",
+ * 		"token": "",
+ * 		"field": "",
+ * 		"newValue" : ""
+ * }
+ */
 @WebServlet(name = "SetUserField", urlPatterns = { "/SetUserField" })
 @MultipartConfig
 public class SetUserField extends HttpServlet {

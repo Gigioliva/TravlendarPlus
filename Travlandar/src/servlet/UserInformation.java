@@ -19,6 +19,15 @@ import dati.User;
 import userManager.SecurityAuthenticator;
 import userManager.UserManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /UserInformation. Allows
+ * only POST requests with URL parameters:
+ * { 
+ * 		"username": "",
+ * 		"token": ""
+ * }
+ */
+
 @WebServlet(name = "UserInformation", urlPatterns = { "/UserInformation" })
 @MultipartConfig
 public class UserInformation extends HttpServlet {

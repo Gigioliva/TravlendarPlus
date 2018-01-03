@@ -25,6 +25,10 @@ import org.json.JSONObject;
 import userManager.SecurityAuthenticator;
 import userManager.UserManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /download. Allows
+ * only POST requests made with the appropriate form for file input
+ */
 @WebServlet(name = "FileUploadServlet", urlPatterns = { "/upload" })
 @MultipartConfig
 public class FileUploadServlet extends HttpServlet {

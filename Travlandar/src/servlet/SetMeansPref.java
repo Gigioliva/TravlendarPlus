@@ -16,6 +16,16 @@ import dati.TypeMeans;
 import userManager.SecurityAuthenticator;
 import userManager.UserManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /SetMeansPref. Allows
+ * only POST requests with URL parameters:
+ * { 
+ * 		"username": "",
+ * 		"token": "",
+ * 		"flag": "",
+ * 		"means" : ""
+ * }
+ */
 @WebServlet(name = "SetMeansPref", urlPatterns = { "/SetMeansPref" })
 @MultipartConfig
 public class SetMeansPref extends HttpServlet {

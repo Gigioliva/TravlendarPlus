@@ -15,6 +15,14 @@ import org.json.JSONObject;
 import userManager.SecurityAuthenticator;
 import userManager.UserManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /download. Allows
+ * only POST requests with URL parameters:
+ * * { 
+ * 		"username": "",
+ * 		"token": ""
+ * }
+ */
 @WebServlet(name = "FileDownloadServlet", urlPatterns = { "/download" })
 @MultipartConfig
 public class FileDownloadServlet extends HttpServlet {

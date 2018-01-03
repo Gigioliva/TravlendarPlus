@@ -18,6 +18,21 @@ import org.json.JSONObject;
 
 import userManager.UserManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /SignUp. Allows
+ * only POST requests with URL parameters:
+ * { 
+ * 		"username": "",
+ * 		"password": "",
+ * 		"name": "",
+ * 		"surname" : "",
+ * 		"email" : "",
+ * 		"phone" : "",
+ * 		"drivingLicense" : "",
+ * 		"creditCard" : ""
+ * }
+ */
+
 @WebServlet(name = "SignUp", urlPatterns = { "/SignUp" })
 @MultipartConfig
 public class SignUp extends HttpServlet {

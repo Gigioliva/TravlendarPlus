@@ -15,6 +15,15 @@ import org.json.JSONObject;
 import dati.TypeMeans;
 import schedule.ExternalRequestManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /GetPath. Allows
+ * only POST requests with URL parameters:
+ * { 
+ * 		"origin": "",
+ * 		"destination": "",
+ * 		"mode": ""
+ * }
+ */
 @WebServlet(name = "GetPath", urlPatterns = { "/GetPath" })
 @MultipartConfig
 public class GetPath extends HttpServlet {

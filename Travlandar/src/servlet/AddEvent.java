@@ -20,6 +20,21 @@ import schedule.ScheduleManager;
 import userManager.SecurityAuthenticator;
 import userManager.UserManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /AddEvent. Allows
+ * only POST requests with URL parameters:
+ * * { 
+ * 		"username": "",
+ * 		"token": "",
+ * 		"day": "",
+ * 		"origin" : "",
+ * 		"eventName" : "",
+ * 		"eventStart" : "",
+ * 		"eventDuration" : "",
+ * 		"eventType" : "",
+ * 		"eventPosition" : ""
+ * }
+ */
 @WebServlet(name = "AddEvent", urlPatterns = { "/AddEvent" })
 @MultipartConfig
 public class AddEvent extends HttpServlet {

@@ -15,6 +15,15 @@ import org.json.JSONObject;
 import schedule.ScheduleManager;
 import userManager.SecurityAuthenticator;
 
+/**
+ * This class represents the servlet that manages the endpoint /DeleteSchedule. Allows
+ * only POST requests with URL parameters:
+ * { 
+ * 		"username": "",
+ * 		"token": "",
+ * 		"day": ""
+ * }
+ */
 @WebServlet(name = "DeleteSchedule", urlPatterns = { "/DeleteSchedule" })
 @MultipartConfig
 public class DeleteSchedule extends HttpServlet {

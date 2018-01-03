@@ -14,10 +14,20 @@ import dati.Schedule;
 import dati.TypeMeans;
 import dati.User;
 
+/**
+ * Class that contains the shcedule management logic
+ */
 public class ScheduleManager {
 
-	private static final int FUSO = 3600000; 
-	
+	private static final int FUSO = 3600000;
+
+	/**
+	 * @param username
+	 *            the {@link User} to create the schedule
+	 * @param day
+	 *            the schedule's day
+	 * @return the {@link Boolean} indicating the result of the create schedule
+	 */
 	public static boolean createSchedule(User user, String day) {
 		String username = user.getUsername();
 		DataHandlerDBMS.executeDML("insert into schedule (username, day) values ('" + username + "','" + day + "')");
@@ -28,6 +38,14 @@ public class ScheduleManager {
 		return true;
 	}
 
+	/**
+	 * @param username
+	 *            the username of the user
+	 * @param day
+	 *            the schedule's day
+	 * @return the {@link Boolean} true if there is a schedule on the given day,
+	 *         false otherwise
+	 */
 	public static boolean hasSchedule(String username, String day) {
 		try {
 			return DataHandlerDBMS
@@ -38,6 +56,12 @@ public class ScheduleManager {
 		}
 	}
 
+	/**
+	 * @param username
+	 *            the username of the user
+	 * 
+	 * @return the {@link ArrayList} of all user's {@link Schedule}
+	 */
 	public static ArrayList<Schedule> getSchedules(String username) {
 		try {
 			ArrayList<String> schedules = new ArrayList<String>();
@@ -56,6 +80,14 @@ public class ScheduleManager {
 		}
 	}
 
+	/**
+	 * @param username
+	 *            the username of the user
+	 * @param day
+	 *            the day of the schedule
+	 * 
+	 * @return the user's {@link Schedule} with the given date
+	 */
 	public static Schedule getSchedule(String username, String day) {
 		try {
 			if (hasSchedule(username, day)) {
@@ -85,6 +117,18 @@ public class ScheduleManager {
 		}
 	}
 
+	/**
+	 * @param user
+	 *            the {@link User} who must perform the operation
+	 * @param day
+	 *            the day of the schedule to which the event is added
+	 * @param event
+	 *            the {@link Event} to add to the schedule
+	 * @param origin
+	 *            the origin of the journey
+	 * 
+	 * @return the {@link Boolean} indicating the result of the add event
+	 */
 	public static boolean addEvent(User user, String day, Event event, String origin) {
 		String username = user.getUsername();
 		ArrayList<TypeMeans> means = user.getMeansPref();
@@ -136,8 +180,7 @@ public class ScheduleManager {
 			Time endj = new Time(event.getStart().getTime() + event.getDuration().getTime() + FUSO);
 			for (Journey el : schedule.getSchedule()) {
 				Time startEl = el.getStart();
-				Time endEl = new Time(
-						el.getEvent().getStart().getTime() + el.getEvent().getStart().getTime() + FUSO);
+				Time endEl = new Time(el.getEvent().getStart().getTime() + el.getEvent().getStart().getTime() + FUSO);
 				if ((startj.compareTo(startEl) > 0 && startj.compareTo(endEl) < 0)
 						|| (endj.compareTo(startEl) > 0 && endj.compareTo(endEl) < 0)) {
 					notOverlaps = false;
@@ -168,6 +211,13 @@ public class ScheduleManager {
 		}
 	}
 
+	/**
+	 * @param username
+	 *            the {@link User} to delete the schedule
+	 * @param day
+	 *            the schedule's day
+	 * @return the {@link Boolean} indicating the result of the delete schedule
+	 */
 	public static boolean deleteSchedule(String username, String day) {
 		Schedule schedule = getSchedule(username, day);
 		for (Journey el : schedule.getSchedule()) {
@@ -177,10 +227,18 @@ public class ScheduleManager {
 				.executeDML("delete from schedule where username='" + username + "' AND day='" + day + "'");
 	}
 
+	/**
+	 * @param ID
+	 *            the ID of the {@link Event} to be deleted
+	 * @return the {@link Boolean} indicating the result of the delete event
+	 */
 	public static boolean deleteEvent(int ID) {
 		return DataHandlerDBMS.executeDML("delete from event where ID='" + ID + "'");
 	}
 
+	/**
+	 * @return the maximum ID assigned to an {@link Event}
+	 */
 	public static int getIntMax() {
 		ResultSet r = DataHandlerDBMS.sendQuery("select max(ID) as Max from event");
 		try {
@@ -249,6 +307,14 @@ public class ScheduleManager {
 
 	}
 
+	/**
+	 * @param user
+	 *            the {@link User} who must perform the operation
+	 * @param schedule
+	 *            the {@link Schedule} of the user
+	 * 
+	 * @return the {@link Boolean} true if all breaks can be added, false otherwise
+	 */
 	public static boolean canAddBreak(User user, Schedule schedule) {
 		boolean flag = true;
 		for (Break br : user.getBreakPref()) {

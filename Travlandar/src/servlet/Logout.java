@@ -14,6 +14,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import userManager.SecurityAuthenticator;
 
+/**
+ * This class represents the servlet that manages the endpoint /Logout. Allows
+ * only POST requests with URL parameters:
+ * { 
+ * 		"username": "",
+ * 		"token": ""
+ * }
+ */
 @WebServlet(name = "Logout", urlPatterns = { "/Logout" })
 @MultipartConfig
 public class Logout extends HttpServlet {

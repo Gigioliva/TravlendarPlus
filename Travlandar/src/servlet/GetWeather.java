@@ -16,6 +16,14 @@ import org.json.JSONObject;
 
 import schedule.ExternalRequestManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /GetWeather. Allows
+ * only POST requests with URL parameters:
+ * { 
+ * 		"city": "",
+ * 		"day": ""
+ * }
+ */
 @WebServlet(name = "GetWeather", urlPatterns = { "/GetWeather" })
 @MultipartConfig
 public class GetWeather extends HttpServlet {

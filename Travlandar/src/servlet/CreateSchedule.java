@@ -18,6 +18,15 @@ import schedule.ScheduleManager;
 import userManager.SecurityAuthenticator;
 import userManager.UserManager;
 
+/**
+ * This class represents the servlet that manages the endpoint /CreateSchedule. Allows
+ * only POST requests with URL parameters:
+ * { 
+ * 		"username": "",
+ * 		"token": "",
+ * 		"day": ""
+ * }
+ */
 @WebServlet(name = "CreateSchedule", urlPatterns = { "/CreateSchedule" })
 @MultipartConfig
 public class CreateSchedule extends HttpServlet {
