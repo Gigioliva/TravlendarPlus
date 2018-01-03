@@ -37,6 +37,8 @@ public class FileUploadServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String token = request.getParameter("token");
 
+		System.out.println("Prova upload: " + username + " " + "token");
+
 		if (SecurityAuthenticator.getUsername(token).equals(username)) {
 			response.setContentType("text/html;charset=UTF-8");
 			final Part filePart = request.getPart("file");
@@ -51,9 +53,9 @@ public class FileUploadServlet extends HttpServlet {
 			try {
 				String urlImg = getImgurContent(out);
 				PrintWriter outClient = response.getWriter();
-				if(UserManager.setFieldUser(username, "img", urlImg)) {
+				if (UserManager.setFieldUser(username, "img", urlImg)) {
 					outClient.println(getResponse("OK"));
-				}else {
+				} else {
 					outClient.println(getResponse("KO"));
 				}
 				outClient.flush();
@@ -101,7 +103,7 @@ public class FileUploadServlet extends HttpServlet {
 		String urlImage = requestJSON.getJSONObject("data").getString("link");
 		return urlImage;
 	}
-	
+
 	private static String getResponse(String status) {
 		return Json.createObjectBuilder().add("status", status).build().toString();
 	}

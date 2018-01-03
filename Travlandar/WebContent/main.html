@@ -55,7 +55,8 @@
                     <div class="container dunno">
                         <div class="row">
                             <div class="col-md-2 col-xs-2 col-sm-2">
-                                <img src="img/profile.png" width="40%" style="padding-bottom: 10px;">
+                                <div class="mini_img_profile"></div>
+                                    
                                 <br>
                                 <span class="profile_name" style="color: white; font-weight: bold">Nome Cognome</span>
                                 <hr style="border: 1px solid white;">
@@ -92,12 +93,12 @@ Hero Section
                     </div>
                     <div class="col-md-3 col-xs-3 col-sm-3 text-center meh_dunno">
                         <div style="width: 100%; min-height: 500px">
-                            <img src="img/profile.png" style="padding-bottom: 10px;">
+                            <img id="profile_picture" src="img/profile.png" style="padding-bottom: 10px;">
                             <h3 class="profile_name" style="color: green"></h3>
                             <p style="text-align: justify;">Keep in mind that you have to choose preferred means of transport and break in order to add a new event</p>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </section>
@@ -140,7 +141,7 @@ Hero Section
                             Origin position
                         </div>
                         <div class="col-md-9 col-xs-9 col-sm-9">
-                            <input id="searchTextField1" type="text" style="width: 100%">
+                            <input id="searchTextField1" type="text" style="width: 100%" placeholder="Ex. Milano via Golgi 20">
                         </div>
                     </div>
                     <div class="row">
@@ -148,7 +149,7 @@ Hero Section
                             Event position
                         </div>
                         <div class="col-md-9 col-xs-9 col-sm-9">
-                            <input id="searchTextField2" type="text" style="width: 100%">
+                            <input id="searchTextField2" type="text" style="width: 100%" placeholder="Ex. Milano via Golgi 20">
                         </div>
                     </div>
                     <div class="row">
@@ -183,7 +184,14 @@ Hero Section
                 <div id="event_content_info">
                     <div id="map" style="height: 70vh"></div>
                 </div>
-
+                <div class="row">
+                    <div class="col-md-6 col-xs-6 col-sm-6">
+                        <button id="delete_event" class="w3-button w3-red" style="width: 100%; text-align: center; display: inline-block; margin-top: 10px ">Delete event</button>
+                    </div>
+                    <div class="col-md-6 col-xs-6 col-sm-6">
+                        <button id="delete_schedule" class="w3-button w3-red" style="width: 100%; text-align: center; display: inline-block;margin-top: 10px; margin-bottom: 20px">Delete schedule</button>
+                    </div>
+                </div>
                 <a class="popup-close" data-popup-close="popup-2" style="color: white; position: absolute; z-index: 999; right: 13px; top:13px;">x</a>
             </div>
         </div>
@@ -228,34 +236,8 @@ Footer
     <script src='./js/moment.min.js'></script>
     <!--<script src="lib/jquery/jquery.min.js"></script>-->
     <script src='./js/fullcalendar.js'></script>
-    <script type="text/javascript">
-        // The only purpose of this script is to redirect a non logged user to the index
-        $(document).ready(function(){/*
-            var isPhoneGap = true;
-            var herokuURL = "";
-            if (isPhoneGap) {
-                herokuURL = "http://travlendarmom.herokuapp.com";
-            }
-            var coseDaMandare = {
-                "username": localStorage.getItem("my_username") | "ciao",
-                "token": localStorage.getItem("my_travlendar") | "altro"
-            };
-            $.ajax({
-                dataType: "text",
-                contentType: "text/plain; charset=utf-8",
-                type: "POST",
-                url: herokuURL + "/UserInformation",
-                data: JSON.stringify(coseDaMandare),
-                success: function(response) {
-                    //alert(response);
-                    response = JSON.parse(response);
-                    if(response["status"]=="KO"){
-                        location.assign("index.html");
-                    }
-                }
-            });*/
-        });
-    </script>
+    <script src='./js/sloggami.js'></script>
+    
     <script>
         /*right: 'listDay,listWeek,month' Da inserire da qualche parte*/
         $(window).ready(function() {
@@ -268,44 +250,44 @@ Footer
 
             var start = "";
             var end = "";
-            var means = "DRIVING";
-            var option = "BUS";
+            var means = "";
+            var option = "";
 
-            function addTimes (startTime, endTime) {
-              var times = [ 0, 0, 0 ]
-              var max = times.length
+            function addTimes(startTime, endTime) {
+                var times = [0, 0, 0]
+                var max = times.length
 
-              var a = (startTime || '').split(':')
-              var b = (endTime || '').split(':')
+                var a = (startTime || '').split(':')
+                var b = (endTime || '').split(':')
 
-              // normalize time values
-              for (var i = 0; i < max; i++) {
-                a[i] = isNaN(parseInt(a[i])) ? 0 : parseInt(a[i])
-                b[i] = isNaN(parseInt(b[i])) ? 0 : parseInt(b[i])
-              }
+                // normalize time values
+                for (var i = 0; i < max; i++) {
+                    a[i] = isNaN(parseInt(a[i])) ? 0 : parseInt(a[i])
+                    b[i] = isNaN(parseInt(b[i])) ? 0 : parseInt(b[i])
+                }
 
-              // store time values
-              for (var i = 0; i < max; i++) {
-                times[i] = a[i] + b[i]
-              }
+                // store time values
+                for (var i = 0; i < max; i++) {
+                    times[i] = a[i] + b[i]
+                }
 
-              var hours = times[0]
-              var minutes = times[1]
-              var seconds = times[2]
+                var hours = times[0]
+                var minutes = times[1]
+                var seconds = times[2]
 
-              if (seconds > 60) {
-                var m = (seconds / 60) << 0
-                minutes += m
-                seconds -= 60 * m
-              }
+                if (seconds > 60) {
+                    var m = (seconds / 60) << 0
+                    minutes += m
+                    seconds -= 60 * m
+                }
 
-              if (minutes > 60) {
-                var h = (minutes / 60) << 0
-                hours += h
-                minutes -= 60 * h
-              }
+                if (minutes > 60) {
+                    var h = (minutes / 60) << 0
+                    hours += h
+                    minutes -= 60 * h
+                }
 
-              return ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2)
+                return ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2)
             }
 
             function getAllSchedulesEver() {
@@ -323,18 +305,18 @@ Footer
                     success: function(response) {
                         //alert(response);
                         response = JSON.parse(response);
-                        for(var i = 0; i < response["schedule"].length; i++){
+                        for (var i = 0; i < response["schedule"].length; i++) {
                             var time_no = String(response["schedule"][i]["day"]).split("-");
                             var time_ok = time_no[2] + "-" + time_no[1] + "-" + time_no[0] + "T";
-                            for(var j = 0; j < response["schedule"][i]["events"].length; j++){
+                            for (var j = 0; j < response["schedule"][i]["events"].length; j++) {
                                 var start_time = time_ok + response["schedule"][i]["events"][j]["start"];
                                 var end_time = time_ok + addTimes(response["schedule"][i]["events"][j]["start"], response["schedule"][i]["events"][j]["duration"]);
                                 var event_name = response["schedule"][i]["events"][j]["name"];
                                 var singolo_evento = {
-                                    "id" : response["schedule"][i]["events"][j]["ID"],
-                                    "title" : event_name,
+                                    "id": response["schedule"][i]["events"][j]["ID"],
+                                    "title": event_name,
                                     "start": start_time,
-                                    "end" : end_time
+                                    "end": end_time
                                 }
                                 returnArray.push(singolo_evento);
                             }
@@ -368,7 +350,7 @@ Footer
                                 var coseDaMandare = {
                                     "username": localStorage.getItem("my_username"),
                                     "token": localStorage.getItem("my_travlendar"),
-                                    "day" : time_send
+                                    "day": time_send
                                 };
                                 $.ajax({
                                     dataType: "text",
@@ -379,12 +361,36 @@ Footer
                                     success: function(response) {
                                         response = JSON.parse(response);
                                         var scorrimento = response["schedule"]["singleSchedule"];
-                                        for(var i = 0; i< scorrimento.length; i++){
-                                            if(scorrimento[i]["event"]["ID"] == calEvent.id){
+                                        for (var i = 0; i < scorrimento.length; i++) {
+                                            if (scorrimento[i]["event"]["ID"] == calEvent.id) {
+                                                localStorage.setItem("current_event", calEvent.id);
+                                                means = scorrimento[i]["means"];
+                                                switch (means) {
+                                                    case "driving":
+                                                        means = "DRIVING";
+                                                        option = "BUS";
+                                                        break;
+                                                    case "bicycling":
+                                                        means = "BICYCLING";
+                                                        option = "BUS";
+                                                        break;
+                                                    case "walking":
+                                                        means = "WALKING";
+                                                        option = "BUS";
+                                                        break;
+                                                    case "bus":
+                                                        means = "TRANSIT";
+                                                        option = "BUS";
+                                                        break;
+                                                    case "tram":
+                                                        means = "TRANSIT";
+                                                        option = "TRAM";
+                                                        break;
+                                                }
                                                 var coseDaMandare = {
                                                     "origin": scorrimento[i]["position"],
                                                     "destination": scorrimento[i]["event"]["position"],
-                                                    "mode" : scorrimento[i]["means"]
+                                                    "mode": scorrimento[i]["means"]
                                                 };
                                                 //alert(JSON.stringify(coseDaMandare));
                                                 $.ajax({
@@ -400,7 +406,6 @@ Footer
                                                         $("#event_content_info").append("");
                                                         initMap();
                                                         $("#popup_getpath").click();
-                                                        console.log(JSON.stringify(response));
                                                     }
                                                 });
                                             }
@@ -430,53 +435,65 @@ Footer
             getAllSchedulesEver();
 
 
-        
 
 
-        function initMap() {
-            var directionsService = new google.maps.DirectionsService;
-            var directionsDisplay = new google.maps.DirectionsRenderer;
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 13,
-                center: {
-                    lat: 45.46,
-                    lng: 9.037
-                }
-            });
-            directionsDisplay.setMap(map);
 
-            function onChangeHandler() {
+            function initMap() {
+                var directionsService = new google.maps.DirectionsService;
+                var directionsDisplay = new google.maps.DirectionsRenderer;
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 13,
+                    center: {
+                        lat: 45.46,
+                        lng: 9.037
+                    }
+                });
+
+                directionsDisplay.setMap(map);
+
+
+
+                google.maps.event.trigger(map, 'resize');
+                window.dispatchEvent(new Event('resize'));
+
+                function onChangeHandler() {
+                    window.dispatchEvent(new Event('resize'));
+                    calculateAndDisplayRoute(directionsService, directionsDisplay);
+                };
                 calculateAndDisplayRoute(directionsService, directionsDisplay);
-            };
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
-        }
+            }
 
-        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-            directionsService.route({
-                origin: start,
-                destination: end,
-                travelMode: means,
-                transitOptions: {
-                    modes: [option]
-                },
-            }, function(response, status) {
-                if (status === 'OK') {
-                    directionsDisplay.setDirections(response);
-                } else {
-                    window.alert('Directions request failed due to ' + status);
-                }
-            });
-        }
+            function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                directionsService.route({
+                    origin: start,
+                    destination: end,
+                    travelMode: means,
+                    transitOptions: {
+                        modes: [option]
+                    },
+                }, function(response, status) {
+                    if (status === 'OK') {
+                        directionsDisplay.setDirections(response);
+                        window.dispatchEvent(new Event('resize'));
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
+            }
 
 
         });
+
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
+            
+            setImage();
+            
             var isPhoneGap = true;
             var herokuURL = "";
             if (isPhoneGap) {
-                herokuURL = "http://" + window.location.host + "/Travlandar";;
+                herokuURL = "http://" + window.location.host + "/Travlandar";
             }
             $(".fc-left>h2").attr("style", "color:darkgreen; text-align:center; font-size: 24px");
             $(".fc-right").attr("style", "text-align:center;");
@@ -516,7 +533,7 @@ Footer
                                 success: function(response) {
 
                                 }
-                            }); 
+                            });
                         }
                     }
                 });
@@ -526,11 +543,7 @@ Footer
                 var targeted_popup_class = jQuery(this).attr('data-popup-close');
                 $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
             });
-            $("#logout_button").on("click", function() {
-                window.localStorage.removeItem("my_travlendar");
-                location.assign("index.html");
-                return false;
-            });
+            
             $("#submit_new_event").on("click", function() {
 
                 var moment = $('#calendar').fullCalendar('getDate');
@@ -569,10 +582,86 @@ Footer
                 });
             });
 
+
+
+            $("#delete_event").on("click", function(obj, altro) {
+                var toDelete = localStorage.getItem("current_event");
+                var coseDaMandare = {
+                    "username": localStorage.getItem("my_username"),
+                    "token": localStorage.getItem("my_travlendar"),
+                    "ID": toDelete
+                }
+                //alert(JSON.stringify(coseDaMandare));
+                $.ajax({
+                    dataType: "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/DeleteEvent",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function(response) {
+                        location.assign("main.html");
+                    }
+                });
+            });
+
+
+            $("#delete_schedule").on("click", function(obj, altro) {
+
+                var moment = $('#calendar').fullCalendar('getDate');
+                var time_no = String(moment.format()).split("T")[0].split("-");
+                var time_send = time_no[2] + "-" + time_no[1] + "-" + time_no[0];
+                var coseDaMandare = {
+                    "username": localStorage.getItem("my_username"),
+                    "token": localStorage.getItem("my_travlendar"),
+                    "day": time_send
+                }
+                //alert(JSON.stringify(coseDaMandare));
+                $.ajax({
+                    dataType: "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/DeleteSchedule",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function(response) {
+                        location.assign("main.html");
+                    }
+                });
+            });
+
             $("#nome_e_cognome").html(localStorage.getItem("my_name") + " " + localStorage.getItem("my_surname"));
+
+            function setImage() {
+                var isPhoneGap = true;
+                var herokuURL = "";
+                if (isPhoneGap) {
+                    herokuURL = "http://" + window.location.host + "/Travlandar";
+                }
+                var coseDaMandare = {
+                    "username": localStorage.getItem("my_username"),
+                    "token": localStorage.getItem("my_travlendar")
+                };
+                $.ajax({
+                    dataType: "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/download",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function(response) {
+                        response = JSON.parse(response);
+                        if (response.status === "OK") {
+                            $("#profile_picture").attr("src", response.url);
+                            $("#mini_img_profile").attr("src", response.url);
+                            localStorage.setItem("profile_url", response.url);
+                        }
+                    }
+                });
+            }
         });
+
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACuHim7KBzg4kgeoLIQMTKSoh34eLXN2c">
+
+
     </script>
 </body>
 

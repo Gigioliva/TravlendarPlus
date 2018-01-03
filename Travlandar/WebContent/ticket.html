@@ -53,18 +53,21 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
           <div class="container dunno">
-            <div class="row">
-              <div class="col-md-2 col-xs-2 col-sm-2" >
-                <img src="img/profile.png" width="40%" style="padding-bottom: 10px;"><br>
-                <span style="color: white;font-weight: bold">Nome Cognome</span>
-                <hr style="border: 1px solid white;">
-              </div>
-            </div>
-          </div>
+                        <div class="row">
+                            <div class="col-md-2 col-xs-2 col-sm-2">
+                                <div class="mini_img_profile"></div>
+                                    
+                                <br>
+                                <span class="profile_name" style="color: white; font-weight: bold">Nome Cognome</span>
+                                <hr style="border: 1px solid white;">
+                            </div>
+                        </div>
+                    </div>
           <li class="menu-active"><a href="main.html">Schedules</a></li>
           <li><a href="profile.html">Profile</a></li>
           <li><a href="ticket.html">Tickets</a></li>
           <li><a href="weather.html">Weather</a></li>
+          <li><a id="logout_button" href="">Logout</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -73,7 +76,7 @@
   <!--==========================
     Hero Section
   ============================-->
-  <section id="hero" style="height: 90px; background: rgb(56,142,60);">
+  <section id="hero" style="height: 90px; background-color: #010150">
 
   </section><!-- #hero -->
 
@@ -131,6 +134,7 @@
   <script src='./js/moment.min.js'></script>
 <script src="lib/jquery/jquery.min.js"></script>
 <script src='./js/fullcalendar.js'></script>
+<script src='./js/sloggami.js'></script>
 <!-- Funzione che mostra e nasconde le cose in base al fatto se è mobile 
   oppure no -->
 
