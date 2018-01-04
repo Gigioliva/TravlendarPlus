@@ -492,9 +492,6 @@ As it's possible to see by the code, in order to view the calendar the user is r
 \chapter{Testing}
 
 In order to proof the correctness of the most important parts of the code will be provided a complete test of all the main parts of the code. \\\newline
-With the aim to provide a test also at the client side of the application was created a purpose specific Python server to test the response of the client at some predetermined situation that the server provide statically. 
-The test of the client will be provided partly with the source code and partly in the following pages. \\\newline
-
 
 \section*{Server Testing}
 On server side the Java EE code has been tested using the tools that Java provide with some additional libraries. In particular were used the JUnit libraries to test the part that works completely in the local system without using external resources like DBMS and network.
@@ -590,9 +587,13 @@ All the results of the tested method are showed below.\\\newline
 \end{figure}
 
 \section*{Client Testing}
-
-+	Per la creazione del server in python è stata utilizzata la libreria Flask
-+	Per ogni endpoint sono state definite delle route come nell'esempio che segue
+With the aim to provide a test also at the client side of the application was created a purpose specific Python server to test the response of the client at some predetermined situation that the server provide statically. 
+The test of the client will be provided in the source code in Travlendar/src/test/testingServer folder and some example of the response are showed in the following pages. \\\newline
+The Python server require to be executed with Python3 to support all its features, it also require two additional modules: Colorama and Flask.
+In order to run the test in the same folder there are a "templates" folder which contains a specifically purposed client copy that must be at the same level of the Puthon server file (server.py).
+For all the endpoint there was a code that emulate the real server response, this allows to test the client side independently from the real application and web servers.
+The servers shows in the command line that run it the result of the different request of the client and shows clearly, also using colors (red for errors and yellow for correct request), if the call be successfull or not. \\\newline
+The following code show the example of the Login endpoint of the testing server.
 
 \lstset{language=Python}
 \begin{lstlisting}
@@ -624,13 +625,19 @@ All the results of the tested method are showed below.\\\newline
 				return json.dumps(my_response)
 \end{lstlisting}
 
-+ Il server testa che il client invii le cose con il formato corretto e in caso contrario mostra a schermo che c'è stato un errore
+In the following pictures will be showed a success and a fail of the request from the client.
 
-+ Un esempio del funzionamento del server è nel seguente screen, dove inizialmente si ha un accesso errato e in seguito uno che va a buon fine 
-(piazzi uno screen)
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/LoginSuccess}
+	\caption{The correct request from the client}
+\end{figure}
 
-
-
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/LoginError}
+	\caption{The wrong request from the client}
+\end{figure}
 
 
 \chapter{Installation instructions}
