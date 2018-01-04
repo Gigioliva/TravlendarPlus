@@ -1,6 +1,5 @@
 package test.testUserManager;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import userManager.SecurityAuthenticator;
@@ -14,11 +13,6 @@ public class TestSecurityAuthenticator {
 	String nameUsername = new String("test2");
 	String nameLogout = new String("test3");
 	Boolean boolLogout;
-	
-	@Before
-	public void init() {
-	
-	}
 	
 	@Test
 	public void testLogin() {

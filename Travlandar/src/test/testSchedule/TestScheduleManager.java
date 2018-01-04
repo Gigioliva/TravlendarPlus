@@ -111,8 +111,6 @@ public class TestScheduleManager {
 		assertEquals(ScheduleManager.getIntMax(), 12346);
 	}
 
-	// da completare
-
 	@Test
 	public void testGetSchedules() {
 		PowerMockito.mockStatic(DataHandlerDBMS.class);

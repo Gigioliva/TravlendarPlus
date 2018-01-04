@@ -68,6 +68,34 @@ public class TestUserManager {
 	}
 	
 	@Test
+	public void testGetUserInformation() throws Exception {
+		User user;
+		Mockito.when(resultSet.getString("username")).thenReturn("marco");
+		Mockito.when(resultSet.getString("name")).thenReturn("aaa");
+		Mockito.when(resultSet.getString("surname")).thenReturn("bbb");
+		Mockito.when(resultSet.getString("email")).thenReturn("marco@email.it");
+		Mockito.when(resultSet.getString("phone")).thenReturn("123");
+		Mockito.when(resultSet.getString("drivingLicense")).thenReturn("drlic");
+		Mockito.when(resultSet.getString("creditCard")).thenReturn("1111222233334444");
+		Mockito.when(resultSet.getInt("maxWalk")).thenReturn(1);
+		Mockito.when(resultSet.getString("maxHourMeans")).thenReturn("20");
+		Mockito.when(resultSet.next()).thenReturn(true);
+		PowerMockito.mockStatic(DataHandlerDBMS.class);
+		PowerMockito.when(DataHandlerDBMS.sendQuery(Matchers.anyString())).thenReturn(resultSet);
+		PowerMockito.spy(UserManager.class);
+		PowerMockito.doNothing().when(UserManager.class,"getUserBreakPref",Matchers.any(User.class));
+		PowerMockito.doNothing().when(UserManager.class,"getUserMeansPref",Matchers.any(User.class));
+		user = UserManager.getUserInformation("marco");
+		assert(user.getUsername().equals("marco"));
+		assert(user.getName().equals("aaa"));
+		assert(user.getSurname()).equals("bbb");
+		assert(user.getDrivingLicense().equals("drlic"));
+		assert(user.getPhone().equals("123"));
+		assert(user.getCreditCard().equals("1111222233334444"));
+		assert(user.getMail().equals("marco@email.it"));
+	}
+	
+	@Test
 	public void testSetFieldUser() throws SQLException {
 		PowerMockito.mockStatic(DataHandlerDBMS.class);
 		PowerMockito.when(DataHandlerDBMS.executeDML(Matchers.anyString())).thenReturn(true);
