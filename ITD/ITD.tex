@@ -557,6 +557,33 @@ System.out.println("Qui il codice dei test");
 
 \chapter{Installation instructions}
 
+To use the application you can proceed into two different ways: you can access the site or you can install all the components in local.\\
+In the first case, you just have to access the url \textbf{http://travlendarmom.herokuapp.com}. Once the page is loaded, you have to log in clicking on "Get Started". After that, you can "Sing Up" or you can access directly using the test credential (username = "admin" e password = "pass").\\
+
+In the second cas, you have to download the following files:
+\begin{itemize}
+	\item JavaEE source files from the repository https://github.com/Gigioliva/OlivaMussiMoskwa
+	\item Dump file for database Dump.sql in the same repository
+	\item Eclipse for JavaEE http://www.eclipse.org/downloads/eclipse-packages/
+	\item MySQL https://dev.mysql.com/downloads/mysql/
+	\item MySQL Workbench https://dev.mysql.com/downloads/workbench/
+	\item Tomcat 8.5.24 https://tomcat.apache.org/download-80.cgi
+\end{itemize}
+One you downloaded all the files proceed with the MySQL installation wizard. For the required parameters choose the port 3306, user = root and password = prova.\\
+Once the MySQL installation is completed, we suggest installing MySQL Workbench in order to manage the database using a GUI. \\
+Now you have to carry out the dump of the data structure by CLI (https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html) or by Workbench (Server $\,\to\,$ Data Import $\,\to\,$ Import from Self-Contained File $\,\to\,$ Dump Structure Only $\,\to\,$ Start Import).\\
+Database initialization completed, install the server.
+
+\begin{itemize}
+	\item Unzip the Tomcat archive
+	\item Open Eclipse and from "file" select "import"
+	\item Select "Existing Maven Projects", then the Travlandar folder downloaded from the repository
+	\item Once the project has been imported, click on it with the right mouse button and then press "Properties"
+	\item Then select "Targeted Runtimes" and if there is no server, press "new ..." and follow the Tomcat configuration wizard.
+	\item Finally click on the project with the right button $\,\to\,$  Run As $\,\to\,$ Run On Server $\,\to\,$ select the server created $\,\to\,$ Finish
+\end{itemize}
+
+
 Per poter utilizzare l'applicazione è possibile procedere in due modi: accedere all'apposito sito o installare tutti i componenti in locale.\\
 
 Nel primo caso è sufficiente accedere all'url \textbf{http://travlendarmom.herokuapp.com}. Una volta caricata la pagina si effettua il login cliccando su "Get Started" e successivamente procedere o effettuando il "Sign Up" o accedere direttamente con le credenziali di prova (username = "admin" e password = "pass").\\

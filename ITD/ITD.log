@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.5)  3 JAN 2018 21:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.5)  4 JAN 2018 16:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,42 +874,65 @@ Underfull \hbox (badness 10000) in paragraph at lines 493--499
 ] [16]
 chapter 6.
 
-Overfull \hbox (0.67967pt too wide) in paragraph at lines 560--561
-\OT1/cmr/m/n/12 Per poter uti-liz-zare l'applicazione ^^Re pos-si-bile pro-cede
-re in due modi: ac-cedere all'apposito
+Overfull \hbox (14.72772pt too wide) in paragraph at lines 560--562
+\OT1/cmr/m/n/12 In the first case, you just have to ac-cess the url \OT1/cmr/bx
+/n/12 http://travlendarmom.herokuapp.com\OT1/cmr/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 560--561
-
- []
-
-
-Overfull \hbox (9.375pt too wide) in paragraph at lines 562--563
-[]\OT1/cmr/m/n/12 Nel primo caso ^^Re suf-fi-ciente ac-cedere all'url \OT1/cmr/
-bx/n/12 http://travlendarmom.herokuapp.com\OT1/cmr/m/n/12 .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 562--563
+Underfull \hbox (badness 10000) in paragraph at lines 560--562
 
  []
 
 
-Overfull \hbox (23.62401pt too wide) in paragraph at lines 566--567
-[]\OT1/cmr/m/n/12 File sor-genti JavaEE dalla repos-i-tory https://github.com/G
-igioliva/OlivaMussiMoskwa 
+Overfull \hbox (33.64612pt too wide) in paragraph at lines 565--566
+[]\OT1/cmr/m/n/12 JavaEE source files from the repos-i-tory https://github.com/
+Gigioliva/OlivaMussiMoskwa 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 574--577
-
+Overfull \hbox (201.4624pt too wide) in paragraph at lines 572--576
+\OT1/cmr/m/n/12 Now you have to carry out the dump of the data struc-ture by CL
+I (https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html)
  []
 
 [17
 
 
-] [18] (./ITD.aux) ) 
+]
+Overfull \hbox (12.42955pt too wide) in paragraph at lines 587--588
+[]\OT1/cmr/m/n/12 Per poter uti-liz-zare l'applicazione ^^Re pos-si-bile pro-ce
+dere in due modi: ac-cedere all'apposito
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 587--588
+
+ []
+
+
+Overfull \hbox (9.375pt too wide) in paragraph at lines 589--590
+[]\OT1/cmr/m/n/12 Nel primo caso ^^Re suf-fi-ciente ac-cedere all'url \OT1/cmr/
+bx/n/12 http://travlendarmom.herokuapp.com\OT1/cmr/m/n/12 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 589--590
+
+ []
+
+
+Overfull \hbox (23.62401pt too wide) in paragraph at lines 593--594
+[]\OT1/cmr/m/n/12 File sor-genti JavaEE dalla repos-i-tory https://github.com/G
+igioliva/OlivaMussiMoskwa 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 601--604
+
+ []
+
+[18] [19] (./ITD.aux) ) 
 Here is how much of TeX's memory you used:
  7811 strings out of 492995
  119599 string characters out of 6132704
@@ -918,20 +941,20 @@ Here is how much of TeX's memory you used:
  11483 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,9n,66p,8836b,1729s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmcsc10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsl12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmssbx10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmti12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmtt10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmtt12.pfb>
-Output written on ITD.pdf (18 pages, 279366 bytes).
+</usr/local/texlive/2017/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmbx12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmcsc10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsl12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmssbx10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmti12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmtt10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmtt12.pfb>
+Output written on ITD.pdf (19 pages, 281449 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
+ 105 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
