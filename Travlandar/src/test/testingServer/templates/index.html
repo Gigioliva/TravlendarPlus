@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Travlendar +</title>
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <!--meta http-equiv="Content-Security-Policy" content="connect-src http://travlendarmom.herokuapp.com"-->
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/w3.css">
+  <link rel="stylesheet" type="text/css" href="./css/popup.css">
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="css/jquery_mobile.css" />
+
+    <script src="lib/jquery/jquery.min.js"></script>
+<!--<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>-->
+    <script src="lib/jquery/jquery-migrate.min.js"></script>
+<script src="js/jquery_mobile.js"></script> 
+    <script src="js/jquery_ui.js"></script>
+
+  <!-- =======================================================
+    Theme Name: Regna
+    Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+
+  <!--==========================
+  Header
+  ============================-->
+  <header id="header">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <!--<a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>-->
+        <!-- Uncomment below if you prefer to use a text logo -->
+        <h1 style="font-family: myTitle; color: white">Travlendar+</h1>
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="#hero">Home</a></li>
+
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Hero Section
+  ============================-->
+  <section id="hero" style="background: url(./img/alter.png) top center fixed;background-size: cover;display: table;  width: 100%; height: 100vh;">
+    <div class="hero-container">
+      <h2>The bad news is time flies. The good news is you're the pilot.</h2>
+      <h1 style="margin-bottom: 30vh">Manage your time with us.</h1>
+      <a href="" class="btn-get-started" data-popup-open="popup-1" style="margin-bottom: 5vh">Get Started</a>
+    </div>
+  </section><!-- #hero -->
+
+  <main id="main">
+
+    <section id="about">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-6 content order-lg-1 order-2">
+            <h2 class="title">Few Words About Us</h2>
+            <p id="just_for_debug">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+
+          <div class="col-lg-6 background order-lg-2 order-1 wow fadeInRight"></div>
+        </div>
+
+      </div>
+    </section><!-- #about -->    
+
+  </main>
+  <div>
+        <div class="popup" data-popup="popup-1" style="z-index: 999; color: black;overflow-y: scroll;">
+            <div class="popup-inner" style="background-color: #212170; text-align: center; height: 90vh; overflow: scroll">
+              <h1 style="font-family: myTitle; color: white">Travlendar+</h1>
+                <div id="tab" class="row">
+                    <div class="col-md-6 col-xs-6 col-sm-6" style="width: 50%">
+                        <a href="javascript:void(0)" clicco="'signup'" onclick="openTab(event, 'signup');">
+                            <div class="tablink w3-bottombar w3-hover-light-grey" style="color: white;">Sign Up</div>
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-xs-6 col-sm-6" style="width: 50%">
+                        <a href="javascript:void(0)" clicco="'signin'" onclick="openTab(event, 'signin');">
+                            <div class="tablink w3-bottombar w3-hover-light-grey" style="color: white;">Sign In</div>
+                        </a>
+                    </div>
+                </div>
+                <div id="signin" class="w3-container little_tab row" style="background-color: white; display:none; padding-bottom: 20px; margin-top: 20px; height: 50vh; vertical-align: middle;">
+                  <div class="row" style=" padding-top: 2vh;">
+                    <div class="col-md-3 col-xs-3 col-sm-3">Username</div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="login_email" type="text" name="" placeholder="Insert your email" style="width: 100%"></div>
+                  </div> 
+                  <div class="row" style="">
+                    <div class="col-md-3 col-xs-3 col-sm-3">Password</div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="login_password" type="password" name="" placeholder="Insert your password" style="width: 100%"></div>
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-3 col-xs-3 col-sm-3"></div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><button id="submit_signin" class="w3-button w3-indigo" style="width: 100%">Submit</button></div>
+                  </div>                 
+                </div>
+
+                <div id="signup" class="w3-container little_tab row" style="display:none; padding-bottom: 20px; padding-top: 20px; color: white;">
+                  <div class="row" style="  padding-top: 2vh;">
+                    <div class="col-md-3 col-xs-3 col-sm-3">Username</div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="signup_username" type="text" name="" placeholder="Insert your username" style="width: 100%"></div>
+                  </div> 
+                  <div class="row" style=" ">
+                    <div class="col-md-3 col-xs-3 col-sm-3">Password</div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="signup_password" type="password" name="" placeholder="Insert your password" style="width: 100%"></div>
+                  </div>
+                  <div class="row" style=" ">
+                    <div class="col-md-3 col-xs-3 col-sm-3">Name</div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="signup_name" type="text" name="" placeholder="Insert your name" style="width: 100%"></div>
+                  </div>
+                  <div class="row" style=" ">
+                    <div class="col-md-3 col-xs-3 col-sm-3">Surname</div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="signup_surname" type="text" name="" placeholder="Insert your surname" style="width: 100%"></div>
+                  </div>   
+                  <div class="row" style=" ">
+                    <div class="col-md-3 col-xs-3 col-sm-3">Email</div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="signup_email" type="text" name="" placeholder="Insert your email" style="width: 100%"></div>
+                  </div> 
+                  <div class="row" style=" ">
+                    <div class="col-md-3 col-xs-3 col-sm-3">Phone</div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="signup_phone" type="text" name="" placeholder="Insert your phone" style="width: 100%"></div>
+                  </div> 
+                  <div class="row" style=" ">
+                    <div class="col-md-3 col-xs-3 col-sm-3">Driving License</div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="signup_license" type="text" name="" placeholder="Insert your driving license" style="width: 100%"></div>
+                  </div> 
+                  <div class="row" style=" ">
+                    <div class="col-md-3 col-xs-3 col-sm-3">Credit Card</div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><input id="signup_credit" type="text" name="" placeholder="Insert your credit card" style="width: 100%"></div>
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-3 col-xs-3 col-sm-3"></div>
+                    <div class="col-md-8 col-xs-8 col-sm-8"><button id="submit_signup" class="w3-button w3-indigo" style="width: 100%">Submit</button></div>
+                  </div>
+                </div>
+
+                <a class="popup-close" data-popup-close="popup-1" style="color: white; position: absolute; z-index: 999; right: 13px; top:13px;">x</a>
+            </div>
+        </div>
+    </div>
+
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+
+      </div>
+    </div>
+  </footer><!-- #footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <!--<script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>-->
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8HeI8o-c1NppZA-92oYlXakhDPYR7XMY"></script>-->
+
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/superfish/hoverIntent.js"></script>
+  <script src="lib/superfish/superfish.min.js"></script>
+
+  <!-- Contact Form JavaScript File -->
+  <script src="contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+  <!-- Funzioni per la gestione delle tab -->
+  <script type="text/javascript">
+    var event;
+      function openTab(evt, tabName) {
+          var i, x, tablinks;
+          x = document.getElementsByClassName("little_tab");
+          for (i = 0; i < x.length; i++) {
+              x[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablink");
+          for (i = 0; i < x.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+          }
+          document.getElementById(tabName).style.display = "block";
+          evt.currentTarget.firstElementChild.className += " w3-border-red";
+      }
+      openTab(event, 'signin');
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if($(window).width() <=1000){
+          $(".dunno").show();
+          $("#lateral_upper_menu").hide();
+       }else{
+          $(".dunno").hide();
+          $("#lateral_upper_menu").show();
+       }
+      $( window ).resize(function() {
+       if($(window).width() <=1000){
+          $(".dunno").show();
+          $("#lateral_upper_menu").hide();
+       }else{
+          $(".dunno").hide();
+          $("#lateral_upper_menu").show();
+       }
+     }); 
+    });
+    
+
+  </script>
+  <!-- funzioni per index specifiche -->
+  <script type="text/javascript">
+    $(document).ready(function(){
+      // Funzione per togliere solo nella pagina principale il menu
+      $("#mobile-nav-toggle").hide();
+        $('[data-popup-open]').on('click', function (e) {
+        var targeted_popup_class = jQuery(this).attr('data-popup-open');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+        e.preventDefault();
+    });
+  $('[data-popup-close]').on('click', function (e) {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+    });
+
+  var isPhoneGap = false;
+  var herokuURL = "";
+  if (isPhoneGap) {
+    herokuURL = "http://" + window.location.host + "/Travlandar";
+  }
+
+    $("#submit_signin").click(function(){
+      /* codice di test */
+      //location.assign("main.html");
+      $("#just_for_debug").append("Tasto cliccato");
+      /* Codice funzionante */
+      var coseDaMandare  = { 
+        "username" : $("#login_email").val(),
+        "password" : $("#login_password").val()
+      };
+      $("#just_for_debug").append(JSON.stringify(coseDaMandare));
+      $.ajax( {
+        dataType : "text",
+        contentType: "text/plain; charset=utf-8",
+        type: "POST",
+        url: herokuURL + "/Login", 
+        data: JSON.stringify(coseDaMandare),
+        success: function( response ) {
+          $("#just_for_debug").append(response);
+          if((JSON.parse(response))["status"]=="OK"){
+            localStorage.setItem("my_travlendar", (JSON.parse(response))["token"]);
+            localStorage.setItem("my_name", (JSON.parse(response))["name"]);
+            localStorage.setItem("my_surname", (JSON.parse(response))["surname"]);
+            localStorage.setItem("my_username", $("#login_email").val());
+            location.assign("main.html");
+          }else{
+            alert("Login errato");  
+          } 
+         },
+         error: function(jqXHR, textStatus, errorThrown){
+          $("#just_for_debug").append("ERRORE : " + JSON.stringify(jqXHR) + "ALTRO" + JSON.stringify(textStatus) + errorThrown);
+         }
+      });
+
+
+      });
+
+    $("#submit_signup").click(function(){
+      /* codice test*/
+      //location.assign("main.html");
+
+      /* Codice funzionante */
+      var coseDaMandare  = { 
+        "username" : $("#signup_username").val(),
+        "password" : $("#signup_password").val(),
+        "name" : $("#signup_name").val(),
+        "surname" : $("#signup_surname").val(),
+        "email" : $("#signup_email").val(),
+        "phone" : $("#signup_phone").val(),
+        "drivingLicense" : $("#signup_license").val(),
+        "creditCard" : $("#signup_credit").val()
+      };
+      $.ajax( {
+        dataType : "text",
+        contentType: "text/plain; charset=utf-8",
+        type: "POST",
+        url: herokuURL + "/SignUp",
+        data: JSON.stringify(coseDaMandare),
+        success: function( response ) {
+          alert(response);
+          if((JSON.parse(response))["status"]=="OK"){
+            window.localStorage.setItem("my_travlendar", (JSON.parse(response))["token"]);
+            location.assign("index.html");
+          }else{
+            alert("Signup errato");  
+          } 
+         }
+      });
+
+
+      });
+
+    });
+  </script>
+
+</body>
+</html>

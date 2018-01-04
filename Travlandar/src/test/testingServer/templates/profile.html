@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Main | Travlendar + </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="stylesheet" type="text/css" href="./css/w3.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
+    <!-- Bootstrap CSS File -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Libraries CSS Files -->
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href='./css/fullcalendar.min.css' rel='stylesheet' />
+    <link href='./css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="./css/custom.css" rel="stylesheet">
+  </head>
+  <body style="display: none;">
+    <!--==========================
+    Header
+    ============================-->
+    <header id="header">
+      <div class="container">
+        <div id="logo" class="pull-left">
+          <!--<a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>-->
+          <!-- Uncomment below if you prefer to use a text logo -->
+          <h1 style="font-family: myTitle; color: white">Travlendar +</h1>
+        </div>
+        <nav id="nav-menu-container">
+          <ul class="nav-menu">
+            <div class="container dunno">
+              <div class="row">
+                <div class="col-md-2 col-xs-2 col-sm-2">
+                  <img src="img/profile.png" width="40%" style="padding-bottom: 10px;"><br>
+                  <span class="profile_name" style="color: white; font-weight: bold">Nome Cognome</span>
+                  <hr style="border: 1px solid white;">
+                </div>
+              </div>
+            </div>
+            <li class="menu-active"><a href="main.html">Schedules</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="ticket.html">Tickets</a></li>
+            <li><a href="weather.html">Weather</a></li>
+            <li><a id="logout_button" href="">Logout</a></li>
+          </ul>
+        </nav>
+        <!-- #nav-menu-container -->
+      </div>
+    </header>
+    <!-- #header -->
+    <!--==========================
+    Hero Section
+    ============================-->
+    <section id="hero" style="height: 90px; background-color: #010150;">
+    </section>
+    <!-- #hero -->
+    <main id="main">
+      <section id="about" style="padding: 20px; min-height: 80vh">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 col-xs-2 col-sm-2" style="text-align: center;">
+              <img id="profile_picture" src="./img/profile.png" style="width: 100%; margin-bottom: 20px;">
+              <form class="custom-file-upload" method="POST" action="http://travlendarmom.herokuapp.com/upload" enctype="multipart/form-data" >
+              <label class="custom-file-upload">
+                <input type="file"/>
+                Load Picture
+              </label>
+              <label>
+                <input type="submit" style="width: 80%" />
+              </label>
+              <input id="image_username" type="text" value="gigidiso" name="username"/>
+            <input id="image_token" type="text" value="abcdef" name="token"/>
+            </form>
+            </div>
+            <div class="col-md-4 col-xs-4 col-sm-4" style="text-align: left;">
+              <h3 class="profile_name" style="color: darkgreen">Nome Cognome</h3>
+              <hr style="border: 1px solid darkgreen">
+              <h5><span style="font-weight: bold">Email: </span> <span id="profile_email">pinco@pallino.com</span></h5>
+              <h5><span style="font-weight: bold">Phone number: </span><span id="profile_phone"> 2324782748</span></h5>
+              <h5><span style="font-weight: bold">Driving License: </span><span id="profile_license"> 2324782748</span></h5>
+              <h5><span style="font-weight: bold">Credit Card: </span><span id="profile_credit"> 2324782748</span></h5>
+                <h5 style="text-decoration: underline;">Break preference time</h5>
+              <label>
+                <label class="text-center">Break start:<br><input id="breakpreftime_start" type="time" name=""></label>
+                <label class="text-center">Break end:<br><input id="breakpreftime_end" type="time" name=""></label>
+              </label>
+              <label>
+                <button id="update_breakpref" class="w3-button w3-indigo">Update Break</button>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px ">
+              <div class="col-lg-2 col-xs-2 col-sm-2" style="text-align: center;">
+                </div>
+              <div class="col-lg-10 col-xs-10 col-sm-10" style="text-align: left;">
+                <h5 style="text-decoration: underline;">Transport means preference</h5>
+                <div id="list_of_means"></div>
+              </div>
+              <div class="col-lg-2 col-xs-2 col-sm-2" style="text-align: center;"></div>
+            </div>
+            <div class="row" style="padding-top: 20px">
+              <div class="col-lg-2 col-xs-2 col-sm-2" style="text-align: center;"></div>
+              <div class="col-lg-4 col-xs-10 col-sm-10" style="text-align: left;">
+                <select id="means_pref" style="width: 100%; margin-bottom: 10px">
+                  <option value="1">Driving</option>
+                  <option value="2">Bycycling</option>
+                  <option value="3">Walking</option>
+                  <option value="4">Bus</option>
+                  <option value="5">Subway</option>
+                  <option value="6">Train</option>
+                  <option value="7">Tram</option>
+                  <option value="8">Rail</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-xs-2 col-sm-2" style="text-align: center;">
+              <button id="add_meanspref" class="w3-button w3-green" style="width: 100%; text-align: center; display: inline-block">Add transport</button>
+            </div>
+            <div class="col-lg-3 col-xs-2 col-sm-2" style="text-align: center;">
+               <button id="remove_meanspref" class="w3-button w3-red" style="width: 100%; text-align: center; display: inline-block">Remove transport</button>
+            </div>    
+          </div>
+          <div class="row" style="padding-top: 20px">
+              <div class="col-lg-2 col-xs-2 col-sm-2" style="text-align: center;"></div>
+              <div class="col-lg-4 col-xs-10 col-sm-10" style="text-align: left;">
+                <select id="means_pref" style="width: 100%; margin-bottom: 10px">
+                  <option value="1">Credit Card</option>
+                  <option value="2">Driving License</option>
+                  <option value="3">Phone Number</option>
+                  <option value="4">Email</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-xs-2 col-sm-2" style="text-align: center;">
+              <input id="update_userinfos_value" style="width: 100%; text-align: center; display: inline-block">
+            </div>  
+            <div class="col-lg-3 col-xs-2 col-sm-2" style="text-align: center;">
+              <button id="update_userinfos" class="w3-button w3-green" style="width: 100%; text-align: center; display: inline-block">Update</button>
+            </div>   
+          </div>
+
+        </div>
+      </section>
+      <!-- #about -->
+    </main>
+    <!--==========================
+    Footer
+    ============================-->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+        </div>
+      </div>
+    </footer>
+    <!-- #footer -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/jquery/jquery-migrate.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/superfish/hoverIntent.js"></script>
+    <script src="lib/superfish/superfish.min.js"></script>
+    <!-- Contact Form JavaScript File -->
+    <script src="contactform/contactform.js"></script>
+    <!-- Template Main Javascript File -->
+    <script src="js/main.js"></script>
+    <script src='./js/moment.min.js'></script>
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src='./js/fullcalendar.js'></script>
+    <!-- Funzione che mostra e nasconde le cose in base al fatto se è mobile
+    oppure no -->
+  </body>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $("#logout_button").on("click", function() {
+        window.localStorage.removeItem("my_travlendar");
+        location.assign("index.html");
+        return false;
+    });
+    var isPhoneGap = false;
+    var herokuURL = "";
+    if (isPhoneGap) {
+        herokuURL = "http://" + window.location.host + "/Travlandar";;
+    }
+    //$("#submit_signin").click(function(){
+    /* codice di test */
+    //location.assign("main.html");
+
+    $("#image_username").val(localStorage.getItem("my_username"));
+    $("#image_token").val(localStorage.getItem("my_travlendar"));
+
+    // Funzione per prendere i dati di base del profilo utente 
+    var coseDaMandare = {
+        "username": localStorage.getItem("my_username"),
+        "token": localStorage.getItem("my_travlendar")
+    };
+    $.ajax({
+        dataType: "text",
+        contentType: "text/plain; charset=utf-8",
+        type: "POST",
+        url: herokuURL + "/UserInformation",
+        data: JSON.stringify(coseDaMandare),
+        success: function(response) {
+          alert(response);
+            if ((JSON.parse(response))["status"] == "OK") {
+                response = JSON.parse(response);
+                $("#profile_email").html(response["user"]["mail"]);
+                $("#profile_phone").html(response["user"]["phone"]);
+                $("#profile_license").html(response["user"]["drivingLicense"]);
+                $("#profile_credit").html(response["user"]["creditCard"]);
+                $("#breakpreftime_start").val(response["user"]["breakPref"][0]["start"].slice(0,-3));
+                $("#breakpreftime_end").val(response["user"]["breakPref"][0]["end"].slice(0,-3));
+                for(var i = 0; i < response["user"]["meansPref"].length; i++){
+                  $("#list_of_means").append(`<img src="img/green_ok.png" style="width: 30px;">` + response["user"]["meansPref"][i]["type"].charAt(0).toUpperCase() + response["user"]["meansPref"][i]["type"].slice(1) + "<br>");
+                }
+            } else {
+                alert("Something went wrong.. Reload page");
+            }
+        }
+    });
+
+
+    // Funzione per aggioranre la preferenza per quanto riguarda il break time
+    $("#update_breakpref").on("click", function() {
+        var timeStart = $("#breakpreftime_start").val();
+        var timeEnd = $("#breakpreftime_end").val();
+        var timeStartParts = timeStart.split(":");
+        var timeEndParts = timeEnd.split(":");
+        var finalStart = (+timeStartParts[0] * (60000 * 60)) + (+timeStartParts[1] * 60000);
+        var finalEnd = (+timeEndParts[0] * (60000 * 60)) + (+timeEndParts[1] * 60000);
+        var coseDaCancellare = {
+            "username": localStorage.getItem("my_username"),
+            "token": localStorage.getItem("my_travlendar"),
+            "flag": false,
+            "name": "Break",
+            "start": finalStart,
+            "end": finalEnd,
+            "duration": finalEnd - finalStart
+        };
+        var coseDaMandare = {
+            "username": localStorage.getItem("my_username"),
+            "token": localStorage.getItem("my_travlendar"),
+            "flag": true,
+            "name": "Break",
+            "start": finalStart,
+            "end": finalEnd,
+            "duration": finalEnd - finalStart
+        };
+        $.ajax({
+            dataType: "text",
+            contentType: "text/plain; charset=utf-8",
+            type: "POST",
+            url: herokuURL + "/SetBreakPref",
+            data: JSON.stringify(coseDaCancellare),
+            success: function(response) {
+                $.ajax({
+                    dataType: "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/SetBreakPref",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function(response) {
+                        if ((JSON.parse(response))["status"] == "OK") {
+                           window.location.assign("profile.html");
+                        } else {
+                            alert("Error");
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+
+
+    // Funzione per aggiornare i dati dell'utente quando richiesto
+    $("#update_userinfos").on("click", function() {
+        var newValue = $("#update_userinfos_value").val();
+        alert(newValue);
+        var coseDaMandare = {
+            "username": localStorage.getItem("my_username"),
+            "token": localStorage.getItem("my_travlendar"),
+            "field": "drivingLicense",
+            "newValue" : newValue
+        };
+        $.ajax({
+            dataType: "text",
+            contentType: "text/plain; charset=utf-8",
+            type: "POST",
+            url: herokuURL + "/SetUserField",
+            data: JSON.stringify(coseDaMandare),
+            success: function(response) {
+              alert(response);
+                location.assign("profile.html");
+            }
+        });
+    });
+
+
+
+    // Funzione per aggiornare le preferenze dell'utente per i mezzi
+
+    $("#add_meanspref").on("click", function() {
+        var selezionato = $("#means_pref option:selected").text();
+        var coseDaMandare = {
+            "username": localStorage.getItem("my_username"),
+            "token": localStorage.getItem("my_travlendar"),
+            "flag": true,
+            "means": selezionato.toLowerCase()
+        };
+        $.ajax({
+            dataType: "text",
+            contentType: "text/plain; charset=utf-8",
+            type: "POST",
+            url: herokuURL + "/SetMeansPref",
+            data: JSON.stringify(coseDaMandare),
+            success: function(response) {
+              //alert(response);
+            }
+        });
+    });
+
+    // Funzione per rimuovere un mezzo di trasporto tra quelli preferiti dall'utente
+    $("#remove_meanspref").on("click", function() {
+        
+        var selezionato = $("#means_pref option:selected").text();
+        var coseDaMandare = {
+            "username": localStorage.getItem("my_username"),
+            "token": localStorage.getItem("my_travlendar"),
+            "flag": false,
+            "means": selezionato.toLowerCase()
+        };
+        $.ajax({
+            dataType: "text",
+            contentType: "text/plain; charset=utf-8",
+            type: "POST",
+            url: herokuURL + "/SetMeansPref",
+            data: JSON.stringify(coseDaMandare),
+            success: function(response) {
+              //alert(response);
+            }
+        });
+    });
+    //});
+});
+  </script>
+</html>
