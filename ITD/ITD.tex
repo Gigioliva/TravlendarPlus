@@ -557,10 +557,18 @@ System.out.println("Qui il codice dei test");
 
 \chapter{Installation instructions}
 
-To use the application you can proceed into two different ways: you can access the site or you can install all the components in local.\\
-In the first case, you just have to access the url \textbf{http://travlendarmom.herokuapp.com}. Once the page is loaded, you have to log in clicking on "Get Started". After that, you can "Sing Up" or you can access directly using the test credential (username = "admin" e password = "pass").\\
+To use the application you can proceed in to two different ways: you can access the site or you can install all the components in local. In the first case, you just have to access the url\\
 
-In the second cas, you have to download the following files:
+\textbf{http://travlendarmom.herokuapp.com}.\\
+
+Once the page is loaded, you have to log in clicking on "Get Started". After that, you can "Sign Up" or you can access directly using the test credentials
+\begin{lstlisting}
+	#Test credentials
+	username = "admin"
+	password = "pass"
+\end{lstlisting}
+
+In the second case, you have to download the following files:
 \begin{itemize}
 	\item JavaEE source files from the repository https://github.com/Gigioliva/OlivaMussiMoskwa
 	\item Dump file for database Dump.sql in the same repository
@@ -569,48 +577,29 @@ In the second cas, you have to download the following files:
 	\item MySQL Workbench https://dev.mysql.com/downloads/workbench/
 	\item Tomcat 8.5.24 https://tomcat.apache.org/download-80.cgi
 \end{itemize}
-One you downloaded all the files proceed with the MySQL installation wizard. For the required parameters choose the port 3306, user = root and password = prova.\\
-Once the MySQL installation is completed, we suggest installing MySQL Workbench in order to manage the database using a GUI. \\
-Now you have to carry out the dump of the data structure by CLI (https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html) or by Workbench (Server $\,\to\,$ Data Import $\,\to\,$ Import from Self-Contained File $\,\to\,$ Dump Structure Only $\,\to\,$ Start Import).\\
+Once you have downloaded all the files, proceed with the MySQL installation wizard. As for the required parameters, please choose the folowing:
+\begin{lstlisting}
+	 port: "3306"
+	 user:  "root"
+	 password: "prova"
+\end{lstlisting}
+
+As the MySQL installation is completed, we suggest installing MySQL Workbench in order to manage the database using a GUI. \\
+Now you have to carry out the dump of the data structure by CLI\\
+(https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html)
+or by Workbench (Server $\,\to\,$ Data Import $\,\to\,$ Import from Self-Contained File $\,\to\,$ Dump Structure Only $\,\to\,$ Start Import).\\
+
 Database initialization completed, install the server.
 
 \begin{itemize}
 	\item Unzip the Tomcat archive
-	\item Open Eclipse and from "file" select "import"
-	\item Select "Existing Maven Projects", then the Travlandar folder downloaded from the repository
+	\item Open Eclipse and from "File" select "Import"
+	\item Select "Existing Maven Projects", then the Travlendar folder downloaded from the repository
 	\item Once the project has been imported, click on it with the right mouse button and then press "Properties"
-	\item Then select "Targeted Runtimes" and if there is no server, press "new ..." and follow the Tomcat configuration wizard.
+	\item Then select "Targeted Runtimes" and if there is no server, press "New ..." and follow the Tomcat configuration wizard.
 	\item Finally click on the project with the right button $\,\to\,$  Run As $\,\to\,$ Run On Server $\,\to\,$ select the server created $\,\to\,$ Finish
 \end{itemize}
 
-
-Per poter utilizzare l'applicazione è possibile procedere in due modi: accedere all'apposito sito o installare tutti i componenti in locale.\\
-
-Nel primo caso è sufficiente accedere all'url \textbf{http://travlendarmom.herokuapp.com}. Una volta caricata la pagina si effettua il login cliccando su "Get Started" e successivamente procedere o effettuando il "Sign Up" o accedere direttamente con le credenziali di prova (username = "admin" e password = "pass").\\
-
-Per il secondo caso occorre innanzitutto scaricare i seguenti file:
-\begin{itemize}
-	\item File sorgenti JavaEE dalla repository https://github.com/Gigioliva/OlivaMussiMoskwa
-	\item Il file di dump del database Dump.sql presente nella stessa repository
-	\item Eclipse for JavaEE http://www.eclipse.org/downloads/eclipse-packages/
-	\item MySQL https://dev.mysql.com/downloads/mysql/
-	\item MySQL Workbench https://dev.mysql.com/downloads/workbench/
-	\item Tomcat 8.5.24 https://tomcat.apache.org/download-80.cgi
-\end{itemize}
-
-Una volta scaricati tutti file procedere con l'installazione guidata di MySQL. Quando richiesti i parametri indicare la porta 3306, user = root e password = prova.\\
-Una volta completata l'installazione di MySQL consigliamo l'installazione di MySQL Workbench per poter gestire il database mediante una GUI.\\
-A questo punto è necessario eseguire il dump della struttura dati o mediante CLI (https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html) o mediante Workbench (Server $\,\to\,$ Data Import $\,\to\,$ Import from Self-Contained File $\,\to\,$ Dump Structure Only $\,\to\,$ Start Import).\\
-
-Terminata l'inizializzazione del database si può procedere all'installazione del server.
-\begin{itemize}
-	\item Scompattare l'archivio contenente Tomcat
-	\item Aprire Eclipse e da "file" selezionare "import"
-	\item Selezionare "Existing Maven Projects" e quindi la cartella Travlandar scaricata dalla repository
-	\item Una volta importato il progetto cliccarlo con il tasto destro e premere poi "Properties"
-	\item Selezionare quindi "Targeted Runtimes" e se non presente alcun server premere su "new..." e seguire la procedura guidata per la configurazione di Tomcat.
-	\item Infine fare click sul progetto con il tasto destro $\,\to\,$  Run As $\,\to\,$ Run On Server $\,\to\,$ selezionare il server creato $\,\to\,$ Finish
-\end{itemize}
 
 
 \end{document}
