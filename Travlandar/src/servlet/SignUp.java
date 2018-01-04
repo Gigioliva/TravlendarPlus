@@ -99,7 +99,7 @@ public class SignUp extends HttpServlet {
 				out.close();
 				Mail.inviaMail(requestJSON.getString("email"));
 			} catch (JSONException e) {
-				System.out.print("Error in SingUpServlet: " + data);
+				System.out.print("Error in SignUpServlet: " + data);
 			}
 		}
 	}

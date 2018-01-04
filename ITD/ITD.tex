@@ -243,6 +243,7 @@ For the client side we used the following libraries and frameworks:
 	\item MySQL
 	\item Postgress
 	\item Flask
+	\item Apache JMeter
 	\item Heroku
 \end{itemize}
 
@@ -491,25 +492,102 @@ As it's possible to see by the code, in order to view the calendar the user is r
 \chapter{Testing}
 
 In order to proof the correctness of the most important parts of the code will be provided a complete test of all the main parts of the code. \\\newline
-On server side the Java EE code has been tested using the tools that Java provide with some additional libraries. In particular were used the JUnit libraries to test the part that works completely in the local system without using external resources like DBMS and network.
-To emulate the part which requires the interaction with external component was used a framework called Mockito to test all the part regarding the not static class and method of the code and another derivative tool called PowerMockito to emulate the response of the parts of the code which are the static methods of the code. 
-Furthermore in order to measure the performance of the whole server side will be showed in the next pages some report of the performance measure extracted by real situation using Apache JMeter. 
-The test of the Java EE server is available with the source code of the whole Web Application. \\\newline
 With the aim to provide a test also at the client side of the application was created a purpose specific Python server to test the response of the client at some predetermined situation that the server provide statically. 
-The test of the client will be provided partly with the source code and partly in the following pages. \\\newpage
+The test of the client will be provided partly with the source code and partly in the following pages. \\\newline
 
 
 \section*{Server Testing}
+On server side the Java EE code has been tested using the tools that Java provide with some additional libraries. In particular were used the JUnit libraries to test the part that works completely in the local system without using external resources like DBMS and network.
+To emulate the part which requires the interaction with external component was used a framework called Mockito to test all the part that regards the not static classes and methods of the code and another derivative tool called PowerMockito to emulate the execution and the response of the parts of the code which are the static. 
+The test of the Java EE server is available with the source code of the whole Web Application in Travlendar/src/test folder in the Github repository. \\\newline
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/ServerEclipse}
+	\caption{The result of the JUnit test on Eclipse}
+\end{figure}
+Furthermore in order to measure the performance of the whole server side will be showed in the next pages some reports of the performance measurerement made by Apache JMeter.
+In order to make the performance measurement test repeatable easily the target of the test provided in the folder Travlendar/src/test/testJMeter folder in the Github repository have as target the Heroku site.
+All tests are executed using Apache JMeter version 3.3.
+The performance tests must be executed in this order:
+\begin{itemize}
+	\item First must be executed the login method with the parameters like in the Login.jmx file (username:admin and password:pass)
+	\item After the execution of the login performance test in the response section a token will be retuned
+	\item Returned token must be inserted in the proper space in "Body Data" field (HTTP Request section) of the others performace tests in order to authenticate the user properly on the system 
+\end{itemize}
 
-+ I test di Java, Jmeter e altro qui sotto 
+All the results of the tested method are showed below.\\\newline
 
-\lstset{language=Java}
-\begin{lstlisting}
-public void main(int prova, int altro){
-System.out.println("Qui il codice dei test");
-}
-\end{lstlisting}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/LoginMain}
+	\caption{The performance results (in millisecond) of the Login servlet on Heroku application server}
+\end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.1\textwidth]{Test/LoginReq}
+\caption{The request sended to server for the Login servlet}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.1\textwidth]{Test/LoginResp}
+\caption{The response of the server for the Login servlet}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/UserInformationMain}
+	\caption{The performance results (in millisecond) of the UserInformation servlet on Heroku application server}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/UserInformationReq}
+	\caption{The request sended to server for the UserInformation servlet}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/UserInformationResp}
+	\caption{The response of the server for the UserInformation servlet}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/GetAllScheduleMain}
+	\caption{The performance results (in millisecond) of the GetAllSchedule servlet on Heroku application server}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/GetAllScheduleReq}
+	\caption{The request sended to server for the GetAllSchedule servlet}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/GetAllScheduleResp}
+	\caption{The response of the server for the GetAllSchedule servlet}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/GetScheduleMain}
+	\caption{The performance results (in millisecond) of the GetSchedule servlet on Heroku application server}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/GetScheduleReq}
+	\caption{The request sended to server for the GetSchedule servlet}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.1\textwidth]{Test/GetScheduleResp}
+	\caption{The response of the server for the GetSchedule servlet}
+\end{figure}
 
 \section*{Client Testing}
 
