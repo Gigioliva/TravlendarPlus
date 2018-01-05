@@ -692,6 +692,32 @@ Database initialization completed, install the server.
 	\item Finally click on the project with the right button $\,\to\,$  Run As $\,\to\,$ Run On Server $\,\to\,$ select the server created $\,\to\,$ Finish
 \end{itemize}
 
+\section*{Additional notes}
+
+\begin{itemize}
+	\item The first request made to the web application can take some time to be performed. This is due to restrinctions imposed by Heroku.
+	For more information about this please check the following link in scalability
+	
+	\textbf{https://devcenter.heroku.com/articles/dynos}
+	
+	\item After creating a new user, it is needed to add his preferences about Break Time and Means of Transport in order to add new Schedules and Events. If omitted this step, the application won't work correctly.
+	
+	\item In order to compile a new APK (if any change is needed), the following command is required
+	\begin{lstlisting}
+		phonegap build android
+	\end{lstlisting}
+	
+	\item In order to replicate the usage of the client testing server, the following command is required
+	\begin{lstlisting}
+		# In testingServer folder
+		./server
+	\end{lstlisting}
+	Then you have to access to your browser while the server is running and check the following address
+	\begin{lstlisting}
+		http://127.0.0.1:5000
+	\end{lstlisting}
+\end{itemize}
+
 
 
 \end{document}
