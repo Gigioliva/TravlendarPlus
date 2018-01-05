@@ -10,10 +10,10 @@ Table of Contents
 
    * [Travlendar +](#travlendar-+)
    * [File Structure](#file-structure)
-    * [Documents](#documents)
-    * [Client](#client)
-    * [Server](#server)
-    * [Testing](#testing)
+      * [Documents](#documents)
+      * [Client](#client)
+      * [Server](#server)
+      * [Testing](#testing)
    * [Screenshots](#screenshots)
 
 
