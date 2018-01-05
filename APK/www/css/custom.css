@@ -1,0 +1,20 @@
+.orange_1{
+	background-color: #fb8c00;
+}
+.orange_2{
+	background-color: #c67c00;
+}
+.orange_3{
+	background-color: #ffe54c; 
+}
+.fc-left>h2{
+	color: black;
+}
+
+.custom-file-upload {
+    display: inline-block;
+}
+
+input[type='file'] {
+  display: none
+}

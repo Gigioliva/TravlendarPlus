@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Main | Travlendar + </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
+    <!-- Bootstrap CSS File -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/w3.css">
+    <!-- Libraries CSS Files -->
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/popup.css">
+    <!-- Main Stylesheet File -->
+    <link href='css/fullcalendar.min.css' rel='stylesheet' />
+    <link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <!-- STUFF -->
+    <link rel="stylesheet" href="css/jquery_mobile.css" />
+    <script src="lib/jquery/jquery.min.js"></script>
+    <!--<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>-->
+    <script src="lib/jquery/jquery-migrate.min.js"></script>
+    <!--<script src="js/jquery_mobile.js"></script>
+        <!--    <script src="js/jquery_ui.js"></script>-->
+    <!-- =======================================================
+        Theme Name: Regna
+        Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
+        Author: BootstrapMade.com
+        License: https://bootstrapmade.com/license/
+        ======================================================= -->
+</head>
+
+<body style="display: none">
+    <!--==========================
+        Header
+        ============================-->
+    <header id="header">
+        <div class="container">
+            <div id="logo" class="pull-left">
+                <!--<a href="#hero"><img src="img/logo.png" alt="" title="" /></img></a>-->
+                <!-- Uncomment below if you prefer to use a text logo -->
+                <h1 style="font-family: myTitle; color: white">Travlendar +</h1>
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <div class="container dunno">
+                        <div class="row">
+                            <div class="col-md-2 col-xs-2 col-sm-2">
+                                <div class="mini_img_profile"></div>
+                                    
+                                <br>
+                                <span class="profile_name" style="color: white; font-weight: bold">Nome Cognome</span>
+                                <hr style="border: 1px solid white;">
+                            </div>
+                        </div>
+                    </div>
+                    <li class="menu-active"><a href="#hero">Schedules</a>
+                    </li>
+                    <li><a href="profile.html">Profile</a>
+                    </li>
+                    <li><a href="ticket.html">Tickets</a>
+                    </li>
+                    <li><a href="weather.html">Weather</a>
+                    </li>
+                    <li><a id="logout_button" href="">Logout</a></li>
+                </ul>
+            </nav>
+            <!-- #nav-menu-container -->
+        </div>
+    </header>
+    <!-- #header -->
+    <!--==========================
+Hero Section
+============================-->
+    <section id="hero" style="height: 90px; background-color: #010150;">
+    </section>
+    <!-- #hero -->
+    <main id="main">
+        <section id="about" style="padding: 20px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-xs-9 col-sm-9">
+                        <div id='calendar' style="width: 100%; min-height: 500px;"></div>
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3 text-center meh_dunno">
+                        <div style="width: 100%; min-height: 500px">
+                            <img id="profile_picture" src="img/profile.png" style="padding-bottom: 10px;">
+                            <h3 class="profile_name" style="color: green"></h3>
+                            <p style="text-align: justify;">Keep in mind that you have to choose preferred means of transport and break in order to add a new event</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- #about -->
+    </main>
+    <!-- SPAZIO POPUP -->
+    <div>
+        <div class="popup" data-popup="popup-1" style="z-index: 999; color: black; overflow-y: scroll;">
+            <div id="popup-inner" class="popup-inner" style="background-color: #212170; text-align: center; height: 90vh; overflow: scroll;">
+                <h1 style="font-family: myTitle; color: white; margin: 0;">Create Event</h1>
+                <div class="container">
+                    <div class="row">
+                        <div id="popup_current_date" class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: center; text-decoration: underline;">
+                            Date
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 15px;">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Event name
+                        </div>
+                        <div class="col-md-9 col-xs-9 col-sm-9">
+                            <input id="event_name" type="text" name="" placeholder="Name of the event" style="width: 100%">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Category
+                        </div>
+                        <div class="col-md-9 col-xs-9 col-sm-9">
+                            <select id="select_event_type" style="width: 100%">
+                    <option value="meeting">Meeting</option>
+                    <option value="break">Break</option>
+                    <option value="party">Party</option>
+                    <option value="other">Other..</option>
+                </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Origin position
+                        </div>
+                        <div class="col-md-9 col-xs-9 col-sm-9">
+                            <input id="searchTextField1" type="text" style="width: 100%" placeholder="Ex. Milano via Golgi 20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Event position
+                        </div>
+                        <div class="col-md-9 col-xs-9 col-sm-9">
+                            <input id="searchTextField2" type="text" style="width: 100%" placeholder="Ex. Milano via Golgi 20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Time start
+                        </div>
+                        <div class="col-md-9 col-xs-9 col-sm-9">
+                            <input id="time_event_start" type="time" style="width: 100%">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3 col-sm-3" style="color: white; text-align: left">
+                            Time end
+                        </div>
+                        <div class="col-md-9 col-xs-9 col-sm-9">
+                            <input id="time_event_end" type="time" style="width: 100%">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 15px; padding-bottom: 15px;">
+                        <div class="col-md-3 col-xs-3 col-sm-3"></div>
+                        <div class="col-md-9 col-xs-9 col-sm-9">
+                            <button id="submit_new_event" class="w3-button w3-indigo" style="width: 100%">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <a class="popup-close" data-popup-close="popup-1" style="color: white; position: absolute; z-index: 999; right: 13px; top:13px;">x</a>
+            </div>
+        </div>
+        <div class="popup" data-popup="popup-2" style="z-index: 999; color: black; overflow-y: scroll;">
+            <div id="popup-inner" class="popup-inner" style="background-color: #212170; text-align: center; height: 90vh; overflow: scroll;">
+                <h1 style="font-family: myTitle; color: white; margin: 0;">Event</h1>
+                <div id="event_content_info">
+                    <div id="map" style="height: 70vh"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-6 col-sm-6">
+                        <button id="delete_event" class="w3-button w3-red" style="width: 100%; text-align: center; display: inline-block; margin-top: 10px ">Delete event</button>
+                    </div>
+                    <div class="col-md-6 col-xs-6 col-sm-6">
+                        <button id="delete_schedule" class="w3-button w3-red" style="width: 100%; text-align: center; display: inline-block;margin-top: 10px; margin-bottom: 20px">Delete schedule</button>
+                    </div>
+                </div>
+                <a class="popup-close" data-popup-close="popup-2" style="color: white; position: absolute; z-index: 999; right: 13px; top:13px;">x</a>
+            </div>
+        </div>
+    </div>
+    <!-- SPAZIO BOTTONI -->
+    <div class="mini_button">
+        <div class="" style="position: fixed; bottom: 3vh; right: 5vh; z-index: 999">
+            <div class="row">
+                <div class="col-lg-2 col-xs-2 col-sm-2" data-popup-open="popup-1" style="border-radius: 50px; background-color: #212170; height: 13vh; width: 13vh; line-height: 13vh; text-align: left; flex: 0; max-width: 13vh; padding: 0;">
+                    <img src="img/event.png" style="width: 13vh">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popup_getpath" data-popup-open="popup-2"></div>
+    <!--==========================
+Footer
+============================-->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+            </div>
+        </div>
+    </footer>
+    <!-- #footer -->
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/superfish/hoverIntent.js"></script>
+    <script src="lib/superfish/superfish.min.js"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>-->
+    <!--<script type="text/javascript" src="./js/google_maps.js"></script>-->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAp9PXwQBN7eFQbJ0AAiWvg1ARqZDtsZIM&libraries=places"></script>
+    <!-- Contact Form JavaScript File -->
+    <script src="contactform/contactform.js"></script>
+    <!-- Template Main Javascript File -->
+    <script src="js/main.js"></script>
+    <script src='./js/moment.min.js'></script>
+    <!--<script src="lib/jquery/jquery.min.js"></script>-->
+    <script src='./js/fullcalendar.js'></script>
+    <script src='./js/sloggami.js'></script>
+    
+    <script>
+        /*right: 'listDay,listWeek,month' Da inserire da qualche parte*/
+        $(window).ready(function() {
+            var isPhoneGap = true;
+            var herokuURL = "";
+            if (isPhoneGap) {
+                herokuURL = "http://travlendarmom.herokuapp.com";
+            }
+
+
+            var start = "";
+            var end = "";
+            var means = "";
+            var option = "";
+
+            function addTimes(startTime, endTime) {
+                var times = [0, 0, 0]
+                var max = times.length
+
+                var a = (startTime || '').split(':')
+                var b = (endTime || '').split(':')
+
+                // normalize time values
+                for (var i = 0; i < max; i++) {
+                    a[i] = isNaN(parseInt(a[i])) ? 0 : parseInt(a[i])
+                    b[i] = isNaN(parseInt(b[i])) ? 0 : parseInt(b[i])
+                }
+
+                // store time values
+                for (var i = 0; i < max; i++) {
+                    times[i] = a[i] + b[i]
+                }
+
+                var hours = times[0]
+                var minutes = times[1]
+                var seconds = times[2]
+
+                if (seconds > 60) {
+                    var m = (seconds / 60) << 0
+                    minutes += m
+                    seconds -= 60 * m
+                }
+
+                if (minutes > 60) {
+                    var h = (minutes / 60) << 0
+                    hours += h
+                    minutes -= 60 * h
+                }
+
+                return ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2)
+            }
+
+            function getAllSchedulesEver() {
+                var returnArray = [];
+                var coseDaMandare = {
+                    "username": localStorage.getItem("my_username"),
+                    "token": localStorage.getItem("my_travlendar")
+                };
+                $.ajax({
+                    dataType: "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/GetAllSchedule",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function(response) {
+                        //alert(response);
+                        response = JSON.parse(response);
+                        for (var i = 0; i < response["schedule"].length; i++) {
+                            var time_no = String(response["schedule"][i]["day"]).split("-");
+                            var time_ok = time_no[2] + "-" + time_no[1] + "-" + time_no[0] + "T";
+                            for (var j = 0; j < response["schedule"][i]["events"].length; j++) {
+                                var start_time = time_ok + response["schedule"][i]["events"][j]["start"];
+                                var end_time = time_ok + addTimes(response["schedule"][i]["events"][j]["start"], response["schedule"][i]["events"][j]["duration"]);
+                                var event_name = response["schedule"][i]["events"][j]["name"];
+                                var singolo_evento = {
+                                    "id": response["schedule"][i]["events"][j]["ID"],
+                                    "title": event_name,
+                                    "start": start_time,
+                                    "end": end_time
+                                }
+                                returnArray.push(singolo_evento);
+                            }
+                        }
+
+
+
+                        $('#calendar').fullCalendar({
+                            header: {
+                                left: 'title',
+                                right: 'prev,next today month agendaDay'
+                            },
+                            dayClick: function(date, jsEvent, view, resourceObj) {
+                                $('#calendar').fullCalendar("gotoDate", date);
+                                $('#calendar').fullCalendar('changeView', 'agendaDay');
+                            },
+                            // customize the button names,
+                            // otherwise they'd all just say "list"
+                            views: {
+                                listDay: {
+                                    buttonText: 'Day'
+                                },
+                                listWeek: {
+                                    buttonText: 'Week'
+                                }
+                            },
+                            eventClick: function(calEvent, jsEvent, view) {
+                                var moment = $('#calendar').fullCalendar('getDate');
+                                var time_no = String(moment.format()).split("T")[0].split("-");
+                                var time_send = time_no[2] + "-" + time_no[1] + "-" + time_no[0];
+                                var coseDaMandare = {
+                                    "username": localStorage.getItem("my_username"),
+                                    "token": localStorage.getItem("my_travlendar"),
+                                    "day": time_send
+                                };
+                                $.ajax({
+                                    dataType: "text",
+                                    contentType: "text/plain; charset=utf-8",
+                                    type: "POST",
+                                    url: herokuURL + "/GetSchedule",
+                                    data: JSON.stringify(coseDaMandare),
+                                    success: function(response) {
+                                        response = JSON.parse(response);
+                                        var scorrimento = response["schedule"]["singleSchedule"];
+                                        for (var i = 0; i < scorrimento.length; i++) {
+                                            if (scorrimento[i]["event"]["ID"] == calEvent.id) {
+                                                localStorage.setItem("current_event", calEvent.id);
+                                                means = scorrimento[i]["means"];
+                                                switch (means) {
+                                                    case "driving":
+                                                        means = "DRIVING";
+                                                        option = "BUS";
+                                                        break;
+                                                    case "bicycling":
+                                                        means = "BICYCLING";
+                                                        option = "BUS";
+                                                        break;
+                                                    case "walking":
+                                                        means = "WALKING";
+                                                        option = "BUS";
+                                                        break;
+                                                    case "bus":
+                                                        means = "TRANSIT";
+                                                        option = "BUS";
+                                                        break;
+                                                    case "tram":
+                                                        means = "TRANSIT";
+                                                        option = "TRAM";
+                                                        break;
+                                                    case "subway":
+                                                        means = "TRANSIT";
+                                                        option = "SUBWAY";
+                                                        break;
+                                                    case "train":
+                                                        means = "TRANSIT";
+                                                        option = "TRAIN";
+                                                        break;
+                                                    case "rail":
+                                                        means = "TRANSIT";
+                                                        option = "RAIL";
+                                                        break;
+                                                }
+                                                var coseDaMandare = {
+                                                    "origin": scorrimento[i]["position"],
+                                                    "destination": scorrimento[i]["event"]["position"],
+                                                    "mode": scorrimento[i]["means"]
+                                                };
+                                                //alert(JSON.stringify(coseDaMandare));
+                                                $.ajax({
+                                                    dataType: "text",
+                                                    contentType: "text/plain; charset=utf-8",
+                                                    type: "POST",
+                                                    url: herokuURL + "/GetPath",
+                                                    data: JSON.stringify(coseDaMandare),
+                                                    success: function(response) {
+                                                        response = JSON.parse(response);
+                                                        start = String(response["routes"][0]["legs"][0]["start_address"]).replace(new RegExp(' ', 'g'), '+');
+                                                        end = String(response["routes"][0]["legs"][0]["end_address"]).replace(new RegExp(' ', 'g'), '+');
+                                                        $("#event_content_info").append("");
+                                                        initMap();
+                                                        $("#popup_getpath").click();
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+                                });
+
+                                // change the border color just for fun
+                                $(this).css('border-color', 'red');
+
+                            },
+                            defaultView: 'agendaDay',
+                            navLinks: true, // can click day/week names to navigate views
+                            editable: false,
+                            eventLimit: true, // allow "more" link when too many events
+                            events: returnArray, // id title start end
+                            eventColor: '#212170',
+                            eventTextColor: "white",
+                            eventBorderColor: "blue"
+                        });
+                        //$('#calendar').fullCalendar("gotoDate", date);
+                        $('#calendar').fullCalendar('changeView', 'agendaDay');
+                    }
+                });
+            };
+
+            getAllSchedulesEver();
+
+
+
+
+
+            function initMap() {
+                var directionsService = new google.maps.DirectionsService;
+                var directionsDisplay = new google.maps.DirectionsRenderer;
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 13,
+                    center: {
+                        lat: 45.46,
+                        lng: 9.037
+                    }
+                });
+
+                directionsDisplay.setMap(map);
+
+
+
+                google.maps.event.trigger(map, 'resize');
+                window.dispatchEvent(new Event('resize'));
+
+                function onChangeHandler() {
+                    window.dispatchEvent(new Event('resize'));
+                    calculateAndDisplayRoute(directionsService, directionsDisplay);
+                };
+                calculateAndDisplayRoute(directionsService, directionsDisplay);
+            }
+
+            function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                directionsService.route({
+                    origin: start,
+                    destination: end,
+                    travelMode: means,
+                    transitOptions: {
+                        modes: [option]
+                    },
+                }, function(response, status) {
+                    if (status === 'OK') {
+                        directionsDisplay.setDirections(response);
+                        window.dispatchEvent(new Event('resize'));
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
+            }
+
+
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+            setImage();
+            
+            var isPhoneGap = true;
+            var herokuURL = "";
+            if (isPhoneGap) {
+                herokuURL = "http://travlendarmom.herokuapp.com";
+            }
+            $(".fc-left>h2").attr("style", "color:darkgreen; text-align:center; font-size: 24px");
+            $(".fc-right").attr("style", "text-align:center;");
+            $(".fc-right").removeClass('fc-right').addClass('fc-left');
+            $(".fc-left").css("margin-bottom", '10px');
+            $("#calendar").attr("style", "z-index:0;width: 100%;min-height: 500px;")
+            // Roba da popup
+            $('[data-popup-open]').on('click', function(e) {
+                var targeted_popup_class = jQuery(this).attr('data-popup-open');
+                $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+                var moment = $('#calendar').fullCalendar('getDate');
+                var time_no = String(moment.format()).split("T")[0].split("-");
+                var time_send = time_no[2] + "-" + time_no[1] + "-" + time_no[0];
+                var splitted_moment = String(moment).split(' ');
+                $("#popup_current_date").html("Day: " + splitted_moment[0] + " " + splitted_moment[1] + " " + splitted_moment[2] + " " + splitted_moment[3]);
+                var coseDaMandare = {
+                    "username": localStorage.getItem("my_username"),
+                    "token": localStorage.getItem("my_travlendar"),
+                    "day": time_send
+                }
+                $.ajax({
+                    dataType: "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/GetSchedule",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function(response) {
+                        response = JSON.parse(response);
+                        if (response["status"] == "KO") {
+                            //Creo uno schedule visto che non esiste
+                            $.ajax({
+                                dataType: "text",
+                                contentType: "text/plain; charset=utf-8",
+                                type: "POST",
+                                url: herokuURL + "/CreateSchedule",
+                                data: JSON.stringify(coseDaMandare),
+                                success: function(response) {
+
+                                }
+                            });
+                        }
+                    }
+                });
+                e.preventDefault();
+            });
+            $('[data-popup-close]').on('click', function(e) {
+                var targeted_popup_class = jQuery(this).attr('data-popup-close');
+                $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+            });
+            
+            $("#submit_new_event").on("click", function() {
+
+                var moment = $('#calendar').fullCalendar('getDate');
+                var time_no = String(moment.format()).split("T")[0].split("-");
+                var time_send = time_no[2] + "-" + time_no[1] + "-" + time_no[0];
+                var timeStart = $("#time_event_start").val();
+                var timeEnd = $("#time_event_end").val();
+                var timeStartParts = timeStart.split(":");
+                var timeEndParts = timeEnd.split(":");
+                var finalStart = (+timeStartParts[0] * (60000 * 60)) + (+timeStartParts[1] * 60000);
+                var finalEnd = (+timeEndParts[0] * (60000 * 60)) + (+timeEndParts[1] * 60000);
+                var originReplaced = String($("#searchTextField1").val()).replace(new RegExp(' ', 'g'), '+');
+                var eventPositionReplaced = String($("#searchTextField2").val()).replace(new RegExp(' ', 'g'), '+');
+                var coseDaMandare = {
+                    "username": localStorage.getItem("my_username"),
+                    "token": localStorage.getItem("my_travlendar"),
+                    "day": time_send,
+                    "origin": originReplaced,
+                    "eventName": $("#event_name").val(),
+                    "eventStart": finalStart,
+                    "eventDuration": finalEnd - finalStart,
+                    "eventType": $("#select_event_type option:selected").text(),
+                    "eventPosition": eventPositionReplaced
+                }
+                //alert(JSON.stringify(coseDaMandare));
+                $.ajax({
+                    dataType: "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/AddEvent",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function(response) {
+                        console.log(response);
+                        location.assign("main.html");
+                    }
+                });
+            });
+
+
+
+            $("#delete_event").on("click", function(obj, altro) {
+                var toDelete = localStorage.getItem("current_event");
+                var coseDaMandare = {
+                    "username": localStorage.getItem("my_username"),
+                    "token": localStorage.getItem("my_travlendar"),
+                    "ID": toDelete
+                }
+                //alert(JSON.stringify(coseDaMandare));
+                $.ajax({
+                    dataType: "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/DeleteEvent",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function(response) {
+                        location.assign("main.html");
+                    }
+                });
+            });
+
+
+            $("#delete_schedule").on("click", function(obj, altro) {
+
+                var moment = $('#calendar').fullCalendar('getDate');
+                var time_no = String(moment.format()).split("T")[0].split("-");
+                var time_send = time_no[2] + "-" + time_no[1] + "-" + time_no[0];
+                var coseDaMandare = {
+                    "username": localStorage.getItem("my_username"),
+                    "token": localStorage.getItem("my_travlendar"),
+                    "day": time_send
+                }
+                //alert(JSON.stringify(coseDaMandare));
+                $.ajax({
+                    dataType: "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/DeleteSchedule",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function(response) {
+                        location.assign("main.html");
+                    }
+                });
+            });
+
+            $("#nome_e_cognome").html(localStorage.getItem("my_name") + " " + localStorage.getItem("my_surname"));
+
+            function setImage() {
+                var isPhoneGap = true;
+                var herokuURL = "";
+                if (isPhoneGap) {
+                    herokuURL = "http://travlendarmom.herokuapp.com";
+                }
+                var coseDaMandare = {
+                    "username": localStorage.getItem("my_username"),
+                    "token": localStorage.getItem("my_travlendar")
+                };
+                $.ajax({
+                    dataType: "text",
+                    contentType: "text/plain; charset=utf-8",
+                    type: "POST",
+                    url: herokuURL + "/download",
+                    data: JSON.stringify(coseDaMandare),
+                    success: function(response) {
+                        response = JSON.parse(response);
+                        if (response.status === "OK") {
+                            $("#profile_picture").attr("src", response.url);
+                            $("#mini_img_profile").attr("src", response.url);
+                            localStorage.setItem("profile_url", response.url);
+                        }
+                    }
+                });
+            }
+        });
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACuHim7KBzg4kgeoLIQMTKSoh34eLXN2c">
+
+
+    </script>
+</body>
+
+</html>
