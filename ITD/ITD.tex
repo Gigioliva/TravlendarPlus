@@ -491,28 +491,28 @@ As it's possible to see by the code, in order to view the calendar the user is r
 
 \chapter{Testing}
 
-In order to proof the correctness of the most important parts of the code will be provided a complete test of all the main parts of the code. \\\newline
+In order to proof the correctness of the most important parts of the code will be provided a complete test of all the main client and server parts of the code. \\\newline
 
 \section*{Server Testing}
 On server side the Java EE code has been tested using the tools that Java provide with some additional libraries. In particular were used the JUnit libraries to test the part that works completely in the local system without using external resources like DBMS and network.
 To emulate the part which requires the interaction with external component was used a framework called Mockito to test all the part that regards the not static classes and methods of the code and another derivative tool called PowerMockito to emulate the execution and the response of the parts of the code which are the static. 
-The test of the Java EE server is available with the source code of the whole Web Application in Travlendar/src/test folder in the Github repository. \\\newline
+The test of the Java EE server is available with the source code of the whole Web Application in Travlendar/src/test folder in the Github repository. \\\newpage
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.1\textwidth]{Test/ServerEclipse}
 	\caption{The result of the JUnit test on Eclipse}
 \end{figure}
 Furthermore in order to measure the performance of the whole server side will be showed in the next pages some reports of the performance measurerement made by Apache JMeter.
-In order to make the performance measurement test repeatable easily the target of the test provided in the folder Travlendar/src/test/testJMeter folder in the Github repository have as target the Heroku site.
 All tests are executed using Apache JMeter version 3.3.
+In order to make the performance measurement test repeatable easily the target of the test provided in the folder Travlendar/src/test/testJMeter folder in the Github repository have as target the Heroku site.
 The performance tests must be executed in this order:
 \begin{itemize}
 	\item First must be executed the login method with the parameters like in the Login.jmx file (username:admin and password:pass)
 	\item After the execution of the login performance test in the response section a token will be retuned
-	\item Returned token must be inserted in the proper space in "Body Data" field (HTTP Request section) of the others performace tests in order to authenticate the user properly on the system 
+	\item Returned token must be inserted in the proper space in "Body Data" field (HTTP Request section) of the others performace tests in order to authenticate the user properly on the system, otherwise the user result ont properly logged in
 \end{itemize}
 
-All the results of the tested method are showed below.\\\newline
+All the results of the tested method are showed in the next pages.\\\newpage
 
 \begin{figure}[H]
 	\centering
@@ -532,6 +532,8 @@ All the results of the tested method are showed below.\\\newline
 \caption{The response of the server for the Login servlet}
 \end{figure}
 
+\\\newpage
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.1\textwidth]{Test/UserInformationMain}
@@ -549,6 +551,8 @@ All the results of the tested method are showed below.\\\newline
 	\includegraphics[width=1.1\textwidth]{Test/UserInformationResp}
 	\caption{The response of the server for the UserInformation servlet}
 \end{figure}
+
+\\\newpage
 
 \begin{figure}[H]
 	\centering
@@ -568,6 +572,8 @@ All the results of the tested method are showed below.\\\newline
 	\caption{The response of the server for the GetAllSchedule servlet}
 \end{figure}
 
+\\\newpage
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.1\textwidth]{Test/GetScheduleMain}
@@ -586,13 +592,15 @@ All the results of the tested method are showed below.\\\newline
 	\caption{The response of the server for the GetSchedule servlet}
 \end{figure}
 
+\\\newpage
+
 \section*{Client Testing}
 With the aim to provide a test also at the client side of the application was created a purpose specific Python server to test the response of the client at some predetermined situation that the server provide statically. 
-The test of the client will be provided in the source code in Travlendar/src/test/testingServer folder and some example of the response are showed in the following pages. \\\newline
-The Python server require to be executed with Python3 to support all its features, it also require two additional modules: Colorama and Flask.
-In order to run the test in the same folder there are a "templates" folder which contains a specifically purposed client copy that must be at the same level of the Puthon server file (server.py).
+The test of the client will be provided in the source code in Travlendar/src/test/testingServer folder and an example of the response is showed in the following pages. \\\newline
+The Python server require to be executed with Python3 to support all its features, it also require two additional modules: Colorama and Flask those are available to download directly from command line by using python commands (that are different between the various OS).
+In order to run the test in the same folder there are a "templates" folder which contains a specifically purposed client copy that must be at the same level of the Puthon server file (server.py).\\\newline
 For all the endpoint there was a code that emulate the real server response, this allows to test the client side independently from the real application and web servers.
-The servers shows in the command line that run it the result of the different request of the client and shows clearly, also using colors (red for errors and yellow for correct request), if the call be successfull or not. \\\newline
+The server shows in the command line that run it the result of the different requests of the client and shows clearly, also using colors (red for errors and yellow for correct request), if the calls is successfull or not. \\\newline
 The following code show the example of the Login endpoint of the testing server.
 
 \lstset{language=Python}
@@ -626,13 +634,13 @@ The following code show the example of the Login endpoint of the testing server.
 \end{lstlisting}
 
 In the following pictures will be showed a success and a fail of the request from the client.
-
+\vspace{1cm}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.1\textwidth]{Test/LoginSuccess}
 	\caption{The correct request from the client}
 \end{figure}
-
+\vspace{1cm}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.1\textwidth]{Test/LoginError}
