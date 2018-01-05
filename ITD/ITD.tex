@@ -252,9 +252,11 @@ The last one was used to deploy the application server to a remote host. Due to 
 \section*{Used API}
 
 \begin{itemize}
-	\item \textbf{Google API}: These are used to diplay and receive information about the path and everything concerning the journey.
+	\item \textbf{Google API}: These are used to display and receive information about the path and everything concerning the journey.
 	
-	\item \textbf{APIXU API}: These are use in order to receinve and display the data about the weather forecast in a particular day
+	\item \textbf{APIXU API}: These are use in order to receive and display the data about the weather forecast in a particular day.
+	
+	\item \textbf{IMGUR API} These are use in order to save the picture of the user.
 \end{itemize}
 
 
@@ -491,17 +493,13 @@ As it's possible to see by the code, in order to view the calendar the user is r
 
 \chapter{Testing}
 
-In order to proof the correctness of the most important parts of the code will be provided a complete test of all the main client and server parts of the code. \\\newline
+In order to proof the correctness of the most important parts of the code will be provided a complete test of all the main client and server parts of the code.
 
 \section*{Server Testing}
 On server side the Java EE code has been tested using the tools that Java provide with some additional libraries. In particular were used the JUnit libraries to test the part that works completely in the local system without using external resources like DBMS and network.
 To emulate the part which requires the interaction with external component was used a framework called Mockito to test all the part that regards the not static classes and methods of the code and another derivative tool called PowerMockito to emulate the execution and the response of the parts of the code which are the static. 
-The test of the Java EE server is available with the source code of the whole Web Application in Travlendar/src/test folder in the Github repository. \\\newpage
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1.1\textwidth]{Test/ServerEclipse}
-	\caption{The result of the JUnit test on Eclipse}
-\end{figure}
+The test of the Java EE server is available with the source code of the whole Web Application in Travlendar/src/test folder in the Github repository.\\
+
 Furthermore in order to measure the performance of the whole server side will be showed in the next pages some reports of the performance measurerement made by Apache JMeter.
 All tests are executed using Apache JMeter version 3.3.
 In order to make the performance measurement test repeatable easily the target of the test provided in the folder Travlendar/src/test/testJMeter folder in the Github repository have as target the Heroku site.
@@ -512,87 +510,88 @@ The performance tests must be executed in this order:
 	\item Returned token must be inserted in the proper space in "Body Data" field (HTTP Request section) of the others performace tests in order to authenticate the user properly on the system, otherwise the user result ont properly logged in
 \end{itemize}
 
-All the results of the tested method are showed in the next pages.\\\newpage
+All the results of the tested method are showed in the next pages.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Test/ServerEclipse}
+	\caption{The result of the JUnit test on Eclipse}
+\end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{Test/LoginMain}
+	\includegraphics[width=0.9\textwidth]{Test/LoginMain}
 	\caption{The performance results (in millisecond) of the Login servlet on Heroku application server}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.1\textwidth]{Test/LoginReq}
+\includegraphics[width=0.8\textwidth]{Test/LoginReq}
 \caption{The request sended to server for the Login servlet}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1.1\textwidth]{Test/LoginResp}
+\includegraphics[width=0.8\textwidth]{Test/LoginResp}
 \caption{The response of the server for the Login servlet}
 \end{figure}
 
-\\\newpage
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{Test/UserInformationMain}
+	\includegraphics[width=0.8\textwidth]{Test/UserInformationMain}
 	\caption{The performance results (in millisecond) of the UserInformation servlet on Heroku application server}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{Test/UserInformationReq}
+	\includegraphics[width=0.8\textwidth]{Test/UserInformationReq}
 	\caption{The request sended to server for the UserInformation servlet}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{Test/UserInformationResp}
+	\includegraphics[width=0.8\textwidth]{Test/UserInformationResp}
 	\caption{The response of the server for the UserInformation servlet}
 \end{figure}
 
-\\\newpage
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{Test/GetAllScheduleMain}
+	\includegraphics[width=0.8\textwidth]{Test/GetAllScheduleMain}
 	\caption{The performance results (in millisecond) of the GetAllSchedule servlet on Heroku application server}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{Test/GetAllScheduleReq}
+	\includegraphics[width=0.8\textwidth]{Test/GetAllScheduleReq}
 	\caption{The request sended to server for the GetAllSchedule servlet}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{Test/GetAllScheduleResp}
+	\includegraphics[width=0.8\textwidth]{Test/GetAllScheduleResp}
 	\caption{The response of the server for the GetAllSchedule servlet}
 \end{figure}
 
-\\\newpage
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{Test/GetScheduleMain}
+	\includegraphics[width=0.8\textwidth]{Test/GetScheduleMain}
 	\caption{The performance results (in millisecond) of the GetSchedule servlet on Heroku application server}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{Test/GetScheduleReq}
+	\includegraphics[width=0.8\textwidth]{Test/GetScheduleReq}
 	\caption{The request sended to server for the GetSchedule servlet}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{Test/GetScheduleResp}
+	\includegraphics[width=0.8\textwidth]{Test/GetScheduleResp}
 	\caption{The response of the server for the GetSchedule servlet}
 \end{figure}
 
-\\\newpage
 
 \section*{Client Testing}
 With the aim to provide a test also at the client side of the application was created a purpose specific Python server to test the response of the client at some predetermined situation that the server provide statically. 
