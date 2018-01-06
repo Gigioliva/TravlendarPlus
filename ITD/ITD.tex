@@ -498,11 +498,13 @@ In order to proof the correctness of the most important parts of the code will b
 \section*{Server Testing}
 On server side the Java EE code has been tested using the tools that Java provide with some additional libraries. In particular were used the JUnit libraries to test the part that works completely in the local system without using external resources like DBMS and network.
 To emulate the part which requires the interaction with external component was used a framework called Mockito to test all the part that regards the not static classes and methods of the code and another derivative tool called PowerMockito to emulate the execution and the response of the parts of the code which are the static. 
-The test of the Java EE server is available with the source code of the whole Web Application in Travlendar/src/test folder in the Github repository.\\
+The test of the Java EE server is available with the source code of the whole Web Application in Travlendar/src/test folder in the Github repository.
+The server test is repetible by Right Click on src folder in Eclipse $\,\to\,$ Run as $\,\to\,$ JUnit test.\\
 
 Furthermore in order to measure the performance of the whole server side will be showed in the next pages some reports of the performance measurerement made by Apache JMeter.
-All tests are executed using Apache JMeter version 3.3.
-In order to make the performance measurement test repeatable easily the target of the test provided in the folder Travlendar/src/test/testJMeter folder in the Github repository have as target the Heroku site.
+All tests are executed using Apache JMeter version 3.3 (JMeter can be downloaded from \textbf{http://jmeter.apache.org/}).
+
+In order to make the performance measurement test repeatable easily the target of the test provided in the folder TestExtra/testJMeter folder in the Github repository have as target the Heroku site.
 The performance tests must be executed in this order:
 \begin{itemize}
 	\item First must be executed the login method with the parameters like in the Login.jmx file (username:admin and password:pass)
@@ -535,7 +537,6 @@ All the results of the tested method are showed in the next pages.
 \caption{The response of the server for the Login servlet}
 \end{figure}
 
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{Test/UserInformationMain}
@@ -553,7 +554,6 @@ All the results of the tested method are showed in the next pages.
 	\includegraphics[width=0.8\textwidth]{Test/UserInformationResp}
 	\caption{The response of the server for the UserInformation servlet}
 \end{figure}
-
 
 \begin{figure}[H]
 	\centering
@@ -592,15 +592,23 @@ All the results of the tested method are showed in the next pages.
 	\caption{The response of the server for the GetSchedule servlet}
 \end{figure}
 
-
 \section*{Client Testing}
 With the aim to provide a test also at the client side of the application was created a purpose specific Python server to test the response of the client at some predetermined situation that the server provide statically. 
-The test of the client will be provided in the source code in Travlendar/src/test/testingServer folder and an example of the response is showed in the following pages. \\\newline
+The test of the client will be provided in the source code in TestExtra/testClient folder and an example of the response is showed in the following pages. \\\newline
 The Python server require to be executed with Python3 to support all its features, it also require two additional modules: Colorama and Flask those are available to download directly from command line by using python commands (that are different between the various OS).
-In order to run the test in the same folder there are a "templates" folder which contains a specifically purposed client copy that must be at the same level of the Puthon server file (server.py).\\\newline
+In order to run the test in the same folder there are a "templates" folder which contains a specifically purposed client copy that must be at the same level of the Python server file (server.py).\\\newline
 For all the endpoint there was a code that emulate the real server response, this allows to test the client side independently from the real application and web servers.
 The server shows in the command line that run it the result of the different requests of the client and shows clearly, also using colors (red for errors and yellow for correct request), if the calls is successfull or not. \\\newline
-The following code show the example of the Login endpoint of the testing server.
+In order to replicate the usage of the client testing server, the following command is required 
+\begin{lstlisting}
+# In Test Extra/testClient folder
+python3 server.py
+\end{lstlisting}
+(Python 3 or later is required, please check on \textbf{https://www.python.org/}) for the download)
+Then you have to access to your browser while the server is running and check the following address
+\begin{lstlisting}
+http://127.0.0.1:5000
+\end{lstlisting}The following code show the example of the Login endpoint of the testing server.
 
 \lstset{language=Python}
 \begin{lstlisting}
@@ -669,7 +677,7 @@ In the second case, you have to download the following files:
 	\item MySQL Workbench https://dev.mysql.com/downloads/workbench/
 	\item Tomcat 8.5.24 https://tomcat.apache.org/download-80.cgi
 \end{itemize}
-Once you have downloaded all the files, proceed with the MySQL installation wizard. As for the required parameters, please choose the folowing:
+Once you have downloaded all the files, proceed with the MySQL installation wizard. As for the required parameters, please choose the following:
 \begin{lstlisting}
 	 port: "3306"
 	 user:  "root"
@@ -686,9 +694,9 @@ Database initialization completed, install the server.
 \begin{itemize}
 	\item Unzip the Tomcat archive
 	\item Open Eclipse and from "File" select "Import"
-	\item Select "Existing Maven Projects", then the Travlendar folder downloaded from the repository
+	\item Select "Existing Maven Projects", then the Travlendar folder downloaded from the repository (please be sure that a tick is present in side of the row of pom.xml)
 	\item Once the project has been imported, click on it with the right mouse button and then press "Properties"
-	\item Then select "Targeted Runtimes" and if there is no server, press "New ..." and follow the Tomcat configuration wizard.
+	\item Then select "Targeted Runtimes" and if there is no server, press "New ..." and follow the Tomcat configuration wizard
 	\item Finally click on the project with the right button $\,\to\,$  Run As $\,\to\,$ Run On Server $\,\to\,$ select the server created $\,\to\,$ Finish
 \end{itemize}
 
@@ -706,18 +714,8 @@ Database initialization completed, install the server.
 	\begin{lstlisting}
 		phonegap build android
 	\end{lstlisting}
+	More information about Adobe PhoneGap can be founded at the following link: \textbf{https://phonegap.com}.
 	
-	\item In order to replicate the usage of the client testing server, the following command is required
-	\begin{lstlisting}
-		# In testingServer folder
-		python3 server
-	\end{lstlisting}
-	Then you have to access to your browser while the server is running and check the following address
-	\begin{lstlisting}
-		http://127.0.0.1:5000
-	\end{lstlisting}
 \end{itemize}
-
-
 
 \end{document}

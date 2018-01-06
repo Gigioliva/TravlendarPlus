@@ -46,10 +46,10 @@ Database file can be found in
 #### Testing
 
 The files about **Server Testing** can be found in
->/Test Extra/testJMeter
+>/TestExtra/testJMeter
 
 The files about **Client Testing** can be found in
->/Test Extra/testingServer
+>/TestExtra/testClient
 
 
 ## Screenshots
