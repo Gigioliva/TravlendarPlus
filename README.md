@@ -87,15 +87,17 @@ The files about **Client Testing** can be found in
 
 References
 ==========
-Client:
-<br />
+
+#### Client:
 Moskwa Lukasz
 > lukasz.moskwa@mail.polimi.it
+
+#### Server:
 <br />
-Server:
 Oliva GianLuigi     
 > gianluigi.oliva@mail.polimi.it
+
+#### Testing:
 <br />
-Testing:
 Mussi Marco
 > marco.mussi@mail.polimi.it
