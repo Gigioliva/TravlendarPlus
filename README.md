@@ -83,3 +83,13 @@ The files about **Client Testing** can be found in
 ![](https://i.imgur.com/gyPFOUP.png)
 
 ![](https://i.imgur.com/X8tTQPy.png)
+
+
+References
+==========
+Client:
+Moskwa Lukasz       lukasz.moskwa@mail.polimi.it
+Server:
+Oliva GianLuigi     gianluigi.oliva@mail.polimi.it
+Testing:
+Mussi Marco         marco.mussi@mail.polimi.it
