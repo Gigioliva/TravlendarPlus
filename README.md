@@ -91,13 +91,9 @@ References
 #### Client:
 Moskwa Lukasz
 > lukasz.moskwa@mail.polimi.it
-
 #### Server:
-<br />
 Oliva GianLuigi     
 > gianluigi.oliva@mail.polimi.it
-
 #### Testing:
-<br />
 Mussi Marco
 > marco.mussi@mail.polimi.it
