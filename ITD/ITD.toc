@@ -4,3 +4,4 @@
 \contentsline {chapter}{\numberline {4}Structure of the code}{8}
 \contentsline {chapter}{\numberline {5}Testing}{15}
 \contentsline {chapter}{\numberline {6}Installation instructions}{23}
+\contentsline {chapter}{\numberline {7}Effort Spent}{25}
