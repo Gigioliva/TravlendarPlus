@@ -5,6 +5,12 @@ Project for Politecnico di Milano's course Software Engineering 2 - 2017/2018
 
 ![](https://i.imgur.com/zyc6mfv.png)
 
+Demo of the application
+=======================
+
+http://travlendarmom.herokuapp.com/
+
+
 Table of Contents
 =================
 
