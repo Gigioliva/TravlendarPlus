@@ -1,0 +1,155 @@
+\documentclass[numbers=noenddot, 12pt, a4paper, oneside]{scrbook}
+\usepackage{blindtext}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\def\Plus{\texttt{+}}
+\usepackage[final]{pdfpages}
+\usepackage[procnames]{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+
+\begin{document}
+
+ 
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE Politecnico di Milano \par}
+	\vspace{1cm}
+	\includegraphics[width=0.65\textwidth]{polimi-logo}\par
+	\vspace{1cm}
+		
+	{\scshape\Large Software Engineering 2 Course\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Travlendar \Plus \par}
+	\vspace{1cm}
+	{\Large\bfseries Acceptance Test Deliverable \par}
+	\vspace{3cm}
+	{\Large\itshape di\par}
+	{\Large\itshape Gianluigi Oliva, Marco Mussi e Lukasz Moskwa\par}
+	\vspace{1.5cm}
+	\vfill
+
+	
+	\vfill
+	
+	% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+
+\newpage 
+\tableofcontents
+\newpage 
+
+\chapter{Project Analyzed}
+Name of author:
+\begin{itemize}
+	\item Pozzi Gioele
+	\item Sanvito Lorenzo
+	\item Villa Luca
+\end{itemize}
+
+Repository: \textbf{https://github.com/Gioelson95/PozziSanvitoVilla}\\\newline
+To conduct the analysis we used as reference the following documents:
+\begin{itemize}
+	\item RASD
+	\item DD
+	\item ITD
+\end{itemize}
+
+
+
+\chapter{Installation Setup}
+
+All the instructions necessary for the can be found in the README of the github repository, where there are links to the server running on Heroku and to the APK to download. \\
+The same instructions are also present more detailed in the "IT" document that is in the "DeliveryFolder" directory. It also contains instructions to start the application on a virtual environment in the most common operating systems
+(Windows, macOS, Linux).
+
+\subsection*{Installation Server}
+The server did not need any installation since it is run by a hosting service such as Heroku. Also for local execution it is very immediate. However, the instructions do not mention the necessity to install "nmp" and "node.js".
+
+\subsection*{Installation Client}
+Client side installation is very easy and immediate. It is already provided the APK to download on your Android device and install as any application available on the store. \\
+For local emulation the instructions are a bit confusing as it is a simple reference to StackOverflow site and also are not even indicated the software to be used.
+
+\chapter{Acceptance Test Case}
+
+In this section we will analyze the functionalities implemented in the second chapter of the ITD document.
+
+\subsection*{Registration}
+
+After fullfilling and sending the form in order to register, a lost connection message is shown. This function was tested with different devices and connections, always showing the same error. Nevertheless, the user is still created.
+
+\subsection*{Log in/Log out}
+This requirement works without apparent bugs. Various tests have been carried out by entering false credentials or by trying values in a format different from that of the e-mails, always behaving correctly, showing error messages.
+
+\subsection*{Customize settings}
+The application allows you to change all personal fields of the user such as personal data or pause preferences. The application always behaves as it should doing the necessary checks on schedules and parameters entered.
+
+\subsection*{Add event}
+
+The application responds well to the addition of a first event in the selected day, however the addition of any event subsequent to the first is not successfull showing an error message due to some overlap. Furthermore, it was not possible to test the flexibility of the pauses since it is not possible to add more than one event on the same day.\\
+
+The application does not seem to calculate the time necessary to reach the place of the event starting from the current position (or from any other position) and therefore does not check the feasibility of reaching the place by notifying the user.\\
+
+The pauses are not added automatically within a day in which there is an event that then must be added manually by the user even if indicated in the preferences. Despite this the pause creates conflict even if not present on a given day and moreover a user can insert a "pause" event but with times completely different from those indicated in the preferences.
+The application also does not check the existence of the city of the event.
+
+\subsection*{Show events of a day}
+
+By clicking on a calendar day you can see all the events in that day displayed as name, beginning, end and any added notes.
+
+\subsection*{Go to next event}
+
+By pressing the appropriate button the application shows the next scheduled event. However, this selection is limited to the current day and not to the following days. In the "Definitions" section (section 1.3.1) it is not specified whether this behavior is correct or not.\\
+
+Furthermore, the route to a distant event (with travel time of about 10 hours) was calculated and accepted for an event which start was scheduled for an initial time of 3 hours ahead, instead of marking it as not viable.\\
+
+In some cases the travel times do not seem to be consistent. For example, the walking time is equal to that in the car.
+
+\subsection*{Open specific external app relative to means of transport}
+The application correctly returns to another navigation application, but with the limits already indicated in the previous section (travel times not respected).
+
+\subsection*{Buy public transport ticket}
+In some cases when asked to buy a ticket, the application ceases to function, forcing the user to close and reopen it.
+
+\chapter{Additional Point}
+The code is affected by considerable vulnerabilities. No checks on requests are made. In fact, by making requests for GET / POST / DELETE using Postman, the following results are obtained:
+\begin{itemize}
+	\item \textbf{GET}\\ \textbf{http://travlendar-plus.herokuapp.com/getall}: this request returns all the information in the database (all user, passwords in clear and data related)
+	\item \textbf{DELETE}\\ \textbf{http://travlendar-plus.herokuapp.com/deleteall} If a delete is sent to this link, the whole database is deleted.
+	\item \textbf{POST}\\
+	\textbf{http://travlendar-plus.herokuapp.com/addEvent} If you perform a post request to this endpoint you can
+	\begin{itemize}
+		\item Add an event to any user even if you are not logged in
+		\item Add an event even if the user does not exist
+	\end{itemize} 
+\end{itemize}
+Furthermore, the possibility to delete events or users has been implemented on the server side, but they have not been implemented on the client side.\\
+
+\chapter{Effort Spent}
+
+While working on the project, we always met to discuss main topics to provide more consistence to the project:\\
+
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+	\hline
+	\parbox[c][6ex]{6ex}{\centering \textbf{Name}} & \textbf{Effort}
+	\\
+	\hline
+	\parbox[c][8ex]{6ex}{\centering Lukasz Moskwa} & Group 5h\\
+	\hline
+	\parbox[c][8ex]{6ex}{\centering Marco Mussi} & Group 5h\\
+	\hline
+	\parbox[c][8ex]{6ex}{\centering Gianluigi Oliva} & Group 5h + 2h alone\\
+	\hline
+	
+	
+	
+\end{tabular}
+
+
+\end{document}
